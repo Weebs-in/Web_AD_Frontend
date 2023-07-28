@@ -23,9 +23,9 @@ const sysManagement = {
     },
     {
       id: 'manage-pickup-points',
-      title: 'Pick-up Points',
+      title: 'Collection Points',
       type: 'item',
-      url: '/admin/pickup-points',
+      url: '/admin/collection-points',
       icon: icons.IconAdjustments,
       breadcrumbs: false
     }

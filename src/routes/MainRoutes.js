@@ -23,7 +23,7 @@ const ManageAdmin = Loadable(lazy(() => import('views/admin-pages/manage-admin')
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/manage-listings')));
 const ManageMod = Loadable(lazy(() => import('views/admin-pages/manage-mod')));
 const ManageMember = Loadable(lazy(() => import('views/admin-pages/manage-member')));
-const PickupPoints = Loadable(lazy(() => import('views/admin-pages/pickup-points')));
+const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points')));
 
 // moderator page routing
 const CreditScores = Loadable(lazy(() => import('views/moderator-pages/credit-scores')));
@@ -141,8 +141,8 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
-          path: 'pickup-points',
-          element: <PickupPoints />
+          path: 'collection-points',
+          element: <CollectionPoints />
         }
       ]
     },
