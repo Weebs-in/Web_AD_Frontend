@@ -22,11 +22,13 @@ const columns = [
   { header: 'Role', field: 'role', render: (rowData) => rowData.role }
 ];
 
+const labelField = 'header';
+
 const ManageStaff = () => (
   <MainCard title="Adminstrators and Moderators">
     <Typography variant="body2">
       <h3>Create, Read, Update, Delete</h3>
-      <TableEditModal data={data} columns={columns} />
+      <TableEditModal data={data} columns={columns} labelField={labelField} />
     </Typography>
   </MainCard>
 );

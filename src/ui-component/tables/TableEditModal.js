@@ -2,8 +2,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Button, Modal } from '@mui/material';
+import EditModal from './EditModal';
 
-const TableEditModal = ({ data, columns }) => {
+const TableEditModal = ({ data, columns, labelField }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
 
@@ -66,6 +67,8 @@ const TableEditModal = ({ data, columns }) => {
       )
     }
   ];
+  console.log('TableEditModal labelField:', labelField); // to remove after debugging
+  console.log('updatedColumns:', updatedColumns); // Add this line to log the updatedColumns
 
   return (
     <div>
@@ -74,7 +77,10 @@ const TableEditModal = ({ data, columns }) => {
           <TableHead>
             <TableRow>
               {updatedColumns.map((column) => (
-                <TableCell key={column.field}>{column.header}</TableCell>
+                <TableCell key={column.field}>
+                  {/* Use the labelField prop to dynamically retrieve the labels */}
+                  {column[labelField]} {/* This will display the header label */}
+                </TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -105,15 +111,14 @@ const TableEditModal = ({ data, columns }) => {
       {/* Modal for editing */}
       <Modal open={isModalOpen} onClose={handleModalClose}>
         <div>
-          {/* Your modal content for editing */}
-          <h2>Edit Data</h2>
-          <p>{editingData && JSON.stringify(editingData)}</p>
-          <Button variant="contained" onClick={handleModalClose}>
-            Close
-          </Button>
-          <Button variant="contained" onClick={handleSaveChanges}>
-            Save Changes
-          </Button>
+          {/* Pass necessary data and props to the EditModal */}
+          <EditModal
+            data={editingData}
+            isOpen={isModalOpen}
+            onClose={handleModalClose}
+            onSaveChanges={handleSaveChanges}
+            columns={columns}
+          />
         </div>
       </Modal>
     </div>
@@ -128,7 +133,8 @@ TableEditModal.propTypes = {
       field: PropTypes.string.isRequired,
       render: PropTypes.func // Optional render function for custom rendering
     })
-  ).isRequired
+  ).isRequired,
+  labelField: PropTypes.string.isRequired // for specifying the field in data that contains the labels
 };
 
 export default TableEditModal;
