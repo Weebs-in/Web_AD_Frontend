@@ -19,9 +19,8 @@ const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialI
 const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
 
 // admin page routing
-const ManageAdmin = Loadable(lazy(() => import('views/admin-pages/manage-admin')));
+const ManageStaff = Loadable(lazy(() => import('views/admin-pages/manage-staff')));
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/manage-listings')));
-const ManageMod = Loadable(lazy(() => import('views/admin-pages/manage-mod')));
 const ManageMember = Loadable(lazy(() => import('views/admin-pages/manage-member')));
 const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points')));
 
@@ -105,8 +104,8 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
-          path: 'manage-admin',
-          element: <ManageAdmin />
+          path: 'manage-staff',
+          element: <ManageStaff />
         }
       ]
     },
@@ -116,15 +115,6 @@ const MainRoutes = {
         {
           path: 'manage-member',
           element: <ManageMember />
-        }
-      ]
-    },
-    {
-      path: 'admin',
-      children: [
-        {
-          path: 'manage-mod',
-          element: <ManageMod />
         }
       ]
     },
