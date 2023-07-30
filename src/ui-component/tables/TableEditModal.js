@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Button, Modal } from '@mui/material';
 import EditModal from './EditModal';
 
-const TableEditModal = ({ data, columns, labelField }) => {
+const TableEditModal = ({ data, columns, labelField, onDelete }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
   const [deletingData, setDeletingData] = useState(null);
@@ -34,6 +34,8 @@ const TableEditModal = ({ data, columns, labelField }) => {
   const handleDeleteClick = (rowData) => {
     // Set the data of the row to be deleted in the deletingData state
     setDeletingData(rowData);
+    // Call the onDelete prop with the rowData when the "Delete" button is clicked
+    onDelete(rowData);
     // setModalOpen(true); // Open the modal (if you want to show a confirmation dialog)
   };
 
@@ -163,7 +165,8 @@ TableEditModal.propTypes = {
       render: PropTypes.func // Optional render function for custom rendering
     })
   ).isRequired,
-  labelField: PropTypes.string.isRequired // for specifying the field in data that contains the labels
+  labelField: PropTypes.string.isRequired, // for specifying the field in data that contains the labels
+  onDelete: PropTypes.func.isRequired // for delete function
 };
 
 export default TableEditModal;
