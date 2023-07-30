@@ -19,11 +19,11 @@ import {
 } from '@mui/material';
 
 // project import
-import OrdersTable from './OrdersTable';
-import IncomeAreaChart from './IncomeAreaChart';
-import MonthlyBarChart from './MonthlyBarChart';
+import OrdersTable from './OrderTable';
+import NewUserChart from './NewUserChart';
+import WeeklyBarChart from './WeeklyBarChart';
 import ReportAreaChart from './ReportAreaChart';
-import SalesColumnChart from './SalesColumnChart';
+import PickupPointColumnChart from './PickupPointColumnChart';
 import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
 
@@ -33,6 +33,7 @@ import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
+import OrderTable from "./OrderTable";
 
 // avatar style
 const avatarSX = {
@@ -52,20 +53,20 @@ const actionSX = {
 };
 
 // sales report status
-const status = [
-  {
-    value: 'today',
-    label: 'Today'
-  },
-  {
-    value: 'month',
-    label: 'This Month'
-  },
-  {
-    value: 'year',
-    label: 'This Year'
-  }
-];
+// const status = [
+//   {
+//     value: 'today',
+//     label: 'Today'
+//   },
+//   {
+//     value: 'month',
+//     label: 'This Month'
+//   },
+//   {
+//     value: 'year',
+//     label: 'This Year'
+//   }
+// ];
 
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
@@ -80,16 +81,16 @@ const DashboardDefault = () => {
         <Typography variant="h5">Dashboard</Typography>
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Page Views" count="4,42,236" percentage={59.3} extra="35,000" />
+        <AnalyticEcommerce title="Total Page Views" count="4,420,236" percentage={31.8} extra="140,564" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Users" count="78,250" percentage={70.5} extra="8,900" />
+        <AnalyticEcommerce title="Total Registered Users" count="138,250" percentage={45.2} extra="62,489" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Order" count="18,800" percentage={27.4} isLoss color="warning" extra="1,943" />
+        <AnalyticEcommerce title="Total Book Listings" count="18,800" percentage={12.4} isLoss color="warning" extra="2,331" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total Sales" count="$35,078" percentage={27.4} isLoss color="warning" extra="$20,395" />
+        <AnalyticEcommerce title="Total New Users Registration" count="26,815" percentage={24.8}  extra="6650" />
       </Grid>
 
       <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -98,7 +99,7 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Unique Visitor</Typography>
+            <Typography variant="h5">Number of new users registration</Typography>
           </Grid>
           <Grid item>
             <Stack direction="row" alignItems="center" spacing={0}>
@@ -122,28 +123,27 @@ const DashboardDefault = () => {
           </Grid>
         </Grid>
         <MainCard content={false} sx={{ mt: 1.5 }}>
-          <Box sx={{ pt: 1, pr: 2 }}>
-            <IncomeAreaChart slot={slot} />
+          <Box sx={{ pt: 1.0, pr: 2 }}>
+            <NewUserChart slot={slot} />
           </Box>
         </MainCard>
       </Grid>
       <Grid item xs={12} md={5} lg={4}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Income Overview</Typography>
+            <Typography variant="h5">Popular times of the week for user engagement</Typography>
           </Grid>
           <Grid item />
         </Grid>
-        <MainCard sx={{ mt: 2 }} content={false}>
+        <MainCard sx={{ mt: 3.0 }} content={false}>
           <Box sx={{ p: 3, pb: 0 }}>
             <Stack spacing={2}>
               <Typography variant="h6" color="textSecondary">
                 This Week Statistics
               </Typography>
-              <Typography variant="h3">$7,650</Typography>
             </Stack>
           </Box>
-          <MonthlyBarChart />
+          <WeeklyBarChart />
         </MainCard>
       </Grid>
 
@@ -151,12 +151,12 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Recent Orders</Typography>
+            <Typography variant="h5">Recent Transactions</Typography>
           </Grid>
           <Grid item />
         </Grid>
         <MainCard sx={{ mt: 2 }} content={false}>
-          <OrdersTable />
+          <OrderTable />
         </MainCard>
       </Grid>
       <Grid item xs={12} md={5} lg={4}>
@@ -189,33 +189,32 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Sales Report</Typography>
+            <Typography variant="h5">Pickup Point Information</Typography>
           </Grid>
-          <Grid item>
-            <TextField
-              id="standard-select-currency"
-              size="small"
-              select
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}
-            >
-              {status.map((option) => (
-                <MenuItem key={option.value} value={option.value}>
-                  {option.label}
-                </MenuItem>
-              ))}
-            </TextField>
-          </Grid>
+          {/*<Grid item>*/}
+            {/*<TextField*/}
+            {/*  id="standard-select-currency"*/}
+            {/*  size="small"*/}
+            {/*  select*/}
+            {/*  value={value}*/}
+            {/*  onChange={(e) => setValue(e.target.value)}*/}
+            {/*  sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}*/}
+            {/*>*/}
+              {/*{status.map((option) => (*/}
+              {/*  <MenuItem key={option.value} value={option.value}>*/}
+              {/*    {option.label}*/}
+              {/*  </MenuItem>*/}
+              {/*))}*/}
+            {/*</TextField>*/}
+          {/*</Grid>*/}
         </Grid>
         <MainCard sx={{ mt: 1.75 }}>
-          <Stack spacing={1.5} sx={{ mb: -12 }}>
+          <Stack spacing={1.5} sx={{ mb: 3 }}>
             <Typography variant="h6" color="secondary">
-              Net Profit
+              {/*Net Profit*/}
             </Typography>
-            <Typography variant="h4">$1560</Typography>
           </Stack>
-          <SalesColumnChart />
+          <PickupPointColumnChart />
         </MainCard>
       </Grid>
       <Grid item xs={12} md={5} lg={4}>
