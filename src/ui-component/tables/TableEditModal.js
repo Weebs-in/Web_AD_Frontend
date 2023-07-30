@@ -7,6 +7,7 @@ import EditModal from './EditModal';
 const TableEditModal = ({ data, columns, labelField }) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
+  const [deletingData, setDeletingData] = useState(null);
 
   // Pagination state variables
   const [page, setPage] = useState(0);
@@ -30,8 +31,15 @@ const TableEditModal = ({ data, columns, labelField }) => {
     setModalOpen(true);
   };
 
+  const handleDeleteClick = (rowData) => {
+    // Set the data of the row to be deleted in the deletingData state
+    setDeletingData(rowData);
+    // setModalOpen(true); // Open the modal (if you want to show a confirmation dialog)
+  };
+
   const handleModalClose = () => {
     setEditingData(null);
+    // setDeletingData(null); // Clear the deletingData state when the modal is closed
     setModalOpen(false);
   };
 
@@ -42,6 +50,18 @@ const TableEditModal = ({ data, columns, labelField }) => {
 
     // Perform any processing or save the data as needed
     // For example, you might make an API call to update the data in the database
+
+    // Check if there is data to be deleted
+    if (deletingData) {
+      // Perform the actual deletion logic here
+      // For example, you might make an API call to delete the data from the database
+      // Your specific implementation will depend on your backend and data storage
+      // After the deletion is done, you can refresh the data or update the table as needed
+      // For example, if your data comes from an API, you can fetch the updated data again
+      // const updatedData = fetchDataFromAPI();
+      // setData(updatedData);
+      console.log('testing delete button');
+    }
 
     // After saving changes, you can close the modal if desired
     setModalOpen(false);
@@ -58,11 +78,20 @@ const TableEditModal = ({ data, columns, labelField }) => {
   const updatedColumns = [
     ...columns,
     {
-      header: 'Edit',
+      header: 'Update',
       field: 'edit',
       render: (rowData) => (
         <Button variant="outlined" onClick={() => handleEditClick(rowData)}>
           Edit
+        </Button>
+      )
+    },
+    {
+      header: 'Delete',
+      field: 'delete',
+      render: (rowData) => (
+        <Button variant="outlined" color="error" onClick={() => handleDeleteClick(rowData)}>
+          Delete
         </Button>
       )
     }
