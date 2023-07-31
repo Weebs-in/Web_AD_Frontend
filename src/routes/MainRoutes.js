@@ -11,6 +11,9 @@ const Homepage = Loadable(lazy(() => import('views/pages/home')));
 // const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 const Dashboard = Loadable(lazy(() => import('views/dashboard')));
 
+// account settings
+const AccountSettings = Loadable(lazy(() => import('views/pages/account-settings')));
+
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
 const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
@@ -41,6 +44,10 @@ const MainRoutes = {
     {
       path: '/',
       element: <Homepage />
+    },
+    {
+      path: 'account-settings',
+      element: <AccountSettings />
     },
     {
       path: 'dashboard',

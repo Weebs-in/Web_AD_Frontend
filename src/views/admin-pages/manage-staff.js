@@ -46,9 +46,9 @@ const ManageStaff = () => {
     try {
       const response = await fetch(config.getAllStaff, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/json'
         },
-        method: 'GET',
+        method: 'GET'
       });
 
       if (!response.ok) {
@@ -67,7 +67,6 @@ const ManageStaff = () => {
       console.error('Error fetching staff data:', error);
     }
   };
-
 
   // const fetchStaff = async () => {
   //   fetch(config.getAllStaff, {
