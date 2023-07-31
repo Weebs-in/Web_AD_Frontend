@@ -17,7 +17,7 @@ const columnChartOptions = {
   },
   plotOptions: {
     bar: {
-      columnWidth: '30%',
+      columnWidth: '45%',
       borderRadius: 4
     }
   },
@@ -30,11 +30,11 @@ const columnChartOptions = {
     colors: ['transparent']
   },
   xaxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   },
   yaxis: {
     title: {
-      text: '$ (thousands)'
+      text: '(books)'
     }
   },
   fill: {
@@ -43,7 +43,7 @@ const columnChartOptions = {
   tooltip: {
     y: {
       formatter(val) {
-        return `$ ${val} thousands`;
+        return `${val} books`;
       }
     }
   },
@@ -81,7 +81,7 @@ const columnChartOptions = {
 
 // ==============================|| SALES COLUMN CHART ||============================== //
 
-const SalesColumnChart = () => {
+const PickupPointColumnChart = () => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -93,12 +93,12 @@ const SalesColumnChart = () => {
 
   const [series] = useState([
     {
-      name: 'Net Profit',
-      data: [180, 90, 135, 114, 120, 145]
+      name: 'Total number of book exchanges (planned)',
+      data: [313, 247, 278, 298, 329, 269, 280, 263, 251, 297, 319, 356]
     },
     {
-      name: 'Revenue',
-      data: [120, 45, 78, 150, 168, 99]
+      name: 'Total number of successful book exchanges',
+      data: [296, 239, 261, 279, 317, 258, 280, 257, 242, 292, 309, 343]
     }
   ]);
 
@@ -111,7 +111,7 @@ const SalesColumnChart = () => {
       xaxis: {
         labels: {
           style: {
-            colors: [secondary, secondary, secondary, secondary, secondary, secondary]
+            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary]
           }
         }
       },
@@ -129,8 +129,8 @@ const SalesColumnChart = () => {
         theme: 'light'
       },
       legend: {
-        position: 'top',
-        horizontalAlign: 'right',
+        position: 'bottom',
+        horizontalAlign: 'center',
         labels: {
           colors: 'grey.500'
         }
@@ -145,4 +145,4 @@ const SalesColumnChart = () => {
   );
 };
 
-export default SalesColumnChart;
+export default PickupPointColumnChart;

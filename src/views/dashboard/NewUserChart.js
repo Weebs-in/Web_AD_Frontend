@@ -30,7 +30,7 @@ const areaChartOptions = {
 
 // ==============================|| INCOME AREA CHART ||============================== //
 
-const IncomeAreaChart = ({ slot }) => {
+const NewUserChart = ({ slot }) => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -89,24 +89,16 @@ const IncomeAreaChart = ({ slot }) => {
 
   const [series, setSeries] = useState([
     {
-      name: 'Page Views',
-      data: [0, 86, 28, 115, 48, 210, 136]
-    },
-    {
-      name: 'Sessions',
-      data: [0, 43, 14, 56, 24, 105, 68]
+      name: 'New users',
+      data: [44, 36, 46, 55, 71, 93, 65]
     }
   ]);
 
   useEffect(() => {
     setSeries([
       {
-        name: 'Page Views',
-        data: slot === 'month' ? [76, 85, 101, 98, 87, 105, 91, 114, 94, 86, 115, 35] : [31, 40, 28, 51, 42, 109, 100]
-      },
-      {
-        name: 'Sessions',
-        data: slot === 'month' ? [110, 60, 150, 35, 60, 36, 26, 45, 65, 52, 53, 41] : [11, 32, 45, 32, 34, 52, 41]
+        name: 'New users',
+        data: slot === 'month' ? [2642, 1852, 1729, 1794, 1952, 2539, 1872, 1748, 1967, 2154, 3164, 3402] : [44, 36, 46, 55, 71, 93, 65]
       }
     ]);
   }, [slot]);
@@ -114,8 +106,8 @@ const IncomeAreaChart = ({ slot }) => {
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };
 
-IncomeAreaChart.propTypes = {
+NewUserChart.propTypes = {
   slot: PropTypes.string
 };
 
-export default IncomeAreaChart;
+export default NewUserChart;

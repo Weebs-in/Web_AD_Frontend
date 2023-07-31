@@ -10,7 +10,7 @@ import ReactApexChart from 'react-apexcharts';
 const barChartOptions = {
   chart: {
     type: 'bar',
-    height: 365,
+    height: 415,
     toolbar: {
       show: false
     }
@@ -25,7 +25,7 @@ const barChartOptions = {
     enabled: false
   },
   xaxis: {
-    categories: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+    categories: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     axisBorder: {
       show: false
     },
@@ -43,7 +43,7 @@ const barChartOptions = {
 
 // ==============================|| MONTHLY BAR CHART ||============================== //
 
-const MonthlyBarChart = () => {
+const WeeklyBarChart = () => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -51,7 +51,8 @@ const MonthlyBarChart = () => {
 
   const [series] = useState([
     {
-      data: [80, 95, 70, 42, 65, 55, 78]
+      name: 'User engagement',
+      data: [173, 157, 182, 205, 285, 328, 256]
     }
   ]);
 
@@ -77,9 +78,9 @@ const MonthlyBarChart = () => {
 
   return (
     <div id="chart">
-      <ReactApexChart options={options} series={series} type="bar" height={365} />
+      <ReactApexChart options={options} series={series} type="bar" height={415} />
     </div>
   );
 };
 
-export default MonthlyBarChart;
+export default WeeklyBarChart;
