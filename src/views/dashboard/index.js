@@ -19,7 +19,7 @@ import {
 } from '@mui/material';
 
 // project import
-import OrdersTable from './OrderTable';
+import TransactionTable from './TransactionTable';
 import NewUserChart from './NewUserChart';
 import WeeklyBarChart from './WeeklyBarChart';
 import ReportAreaChart from './ReportAreaChart';
@@ -33,7 +33,7 @@ import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
-import OrderTable from "./OrderTable";
+// import TransactionTable from "./TransactionTable";
 
 // avatar style
 const avatarSX = {
@@ -156,7 +156,7 @@ const DashboardDefault = () => {
           <Grid item />
         </Grid>
         <MainCard sx={{ mt: 2 }} content={false}>
-          <OrderTable />
+          <TransactionTable />
         </MainCard>
       </Grid>
       <Grid item xs={12} md={5} lg={4}>
