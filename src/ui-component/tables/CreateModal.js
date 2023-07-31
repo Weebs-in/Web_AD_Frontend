@@ -56,10 +56,10 @@ const CreateModal = ({ isOpen, onClose, onSaveChanges, columns }) => {
               ))}
             </Grid>
           </form>
-          <Button variant="contained" onClick={handleSave} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+          <Button variant="contained" color="success" onClick={handleSave} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
             Add
           </Button>
-          <Button variant="contained" onClick={onClose} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+          <Button variant="contained" color="success" onClick={onClose} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
             Close
           </Button>
         </Typography>
