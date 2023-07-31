@@ -9,22 +9,22 @@ import SearchBar from '../../ui-component/SearchBar';
 // ==============================|| COLLECTION POINTS MANAGEMENT ||============================== //
 
 const testData = [
-  { id: 1, name: 'ISS', address: 'userA@example.com', status: 'active', qrCode: 'nil' },
-  { id: 2, name: 'Bisstro', address: 'userB@example.com', status: 'inactive', qrCode: 'nil' },
-  { id: 3, name: 'Male Toilet', address: 'level 2' },
-  { id: 4, name: 'Female Toilet', address: 'level 3' },
-  { id: 5, name: 'Ceiling', address: 'userA@example.com' },
-  { id: 6, name: 'Canteen', address: 'userB@example.com' },
-  { id: 7, name: 'NUS', address: 'userA@example.com' },
-  { id: 8, name: 'NTU', address: 'userB@example.com' },
-  { id: 9, name: 'SMU', address: 'userA@example.com' },
-  { id: 10, name: 'SIM', address: 'userB@example.com' },
-  { id: 11, name: 'SUSS', address: 'userA@example.com' },
-  { id: 12, name: 'SUTD', address: 'userB@example.com' },
-  { id: 13, name: 'Grass patch', address: 'userA@example.com' },
-  { id: 14, name: 'Sky', address: 'userB@example.com' },
-  { id: 15, name: 'Library', address: 'userA@example.com' },
-  { id: 16, name: 'Swimming pool', address: 'userB@example.com' }
+  { id: 1, name: 'ISS', address: 'userA@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 2, name: 'Bisstro', address: 'userB@example.com', status: 'Unavailable', qrCode: 'nil' },
+  { id: 3, name: 'Male Toilet', address: 'level 2', status: 'Available', qrCode: 'nil' },
+  { id: 4, name: 'Female Toilet', address: 'level 3', status: 'Available', qrCode: 'nil' },
+  { id: 5, name: 'Ceiling', address: 'userA@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 6, name: 'Canteen', address: 'userB@example.com', status: 'Unavailable', qrCode: 'nil' },
+  { id: 7, name: 'NUS', address: 'userA@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 8, name: 'NTU', address: 'userB@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 9, name: 'SMU', address: 'userA@example.com', status: 'Unavailable', qrCode: 'nil' },
+  { id: 10, name: 'SIM', address: 'userB@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 11, name: 'SUSS', address: 'userA@example.com', status: 'Unavailable', qrCode: 'nil' },
+  { id: 12, name: 'SUTD', address: 'userB@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 13, name: 'Grass patch', address: 'userA@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 14, name: 'Sky', address: 'userB@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 15, name: 'Library', address: 'userA@example.com', status: 'Available', qrCode: 'nil' },
+  { id: 16, name: 'Swimming pool', address: 'userB@example.com', status: 'Available', qrCode: 'nil' }
   // Add more user data as needed
 ];
 

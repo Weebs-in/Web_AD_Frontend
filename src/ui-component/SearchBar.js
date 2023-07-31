@@ -14,7 +14,7 @@ function SearchBar() {
       sx={{
         // width: 400,
         // height: 660,
-        margin: '10px auto',
+        marginBottom: '16px',
 
         display: 'flex',
         flexDirection: 'column',
