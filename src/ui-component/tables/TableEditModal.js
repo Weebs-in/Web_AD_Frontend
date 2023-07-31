@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow, Paper, Button, Modal } from '@mui/material';
 import EditModal from './EditModal';
+import CreateModal from './CreateModal';
 
 const TableEditModal = ({ data, columns, labelField, onDelete }) => {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isCreateModalOpen, setCreateModalOpen] = useState(false);
+  const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
   const [deletingData, setDeletingData] = useState(null);
 
@@ -25,12 +27,23 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
   // Calculate the starting and ending index based on pagination settings
   const startIndex = page * rowsPerPage;
 
-  // handle clicking for modals
-  const handleEditClick = (rowData) => {
-    setEditingData(rowData);
-    setModalOpen(true);
+  // Function to open the Create Modal
+  const handleCreateClick = () => {
+    setCreateModalOpen(true);
   };
 
+  // Function to close the Create Modal
+  const handleCreateModalClose = () => {
+    setCreateModalOpen(false);
+  };
+
+  // Function to open the Edit Modal
+  const handleEditClick = (rowData) => {
+    setEditingData(rowData);
+    setEditModalOpen(true);
+  };
+
+  // Function to handle the delete
   const handleDeleteClick = (rowData) => {
     // Set the data of the row to be deleted in the deletingData state
     setDeletingData(rowData);
@@ -39,10 +52,10 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
     // setModalOpen(true); // Open the modal (if you want to show a confirmation dialog)
   };
 
-  const handleModalClose = () => {
+  const handleEditModalClose = () => {
     setEditingData(null);
     // setDeletingData(null); // Clear the deletingData state when the modal is closed
-    setModalOpen(false);
+    setEditModalOpen(false);
   };
 
   const handleSaveChanges = () => {
@@ -66,7 +79,7 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
     }
 
     // After saving changes, you can close the modal if desired
-    setModalOpen(false);
+    setEditModalOpen(false);
   };
   if (!data || data.length === 0) {
     return <div>No data available.</div>;
@@ -83,7 +96,7 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
       header: 'Update',
       field: 'edit',
       render: (rowData) => (
-        <Button variant="outlined" onClick={() => handleEditClick(rowData)}>
+        <Button variant="contained" onClick={() => handleEditClick(rowData)}>
           Edit
         </Button>
       )
@@ -92,7 +105,7 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
       header: 'Delete',
       field: 'delete',
       render: (rowData) => (
-        <Button variant="outlined" color="error" onClick={() => handleDeleteClick(rowData)}>
+        <Button variant="contained" color="error" onClick={() => handleDeleteClick(rowData)}>
           Delete
         </Button>
       )
@@ -103,6 +116,11 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
 
   return (
     <div>
+      {/* Create Button */}
+      <Button variant="contained" color="success" onClick={handleCreateClick}>
+        + Add
+      </Button>
+      {/* Table */}
       <TableContainer component={Paper}>
         <Table aria-label="basic table">
           <TableHead>
@@ -139,14 +157,25 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
 
+      {/* Modal for creating */}
+      <Modal open={isCreateModalOpen} onClose={handleCreateModalClose}>
+        <div>
+          <CreateModal
+              isOpen={isCreateModalOpen}
+              onClose={handleCreateModalClose}
+              onSaveChanges={handleSaveChanges}
+              columns={columns} />
+        </div>
+      </Modal>
+
       {/* Modal for editing */}
-      <Modal open={isModalOpen} onClose={handleModalClose}>
+      <Modal open={isEditModalOpen} onClose={handleEditModalClose}>
         <div>
           {/* Pass necessary data and props to the EditModal */}
           <EditModal
             data={editingData}
-            isOpen={isModalOpen}
-            onClose={handleModalClose}
+            isOpen={isEditModalOpen}
+            onClose={handleEditModalClose}
             onSaveChanges={handleSaveChanges}
             columns={columns}
           />
