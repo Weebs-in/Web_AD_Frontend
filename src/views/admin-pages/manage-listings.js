@@ -4,6 +4,7 @@ import { Typography } from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TableEditModal from '../../ui-component/tables/TableEditModal';
+import SearchBar from '../../ui-component/SearchBar';
 
 // ==============================|| BOOK LISTINGS PAGE ||============================== //
 
@@ -65,6 +66,7 @@ const testColumns = [
 const ManageBookListings = () => (
   <MainCard title="Book Listings">
     <Typography variant="body2">
+      <SearchBar />
       <TableEditModal data={testData} columns={testColumns} labelField={labelField} />
     </Typography>
   </MainCard>

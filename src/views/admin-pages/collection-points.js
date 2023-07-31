@@ -4,12 +4,13 @@ import { Typography } from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import TableEditModal from '../../ui-component/tables/TableEditModal';
+import SearchBar from '../../ui-component/SearchBar';
 
 // ==============================|| COLLECTION POINTS MANAGEMENT ||============================== //
 
 const testData = [
   { id: 1, name: 'ISS', address: 'userA@example.com', status: 'active', qrCode: 'nil' },
-  { id: 2, name: 'Bisstro', address: 'userB@example.com', status: 'inactive', qrCode: 'nil'},
+  { id: 2, name: 'Bisstro', address: 'userB@example.com', status: 'inactive', qrCode: 'nil' },
   { id: 3, name: 'Male Toilet', address: 'level 2' },
   { id: 4, name: 'Female Toilet', address: 'level 3' },
   { id: 5, name: 'Ceiling', address: 'userA@example.com' },
@@ -31,9 +32,9 @@ const labelField = 'header';
 
 const testColumns = [
   // { header: 'ID', field: 'id' },
-  { header: 'Name', field: 'name', render: (rowData) => rowData.name},
-  { header: 'Address', field: 'address', render: (rowData) => rowData.address},
-  { header: 'Status', field: 'status', render: (rowData) => rowData.status},
+  { header: 'Name', field: 'name', render: (rowData) => rowData.name },
+  { header: 'Address', field: 'address', render: (rowData) => rowData.address },
+  { header: 'Status', field: 'status', render: (rowData) => rowData.status },
   { header: 'QR Code', field: 'qrCode', render: (rowData) => rowData.qrCode }
 ];
 
@@ -94,6 +95,7 @@ const CollectionPoints = () => (
   // };
   <MainCard title="Collection Points">
     <Typography variant="body2">
+      <SearchBar />
       <TableEditModal data={testData} columns={testColumns} labelField={labelField} />
     </Typography>
   </MainCard>
