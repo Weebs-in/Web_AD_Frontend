@@ -6,7 +6,7 @@ import { Link as RouterLink } from 'react-router-dom';
 import { Box, Link, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography } from '@mui/material';
 
 // third-party - use NumericFormat or PatternFormat in place of NumberFormat
-import { PatternFormat } from 'react-number-format';
+// import { PatternFormat } from 'react-number-format';
 
 // project import
 import Dot from 'ui-component/extended/Dot';
@@ -17,7 +17,7 @@ function createData(bookId, bookTitle, donarId, status, bookCondition) {
 
 const rows = [
   createData(439023483, 'The Hunger Games', 1, 1, 8),
-  createData(439554934, 'Harry Potter and the Philosopher\'s Stone', 2, 1, 9),
+  createData(439554934, "Harry Potter and the Philosopher's Stone", 2, 1, 9),
   createData(316015849, 'Twilight', 3, 1, 9),
   createData(61120081, 'To Kill a Mockingbird', 4, 0, 6),
   createData(743273567, 'The Great Gatsby', 5, 1, 9),
@@ -210,7 +210,8 @@ export default function TransactionTable() {
                   <TableCell align="left">
                     <OrderStatus status={row.status} />
                   </TableCell>
-                  <TableCell align="center">{row.bookCondition}
+                  <TableCell align="center">
+                    {row.bookCondition}
                     {/*<PatternFormat value={row.bookCondition} displayType="text" thousandSeparator prefix="$" format="### ###" />*/}
                   </TableCell>
                 </TableRow>

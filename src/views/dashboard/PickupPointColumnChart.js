@@ -111,7 +111,20 @@ const PickupPointColumnChart = () => {
       xaxis: {
         labels: {
           style: {
-            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary]
+            colors: [
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary,
+              secondary
+            ]
           }
         }
       },

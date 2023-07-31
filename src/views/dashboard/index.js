@@ -12,11 +12,12 @@ import {
   ListItemButton,
   ListItemSecondaryAction,
   ListItemText,
-  MenuItem,
   Stack,
-  TextField,
   Typography
 } from '@mui/material';
+
+// import MenuItem from from '@mui/material';
+// import TexfField from from '@mui/material';
 
 // project import
 import TransactionTable from './TransactionTable';
@@ -28,7 +29,8 @@ import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
 
 // assets
-import { GiftOutlined, MessageOutlined, SettingOutlined } from '@ant-design/icons';
+import { GiftOutlined, MessageOutlined } from '@ant-design/icons';
+// import SettingOutlined from '@ant-design/icons';
 import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
@@ -71,7 +73,7 @@ const actionSX = {
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
-  const [value, setValue] = useState('today');
+  // const [value, setValue] = useState('today');
   const [slot, setSlot] = useState('week');
 
   return (
@@ -90,7 +92,7 @@ const DashboardDefault = () => {
         <AnalyticEcommerce title="Total Book Listings" count="18,800" percentage={12.4} isLoss color="warning" extra="2,331" />
       </Grid>
       <Grid item xs={12} sm={6} md={4} lg={3}>
-        <AnalyticEcommerce title="Total New Users Registration" count="26,815" percentage={24.8}  extra="6650" />
+        <AnalyticEcommerce title="Total New Users Registration" count="26,815" percentage={24.8} extra="6650" />
       </Grid>
 
       <Grid item md={8} sx={{ display: { sm: 'none', md: 'block', lg: 'none' } }} />
@@ -192,20 +194,20 @@ const DashboardDefault = () => {
             <Typography variant="h5">Pickup Point Information</Typography>
           </Grid>
           {/*<Grid item>*/}
-            {/*<TextField*/}
-            {/*  id="standard-select-currency"*/}
-            {/*  size="small"*/}
-            {/*  select*/}
-            {/*  value={value}*/}
-            {/*  onChange={(e) => setValue(e.target.value)}*/}
-            {/*  sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}*/}
-            {/*>*/}
-              {/*{status.map((option) => (*/}
-              {/*  <MenuItem key={option.value} value={option.value}>*/}
-              {/*    {option.label}*/}
-              {/*  </MenuItem>*/}
-              {/*))}*/}
-            {/*</TextField>*/}
+          {/*<TextField*/}
+          {/*  id="standard-select-currency"*/}
+          {/*  size="small"*/}
+          {/*  select*/}
+          {/*  value={value}*/}
+          {/*  onChange={(e) => setValue(e.target.value)}*/}
+          {/*  sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}*/}
+          {/*>*/}
+          {/*{status.map((option) => (*/}
+          {/*  <MenuItem key={option.value} value={option.value}>*/}
+          {/*    {option.label}*/}
+          {/*  </MenuItem>*/}
+          {/*))}*/}
+          {/*</TextField>*/}
           {/*</Grid>*/}
         </Grid>
         <MainCard sx={{ mt: 1.75 }}>
