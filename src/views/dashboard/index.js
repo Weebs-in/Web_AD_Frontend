@@ -248,14 +248,14 @@ const DashboardDefault = () => {
                   <GiftOutlined />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={<Typography variant="subtitle1">Order #002434</Typography>} secondary="Today, 2:00 AM" />
+              <ListItemText primary={<Typography variant="subtitle1">Book Id #1612130291</Typography>} secondary="28 July, 5:45 PM" />
               <ListItemSecondaryAction>
                 <Stack alignItems="flex-end">
                   <Typography variant="subtitle1" noWrap>
-                    + $1,430
+                    Status
                   </Typography>
-                  <Typography variant="h6" color="secondary" noWrap>
-                    78%
+                  <Typography variant="h6" color="primary" noWrap>
+                    Completed
                   </Typography>
                 </Stack>
               </ListItemSecondaryAction>
@@ -264,21 +264,24 @@ const DashboardDefault = () => {
               <ListItemAvatar>
                 <Avatar
                   sx={{
-                    color: 'primary.main',
-                    bgcolor: 'primary.lighter'
+                    color: 'success.main',
+                    bgcolor: 'success.lighter'
+                    // color: 'primary.main',
+                    // bgcolor: 'primary.lighter'
                   }}
                 >
-                  <MessageOutlined />
+                  <GiftOutlined />
+                  {/*<MessageOutlined />*/}
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={<Typography variant="subtitle1">Order #984947</Typography>} secondary="5 August, 1:45 PM" />
+              <ListItemText primary={<Typography variant="subtitle1">Book Id #61122416</Typography>} secondary="31 July, 2:00 PM" />
               <ListItemSecondaryAction>
                 <Stack alignItems="flex-end">
                   <Typography variant="subtitle1" noWrap>
-                    + $302
+                    Status
                   </Typography>
-                  <Typography variant="h6" color="secondary" noWrap>
-                    8%
+                  <Typography variant="h6" color="primary" noWrap>
+                    Completed
                   </Typography>
                 </Stack>
               </ListItemSecondaryAction>
@@ -291,17 +294,18 @@ const DashboardDefault = () => {
                     bgcolor: 'error.lighter'
                   }}
                 >
-                  <SettingOutlined />
+                  <MessageOutlined />
+                  {/*<SettingOutlined />*/}
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={<Typography variant="subtitle1">Order #988784</Typography>} secondary="7 hours ago" />
+              <ListItemText primary={<Typography variant="subtitle1">Book Id #385732554</Typography>} secondary="7 hours ago" />
               <ListItemSecondaryAction>
                 <Stack alignItems="flex-end">
                   <Typography variant="subtitle1" noWrap>
-                    + $682
+                    Status
                   </Typography>
-                  <Typography variant="h6" color="secondary" noWrap>
-                    16%
+                  <Typography variant="h6" color="error" noWrap>
+                    Pending
                   </Typography>
                 </Stack>
               </ListItemSecondaryAction>

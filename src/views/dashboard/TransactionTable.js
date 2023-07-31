@@ -54,7 +54,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-// ==============================|| ORDER TABLE - HEADER CELL ||============================== //
+// ==============================|| TRANSACTION TABLE - HEADER CELL ||============================== //
 
 const headCells = [
   {
@@ -90,7 +90,7 @@ const headCells = [
   }
 ];
 
-// ==============================|| ORDER TABLE - HEADER ||============================== //
+// ==============================|| TRANSACTION TABLE - HEADER ||============================== //
 
 function OrderTableHead({ order, orderBy }) {
   return (
@@ -116,7 +116,7 @@ OrderTableHead.propTypes = {
   orderBy: PropTypes.string
 };
 
-// ==============================|| ORDER TABLE - STATUS ||============================== //
+// ==============================|| TRANSACTION TABLE - STATUS ||============================== //
 
 const OrderStatus = ({ status }) => {
   let color;
@@ -152,7 +152,7 @@ OrderStatus.propTypes = {
   status: PropTypes.number
 };
 
-// ==============================|| ORDER TABLE ||============================== //
+// ==============================|| TRANSACTION TABLE ||============================== //
 
 export default function TransactionTable() {
   const [order] = useState('asc');

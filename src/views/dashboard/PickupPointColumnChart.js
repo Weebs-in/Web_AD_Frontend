@@ -17,7 +17,7 @@ const columnChartOptions = {
   },
   plotOptions: {
     bar: {
-      columnWidth: '30%',
+      columnWidth: '45%',
       borderRadius: 4
     }
   },
@@ -30,7 +30,7 @@ const columnChartOptions = {
     colors: ['transparent']
   },
   xaxis: {
-    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun']
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
   },
   yaxis: {
     title: {
@@ -94,11 +94,11 @@ const PickupPointColumnChart = () => {
   const [series] = useState([
     {
       name: 'Total number of book exchanges (planned)',
-      data: [313, 247, 278, 298, 329, 269]
+      data: [313, 247, 278, 298, 329, 269, 280, 263, 251, 297, 319, 356]
     },
     {
       name: 'Total number of successful book exchanges',
-      data: [296, 239, 261, 279, 317, 258]
+      data: [296, 239, 261, 279, 317, 258, 280, 257, 242, 292, 309, 343]
     }
   ]);
 
@@ -111,7 +111,7 @@ const PickupPointColumnChart = () => {
       xaxis: {
         labels: {
           style: {
-            colors: [secondary, secondary, secondary, secondary, secondary, secondary]
+            colors: [secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary, secondary]
           }
         }
       },
