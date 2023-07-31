@@ -77,5 +77,6 @@
     "immutable": "^4.3.0",
     "prettier": "^2.8.7",
     "sass": "^1.53.0"
-  }
+  },
+  "proxy": "https://adt8api.azurewebsites.net"
 }
