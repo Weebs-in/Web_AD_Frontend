@@ -7,8 +7,8 @@ import MainCard from 'ui-component/cards/MainCard';
 // ==============================|| SAMPLE PAGE ||============================== //
 
 const Home = () => (
-  <MainCard title="Homepage">
-    <Typography variant="body2">Placeholder content</Typography>
+  <MainCard title="Welcome">
+    <Typography variant="body2">Please click on the sidebar to get started with your tasks</Typography>
   </MainCard>
 );
 

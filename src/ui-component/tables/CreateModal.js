@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Box, Modal, Button, Typography, TextField } from '@mui/material';
+import { Box, Modal, Button, Typography, TextField, Grid } from '@mui/material';
 
 const modalStyle = {
   position: 'absolute',
@@ -37,28 +37,30 @@ const CreateModal = ({ isOpen, onClose, onSaveChanges, columns }) => {
     <Modal open={isOpen} onClose={onClose} aria-labelledby="modal-modal-title" aria-describedby="modal-modal-description">
       <Box sx={modalStyle}>
         <Typography id="modal-modal-title" variant="h4" component="h2">
-          Create New Staff
+          Add New Entry
         </Typography>
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <form>
-            {columns.map((col) => (
-              <div key={col.field} style={{ marginBottom: ELEMENT_PADDING }}>
-                <TextField
-                  name={col.field}
-                  label={col.header}
-                  value={formData[col.field] || ''}
-                  onChange={handleInputChange}
-                  variant="outlined"
-                  fullWidth
-                />
-              </div>
-            ))}
+            <Grid container spacing={2}>
+              {columns.map((col) => (
+                <Grid item xs={6} key={col.field}>
+                  <TextField
+                    name={col.field}
+                    label={col.header}
+                    value={formData[col.field] || ''}
+                    onChange={handleInputChange}
+                    variant="outlined"
+                    fullWidth
+                  />
+                </Grid>
+              ))}
+            </Grid>
           </form>
-          <Button variant="contained" onClick={onClose} style={{ marginRight: ELEMENT_PADDING }}>
-            Close
+          <Button variant="contained" onClick={handleSave} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+            Add
           </Button>
-          <Button variant="contained" onClick={handleSave} style={{ marginRight: ELEMENT_PADDING }}>
-            Create
+          <Button variant="contained" onClick={onClose} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+            Close
           </Button>
         </Typography>
       </Box>

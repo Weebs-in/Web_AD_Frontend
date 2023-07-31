@@ -3,94 +3,57 @@ import { Typography } from '@mui/material';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import TableEditModal from '../../ui-component/tables/TableEditModal';
+import BasicTable from '../../ui-component/tables/BasicTable';
 
 // ==============================|| CRUD for Administrators and Moderators ||============================== //
 
 // Sample data and columns
 const data = [
-  { id: 1, name: 'Adam', role: 'Administrator' },
-  { id: 2, name: 'Eve', role: 'Administrator' },
-  { id: 3, name: 'Alice', role: 'Moderator' },
-  { id: 4, name: 'Bob', role: 'Moderator' }
+  { id: 1, username: 'Adam', phone: '333222', email: 'adam@adproject.com', role: '0' },
+  { id: 2, username: 'Eve', phone: '111222', email: 'eve@adproject.com', role: '0' },
+  { id: 3, username: 'Alice', phone: '333222', email: 'alice@adproject.com', role: '1' },
+  { id: 4, username: 'Bob', phone: '111222', email: 'bob@adproject.com', role: '1' },
+  { id: 5, username: 'Charlie', phone: '333222', email: 'charlie@adproject.com', role: '1' },
+  { id: 6, username: 'Mcdonalds', phone: '111222', email: 'macs@adproject.com', role: '1' },
+  { id: 7, username: 'KFC', phone: '333222', email: 'kfc@adproject.com', role: '1' },
+  { id: 8, username: 'BurgerKing', phone: '111222', email: 'burgerking@adproject.com', role: '1' }
   // Add more data as needed
 ];
 
 const columns = [
-  { header: 'ID', field: 'id', render: (rowData) => rowData.id },
-  { header: 'Name', field: 'name', render: (rowData) => rowData.name },
-  { header: 'Role', field: 'role', render: (rowData) => rowData.role }
+  // { header: 'ID', field: 'id'},
+  { header: 'Username', field: 'username' },
+  { header: 'Phone', field: 'phone' },
+  { header: 'Email', field: 'email' },
+  { header: 'Role', field: 'role' }
 ];
 
 const labelField = 'header';
 
-const ManageStaff = () => (
-  // // function for deleting row
-  // const handleDelete = async (id) => {
-  //   event.preventDefault();
-  //   try {
-  //     const params = new URLSearchParams();
-  //     params.append('id', id);
-  //     const response = await fetch(config.deleteLecturer + `?${params.toString()}`, {
-  //       headers: {
-  //         'Authorization': 'Bearer ' + getJWTFromLS(),
-  //         'Content-Type': 'application/json'
-  //       },
-  //       method: 'DELETE'
-  //     });
-  //     if (response.ok) {
-  //       const responseData = await response.json();
-  //       if (responseData.code === config.REQUEST_SUCCESS) {
-  //         console.log('Lecturer deleted');
-  //         setVisibleDel(false);
-  //         addToast(resultToast({
-  //           toastColor: config.TOAST_SUCCESS_COLOR,
-  //           toastMessage: config.TOAST_SUCCESS_MSG
-  //         }));
-  //         await fetchLecturers();
-  //       } else {
-  //         console.error('Failed to delete faculty: ', responseData.msg);
-  //         addToast(resultToast({
-  //           toastColor: config.TOAST_FAILED_COLOR,
-  //           toastMessage: config.TOAST_FAILED_MSG
-  //         }));
-  //       }
-  //     } else {
-  //       console.error('Failed to submit form data, request failed');
-  //       addToast(resultToast({
-  //         toastColor: config.TOAST_FAILED_COLOR,
-  //         toastMessage: config.TOAST_FAILED_MSG
-  //       }));
-  //     }
-  //   } catch (error) {
-  //     console.error('Error while submitting form data:', error);
-  //     addToast(resultToast({
-  //       toastColor: config.TOAST_FAILED_COLOR,
-  //       toastMessage: config.TOAST_FAILED_MSG
-  //     }));
-  //   }
-  // };
-  //
-  // // function to handle delete action when triggered by Table
-  // const handleDeleteFromTableModal = async (rowData) => {
-  //   // Extract the lecturerId from rowData or any other relevant data
-  //   const id = rowData.id; // Replace "id" with the actual key in your rowData
-  //
-  //   // Call the handleDelete function with the lecturerId
-  //   await handleDelete(id);
-  // };
-
-  <MainCard title="Adminstrators and Moderators">
-    <Typography variant="body2">
-      <h3>Create, Read, Update, Delete</h3>
-      <TableEditModal
-        data={data}
-        columns={columns}
-        labelField={labelField}
-        // onDelete={handleDeleteFromTableModal}
-      />
-    </Typography>
-  </MainCard>
-);
+const ManageStaff = () => {
+  // Map the data and update the "Role" field
+  const updatedData = data.map((item) => ({
+    ...item,
+    role:
+        item.role === '0'
+            ? 'Administrator'
+            : item.role === '1'
+                ? 'Moderator'
+                : null // Return null if role is neither '0' nor '1'
+  }));
+  return (
+    <MainCard title="Adminstrators and Moderators">
+      <Typography variant="body2">
+        <h3>Staff Information</h3>
+        <BasicTable
+          data={updatedData}
+          columns={columns}
+          labelField={labelField}
+          // onDelete={handleDeleteFromTableModal}
+        />
+      </Typography>
+    </MainCard>
+  );
+};
 
 export default ManageStaff;
