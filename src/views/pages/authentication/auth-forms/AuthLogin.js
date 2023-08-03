@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 import { useState } from 'react';
 // import { useSelector } from 'react-redux';
 
@@ -11,13 +13,13 @@ import {
   FormControl,
   FormControlLabel,
   FormHelperText,
-  Grid,
+  // Grid,
   IconButton,
   InputAdornment,
   InputLabel,
   OutlinedInput,
-  Stack,
-  Typography
+  Stack
+  // Typography
   // useMediaQuery
 } from '@mui/material';
 
@@ -37,7 +39,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
 // ============================|| FIREBASE - LOGIN ||============================ //
 
-const FirebaseLogin = ({ ...others }) => {
+const AuthLogin = ({ handleFormSubmit, ...others }) => {
   const theme = useTheme();
   const scriptedRef = useScriptRef();
   // const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
@@ -57,110 +59,57 @@ const FirebaseLogin = ({ ...others }) => {
     event.preventDefault();
   };
 
+  const handleSubmit = async (values, { setErrors, setStatus, setSubmitting }) => {
+    try {
+      console.log('Form submitted with values:', values);
+      if (scriptedRef.current) {
+        setStatus({ success: true });
+        setSubmitting(false);
+      }
+      // Call the handleFormSubmit function with the form data
+      await handleFormSubmit(values);
+    } catch (err) {
+      console.error(err);
+      if (scriptedRef.current) {
+        setStatus({ success: false });
+        setErrors({ submit: err.message });
+        setSubmitting(false);
+      }
+    }
+  };
+
   return (
     <>
-      <Grid container direction="column" justifyContent="center" spacing={2}>
-        {/*<Grid item xs={12}>*/}
-        {/*  <AnimateButton>*/}
-        {/*    <Button*/}
-        {/*      disableElevation*/}
-        {/*      fullWidth*/}
-        {/*      onClick={googleHandler}*/}
-        {/*      size="large"*/}
-        {/*      variant="outlined"*/}
-        {/*      sx={{*/}
-        {/*        color: 'grey.700',*/}
-        {/*        backgroundColor: theme.palette.grey[50],*/}
-        {/*        borderColor: theme.palette.grey[100]*/}
-        {/*      }}*/}
-        {/*    >*/}
-        {/*      <Box sx={{ mr: { xs: 1, sm: 2, width: 20 } }}>*/}
-        {/*        <img src={Google} alt="google" width={16} height={16} style={{ marginRight: matchDownSM ? 8 : 16 }} />*/}
-        {/*      </Box>*/}
-        {/*      Sign in with Google*/}
-        {/*    </Button>*/}
-        {/*  </AnimateButton>*/}
-        {/*</Grid>*/}
-        {/*<Grid item xs={12}>*/}
-        {/*  <Box*/}
-        {/*    sx={{*/}
-        {/*      alignItems: 'center',*/}
-        {/*      display: 'flex'*/}
-        {/*    }}*/}
-        {/*  >*/}
-        {/*    <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />*/}
-
-        {/*    <Button*/}
-        {/*      variant="outlined"*/}
-        {/*      sx={{*/}
-        {/*        cursor: 'unset',*/}
-        {/*        m: 2,*/}
-        {/*        py: 0.5,*/}
-        {/*        px: 7,*/}
-        {/*        borderColor: `${theme.palette.grey[100]} !important`,*/}
-        {/*        color: `${theme.palette.grey[900]}!important`,*/}
-        {/*        fontWeight: 500,*/}
-        {/*        borderRadius: `${customization.borderRadius}px`*/}
-        {/*      }}*/}
-        {/*      disableRipple*/}
-        {/*      disabled*/}
-        {/*    >*/}
-        {/*      OR*/}
-        {/*    </Button>*/}
-
-        {/*    <Divider sx={{ flexGrow: 1 }} orientation="horizontal" />*/}
-        {/*  </Box>*/}
-        {/*</Grid>*/}
-        {/*<Grid item xs={12} container alignItems="center" justifyContent="center">*/}
-        {/*  <Box sx={{ mb: 2 }}>*/}
-        {/*    <Typography variant="subtitle1">Sign in with Username</Typography>*/}
-        {/*  </Box>*/}
-        {/*</Grid>*/}
-      </Grid>
-
       <Formik
         initialValues={{
-          email: 'username', // change email field to "username" later on
-          password: '123456',
+          username: '', // change these values if we want to store any default value
+          password: null,
           submit: null
         }}
         validationSchema={Yup.object().shape({
-          email: Yup.string().email('Must be a valid username').max(255).required('Username is required'),
+          username: Yup.string().max(255).required('Username is required'),
           password: Yup.string().max(255).required('Password is required')
         })}
-        onSubmit={async (values, { setErrors, setStatus, setSubmitting }) => {
-          try {
-            if (scriptedRef.current) {
-              setStatus({ success: true });
-              setSubmitting(false);
-            }
-          } catch (err) {
-            console.error(err);
-            if (scriptedRef.current) {
-              setStatus({ success: false });
-              setErrors({ submit: err.message });
-              setSubmitting(false);
-            }
-          }
-        }}
+        onSubmit={handleSubmit} // Use the handleSubmit function as the form submission handler
+        {...others}
       >
-        {({ errors, handleBlur, handleChange, handleSubmit, isSubmitting, touched, values }) => (
-          <form noValidate onSubmit={handleSubmit} {...others}>
-            <FormControl fullWidth error={Boolean(touched.email && errors.email)} sx={{ ...theme.typography.customInput }}>
+        {({ errors, handleBlur, handleChange, isSubmitting, touched, values }) => (
+          <form noValidate {...others}>
+            <FormControl fullWidth error={Boolean(touched.username && errors.username)} sx={{ ...theme.typography.customInput }}>
               <InputLabel htmlFor="outlined-adornment-email-login">Username</InputLabel>
               <OutlinedInput
                 id="outlined-adornment-email-login"
                 type="email"
-                value={values.email}
-                name="email"
+                value={values.username || ''}
+                name="username"
                 onBlur={handleBlur}
                 onChange={handleChange}
-                label="Email Address / Username"
+                label="Username"
                 inputProps={{}}
               />
-              {touched.email && errors.email && (
+              {touched.username && errors.username && (
                 <FormHelperText error id="standard-weight-helper-text-email-login">
-                  {errors.email}
+                  {errors.username}
                 </FormHelperText>
               )}
             </FormControl>
@@ -170,7 +119,7 @@ const FirebaseLogin = ({ ...others }) => {
               <OutlinedInput
                 id="outlined-adornment-password-login"
                 type={showPassword ? 'text' : 'password'}
-                value={values.password}
+                value={values.password || ''}
                 name="password"
                 onBlur={handleBlur}
                 onChange={handleChange}
@@ -203,9 +152,9 @@ const FirebaseLogin = ({ ...others }) => {
                 }
                 label="Remember me"
               />
-              <Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>
-                Forgot Password?
-              </Typography>
+              {/*<Typography variant="subtitle1" color="secondary" sx={{ textDecoration: 'none', cursor: 'pointer' }}>*/}
+              {/*  Forgot Password?*/}
+              {/*</Typography>*/}
             </Stack>
             {errors.submit && (
               <Box sx={{ mt: 3 }}>
@@ -227,4 +176,9 @@ const FirebaseLogin = ({ ...others }) => {
   );
 };
 
-export default FirebaseLogin;
+// Prop validation
+AuthLogin.propTypes = {
+  handleFormSubmit: PropTypes.func.isRequired
+};
+
+export default AuthLogin;

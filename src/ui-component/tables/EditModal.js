@@ -48,22 +48,36 @@ const EditModal = ({ data, isOpen, onClose, onSaveChanges, columns }) => {
         <Typography id="modal-modal-description" sx={{ mt: 2 }}>
           <form>
             <Grid container spacing={2}>
-              {Object.keys(data).map((key) => (
-                <Grid item xs={12} sm={6} key={key}>
-                  {/* Use the labelField prop to dynamically generate labels */}
-                  {/* Use label if we want it bigger */}
-                  {/* <label>{columns.find((col) => col.field === key)?.header}</label> */}
+              {columns.map((col) => (
+                <Grid item xs={12} sm={6} key={col.field}>
                   <TextField
-                    name={key}
-                    label={columns.find((col) => col.field === key)?.header}
-                    value={editedData[key]}
+                    name={col.field}
+                    label={col.header}
+                    value={editedData[col.field]}
                     onChange={handleInputChange}
                     variant="outlined"
-                    fullWidth // To make the TextField take the full width of the form
+                    fullWidth
                   />
                 </Grid>
               ))}
             </Grid>
+            {/*<Grid container spacing={2}>*/}
+            {/*  {Object.keys(data).map((key) => (*/}
+            {/*    <Grid item xs={12} sm={6} key={key}>*/}
+            {/*      /!* Use the labelField prop to dynamically generate labels *!/*/}
+            {/*      /!* Use label if we want it bigger *!/*/}
+            {/*      /!* <label>{columns.find((col) => col.field === key)?.header}</label> *!/*/}
+            {/*      <TextField*/}
+            {/*        name={key}*/}
+            {/*        label={columns.find((col) => col.field === key)?.header}*/}
+            {/*        value={editedData[key]}*/}
+            {/*        onChange={handleInputChange}*/}
+            {/*        variant="outlined"*/}
+            {/*        fullWidth // To make the TextField take the full width of the form*/}
+            {/*      />*/}
+            {/*    </Grid>*/}
+            {/*/!*  ))}*!/*/}
+            {/*</Grid>*/}
           </form>
           <Button variant="contained" onClick={handleSave} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
             Save

@@ -7,7 +7,7 @@ const config = {
   borderRadius: 12,
 
   // request codes
-  REQUEST_SUCCESS: 1000,
+  REQUEST_SUCCESS: 200,
 
   // user roles
   USER_ROLE_ADMIN: '0',
@@ -15,7 +15,7 @@ const config = {
 
   // urls
   basicURL: 'http://localhost:3000', // this field is probably not going to be used
-  loginUrl: '/login',
+  loginUrl: '/auth/login',
   logoutUrl: '/logout', // might not use
 
   // toasts
