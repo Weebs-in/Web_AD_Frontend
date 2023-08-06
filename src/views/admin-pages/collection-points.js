@@ -16,7 +16,7 @@ import {
   GridToolbarContainer,
   GridActionsCellItem,
   GridRowEditStopReasons,
-  GridToolbarQuickFilter,
+  GridToolbarFilterButton,
   GridToolbarExport,
   useGridApiRef
 } from '@mui/x-data-grid';
@@ -54,7 +54,7 @@ function EditToolbar(props) {
         Add record
       </Button>
       <GridToolbarExport />
-      <GridToolbarQuickFilter />
+      <GridToolbarFilterButton />
     </GridToolbarContainer>
   );
 }

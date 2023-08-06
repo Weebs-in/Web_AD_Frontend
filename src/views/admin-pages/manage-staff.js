@@ -1,46 +1,57 @@
-import React, { useEffect, useState } from 'react';
-
 // material-ui
 import { Typography } from '@mui/material';
+import Box from '@mui/material/Box';
+// import Button from '@mui/material/Button';
+// import AddIcon from '@mui/icons-material/Add';
+// import EditIcon from '@mui/icons-material/Edit';
+// import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+// import SaveIcon from '@mui/icons-material/Save';
+// import CancelIcon from '@mui/icons-material/Close';
+
+// mui-datagrid
+import {
+  // useGridApiContext,
+  // GridRowModes,
+  DataGrid,
+  GridToolbarContainer,
+  // GridActionsCellItem,
+  // GridRowEditStopReasons,
+  GridToolbarExport,
+  GridToolbarFilterButton
+  // useGridApiRef
+} from '@mui/x-data-grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import BasicTable from '../../ui-component/tables/BasicTable';
+
+import React, { useEffect, useMemo, useState } from 'react';
 import config from '../../config';
 import { getJWTFromLS } from '../../utils/jwtUtils';
 
 // ==============================|| CRUD for Administrators and Moderators ||============================== //
 
-// Sample data and columns
-// const data = [
-//   { id: 1, username: 'Adam', phoneNumber: '333222', email: 'adam@adproject.com', role: '0' },
-//   { id: 2, username: 'Eve', phoneNumber: '111222', email: 'eve@adproject.com', role: '0' },
-//   { id: 3, username: 'Alice', phoneNumber: '333222', email: 'alice@adproject.com', role: '1' },
-//   { id: 4, username: 'Bob', phoneNumber: '111222', email: 'bob@adproject.com', role: '1' },
-//   { id: 5, username: 'Charlie', phoneNumber: '333222', email: 'charlie@adproject.com', role: '1' },
-//   { id: 6, username: 'Mcdonalds', phoneNumber: '111222', email: 'macs@adproject.com', role: '1' },
-//   { id: 7, username: 'KFC', phoneNumber: '333222', email: 'kfc@adproject.com', role: '1' },
-//   { id: 8, username: 'BurgerKing', phoneNumber: '111222', email: 'burgerking@adproject.com', role: '1' }
-// Add more data as needed
-// ];
-
-const columns = [
-  // { header: 'ID', field: 'id'},
-  { header: 'Username', field: 'username' },
-  { header: 'Phone No.', field: 'phoneNumber' },
-  { header: 'Email', field: 'email' },
-  { header: 'Role', field: 'role' }
-];
-
-const labelField = 'header';
+function StaffToolBar() {
+  return (
+    <GridToolbarContainer>
+      <GridToolbarExport />
+      <GridToolbarFilterButton />
+    </GridToolbarContainer>
+  );
+}
 
 const ManageStaff = () => {
   //variables
   const [staff, setStaff] = useState([]);
+  const [rows, setRows] = useState([]);
+  const VISIBLE_FIELDS = React.useMemo(() => ['username', 'phoneNumber', 'email', 'role'], []);
 
   useEffect(() => {
     fetchStaff();
   }, []);
+
+  useEffect(() => {
+    setRows(staff);
+  }, [staff]);
 
   const fetchStaff = async () => {
     try {
@@ -86,19 +97,140 @@ const ManageStaff = () => {
   //     });
   // };
   // Map the data and update the "Role" field
-  const updatedData = staff.map((item) => ({
-    ...item,
-    role: item.role === 0 ? 'Administrator' : item.role === 1 ? 'Moderator' : null // Return null if role is neither '0' nor '1'
-  }));
+
+  const columns = useMemo(() => {
+    return [
+      { field: 'id', headerName: 'ID', width: 0 },
+      {
+        field: 'username',
+        headerName: 'Username',
+        type: 'string',
+        width: 150,
+        align: 'left',
+        headerAlign: 'left'
+        // editable: true
+      },
+      {
+        field: 'phoneNumber',
+        headerName: 'Phone Number',
+        type: 'string',
+        width: 150
+        // editable: true
+      },
+      {
+        field: 'email',
+        headerName: 'Email Address',
+        type: 'string',
+        width: 200
+        // editable: true
+      },
+      {
+        field: 'role',
+        headerName: 'Role',
+        width: 120,
+        // editable: true,
+        type: 'singleSelect',
+        valueOptions: [
+          { value: 0, label: 'Administrator' },
+          { value: 1, label: 'Moderator' }
+        ]
+      }
+      // {
+      //   field: 'actions',
+      //   type: 'actions',
+      //   headerName: 'Actions',
+      //   width: 100,
+      //   cellClassName: 'actions',
+      //   getActions: ({ id }) => {
+      //     console.log('getActions activated for ID:', id);
+      //     const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+      //
+      //     if (isInEditMode) {
+      //       return [
+      //         <GridActionsCellItem
+      //             icon={<SaveIcon />}
+      //             key={`save_${id}`}
+      //             label="Save"
+      //             sx={{
+      //               color: 'primary.main'
+      //             }}
+      //             onClick={(event) => handleSaveClick(event, id)}
+      //         />,
+      //         <GridActionsCellItem
+      //             icon={<CancelIcon />}
+      //             key={`cancel_${id}`}
+      //             label="Cancel"
+      //             className="textPrimary"
+      //             onClick={handleCancelClick(id)}
+      //             color="inherit"
+      //         />
+      //       ];
+      //     }return [
+      //       <GridActionsCellItem
+      //           icon={<EditIcon />}
+      //           label="Edit"
+      //           key={`edit_${id}`}
+      //           className="textPrimary"
+      //           onClick={(event) => handleEditClick(event, id)}
+      //           color="inherit"
+      //       />,
+      //       <GridActionsCellItem
+      //           icon={<DeleteIcon />}
+      //           key={`delete_${id}`}
+      //           label="Delete"
+      //           onClick={(event) => handleDeleteClick(event, id)}
+      //           color="inherit"
+      //       />
+      //     ];
+      //   }
+      // }
+    ].filter((column) => VISIBLE_FIELDS.includes(column.field));
+  }, [VISIBLE_FIELDS]);
+
   return (
     <MainCard title="Staff Information">
       <Typography variant="body2">
-        <BasicTable
-          data={updatedData}
-          columns={columns}
-          labelField={labelField}
-          // onDelete={handleDeleteFromTableModal}
-        />
+        <Box
+          sx={{
+            height: 500,
+            width: '100%',
+            '& .actions': {
+              color: 'text.secondary'
+            },
+            '& .textPrimary': {
+              color: 'text.primary'
+            }
+          }}
+        >
+          <DataGrid
+            rows={rows}
+            // editMode="row"
+            columns={columns}
+            // rowModesModel={rowModesModel}
+            // onRowModesModelChange={handleRowModesModelChange}
+            // onRowEditStop={handleRowEditStop}
+            // processRowUpdate={processRowUpdate}
+            // apiRef={apiRef}
+            slots={{
+              toolbar: StaffToolBar
+            }}
+            // slotProps={{
+            //   toolbar: { setRows, setRowModesModel }
+            // }}
+            columnVisibilityModel={{
+              // Hide column id, the other columns will remain visible
+              id: false
+            }}
+            initialState={{
+              pagination: {
+                paginationModel: {
+                  pageSize: 5
+                }
+              }
+            }}
+            pageSizeOptions={[5, 10, 25]}
+          />
+        </Box>
       </Typography>
     </MainCard>
   );

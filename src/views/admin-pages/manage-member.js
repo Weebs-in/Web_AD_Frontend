@@ -16,7 +16,7 @@ import {
   GridToolbarContainer,
   GridActionsCellItem,
   GridRowEditStopReasons,
-  GridToolbarQuickFilter,
+  GridToolbarFilterButton,
   GridToolbarExport,
   useGridApiRef
 } from '@mui/x-data-grid';
@@ -66,7 +66,7 @@ function EditToolbar(props) {
         Add record
       </Button>
       <GridToolbarExport />
-      <GridToolbarQuickFilter />
+      <GridToolbarFilterButton />
     </GridToolbarContainer>
   );
 }
@@ -458,7 +458,7 @@ const ManageMembers = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Members">
+    <MainCard title="Member Information">
       <Typography variant="body2">
         <Box
           sx={{
