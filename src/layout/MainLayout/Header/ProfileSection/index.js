@@ -32,8 +32,8 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import FaceIcon from '@mui/icons-material/Face';
-// import UpgradePlanCard from './UpgradePlanCard';
-// import User1 from 'assets/images/users/user-round.svg';
+import { getUserNbrFromLS } from '../../../../utils/jwtUtils';
+import { getUserRoleFromLS } from '../../../../utils/jwtUtils';
 
 // assets
 import { IconLogout, IconSettings } from '@tabler/icons';
@@ -44,6 +44,9 @@ const ProfileSection = () => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
   const navigate = useNavigate();
+
+  const userRole = getUserRoleFromLS() === 'sys:admin' ? 'Administrator' : 'Moderator';
+  const userName = getUserNbrFromLS();
 
   const [sdm, setSdm] = useState(true);
   const [notification, setNotification] = useState(false);
@@ -159,10 +162,10 @@ const ProfileSection = () => {
                       <Stack direction="row" spacing={0.5} alignItems="center">
                         <Typography variant="h4">Good Morning,</Typography>
                         <Typography component="span" variant="h4" sx={{ fontWeight: 400 }}>
-                          Name
+                          {userName}
                         </Typography>
                       </Stack>
-                      <Typography variant="subtitle2">Project Admin</Typography>
+                      <Typography variant="subtitle2">{userRole}</Typography>
                     </Stack>
                     <Divider />
                   </Box>

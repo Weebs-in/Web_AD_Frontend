@@ -10,7 +10,7 @@ const config = {
   REQUEST_SUCCESS: 200,
 
   // user roles
-  USER_ROLE_ADMIN: '0',
+  USER_ROLE_ADMIN: '0', //console.log indicates this is sys:admin
   USER_ROLE_MODERATOR: '1',
 
   // urls
