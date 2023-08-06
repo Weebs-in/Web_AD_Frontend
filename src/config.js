@@ -25,10 +25,19 @@ const config = {
   TOAST_FAILED_MSG: 'Failed',
 
   // staff functions
-  getAllStaff: '/api/staff',
-  getStaffById: '/api/staff/1',
-  updateStaff: '/api/staff/15', // PUT
-  deleteStaff: '/api/staff/16' // DELETE
+  staff: '/api/staff',
+
+  // member functions
+  member: '/api/member',
+
+  // collection point functions
+  collectionPoint: '/api/collectionPoint',
+
+  // book functions
+  book: '/api/book',
+
+  //application functions
+  application: '/api/application'
 };
 
 export default config;

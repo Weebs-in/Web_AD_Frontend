@@ -7,7 +7,7 @@ import { Typography } from '@mui/material';
 import MainCard from 'ui-component/cards/MainCard';
 import BasicTable from '../../ui-component/tables/BasicTable';
 import config from '../../config';
-// import { getJWTFromLS } from '../../utils/jwtUtils';
+import { getJWTFromLS } from '../../utils/jwtUtils';
 
 // ==============================|| CRUD for Administrators and Moderators ||============================== //
 
@@ -44,8 +44,9 @@ const ManageStaff = () => {
 
   const fetchStaff = async () => {
     try {
-      const response = await fetch(config.getAllStaff, {
+      const response = await fetch(config.staff, {
         headers: {
+          Authorization: 'Bearer ' + getJWTFromLS(),
           'Content-Type': 'application/json'
         },
         method: 'GET'

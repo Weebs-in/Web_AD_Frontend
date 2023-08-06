@@ -5,11 +5,11 @@ import { Table, TableBody, TableCell, TableContainer, TableHead, TablePagination
 import EditModal from './EditModal';
 import CreateModal from './CreateModal';
 
-const TableEditModal = ({ data, columns, labelField, onDelete }) => {
+const TableEditModal = ({ data, columns, labelField, onSaveNew, onUpdate, onDelete }) => {
   const [isCreateModalOpen, setCreateModalOpen] = useState(false);
   const [isEditModalOpen, setEditModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
-  const [deletingData, setDeletingData] = useState(null);
+  // const [deletingData, setDeletingData] = useState(null);
 
   // Pagination state variables
   const [page, setPage] = useState(0);
@@ -37,50 +37,34 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
     setCreateModalOpen(false);
   };
 
+  // Function to handle saving new data from the Create Modal
+  const handleSaveChanges = (event, newData) => {
+    event.preventDefault();
+    onSaveNew(event, newData); // Call the onSaveNew prop with the new data
+    handleCreateModalClose(); // Close the CreateModal after saving changes
+  };
+
   // Function to open the Edit Modal
   const handleEditClick = (rowData) => {
     setEditingData(rowData);
     setEditModalOpen(true);
   };
 
-  // Function to handle the delete
+  // Functions to handle the delete
   const handleDeleteClick = (rowData) => {
     // Set the data of the row to be deleted in the deletingData state
-    setDeletingData(rowData);
-    // Call the onDelete prop with the rowData when the "Delete" button is clicked
-    onDelete(rowData);
+    onDelete(rowData.id);
     // setModalOpen(true); // Open the modal (if you want to show a confirmation dialog)
   };
 
-  const handleEditModalClose = () => {
-    setEditingData(null);
-    // setDeletingData(null); // Clear the deletingData state when the modal is closed
-    setEditModalOpen(false);
-  };
-
-  const handleSaveChanges = () => {
-    // Access the form data or any relevant state needed for saving changes
-    // For example, if you have form inputs in the modal, you can access them here
-    // const formData = { ... };
-
-    // Perform any processing or save the data as needed
-    // For example, you might make an API call to update the data in the database
-
-    // Check if there is data to be deleted
-    if (deletingData) {
-      // Perform the actual deletion logic here
-      // For example, you might make an API call to delete the data from the database
-      // Your specific implementation will depend on your backend and data storage
-      // After the deletion is done, you can refresh the data or update the table as needed
-      // For example, if your data comes from an API, you can fetch the updated data again
-      // const updatedData = fetchDataFromAPI();
-      // setData(updatedData);
-      console.log('testing delete button');
+  const handleEditModalClose = (editedData) => {
+    if (editedData) {
+      onUpdate(editedData); // Call the onUpdate prop with the edited data
     }
-
-    // After saving changes, you can close the modal if desired
+    setEditingData(null);
     setEditModalOpen(false);
   };
+
   if (!data || data.length === 0) {
     return <div>No data available.</div>;
   }
@@ -160,11 +144,7 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
       {/* Modal for creating */}
       <Modal open={isCreateModalOpen} onClose={handleCreateModalClose}>
         <div>
-          <CreateModal
-              isOpen={isCreateModalOpen}
-              onClose={handleCreateModalClose}
-              onSaveChanges={handleSaveChanges}
-              columns={columns} />
+          <CreateModal isOpen={isCreateModalOpen} onClose={handleCreateModalClose} onSaveChanges={handleSaveChanges} columns={columns} />
         </div>
       </Modal>
 
@@ -175,8 +155,8 @@ const TableEditModal = ({ data, columns, labelField, onDelete }) => {
           <EditModal
             data={editingData}
             isOpen={isEditModalOpen}
-            onClose={handleEditModalClose}
-            onSaveChanges={handleSaveChanges}
+            onClose={() => handleEditModalClose(null)}
+            onSave={onUpdate}
             columns={columns}
           />
         </div>
@@ -195,6 +175,8 @@ TableEditModal.propTypes = {
     })
   ).isRequired,
   labelField: PropTypes.string.isRequired, // for specifying the field in data that contains the labels
+  onSaveNew: PropTypes.func.isRequired, // for create function
+  onUpdate: PropTypes.func.isRequired, // for update function
   onDelete: PropTypes.func.isRequired // for delete function
 };
 

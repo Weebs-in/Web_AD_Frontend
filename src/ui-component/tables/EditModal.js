@@ -1,5 +1,5 @@
 // modal to be used by TableEditModal
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Box, Modal, Button, Typography, TextField, Grid } from '@mui/material';
 
@@ -19,24 +19,21 @@ const modalStyle = {
 // to consistently edit all padding values
 const ELEMENT_PADDING = '16px';
 
-const EditModal = ({ data, isOpen, onClose, onSaveChanges, columns }) => {
+const EditModal = ({ data, isOpen, onClose, onSave, columns }) => {
   const [editedData, setEditedData] = useState(data);
 
-  // Add useEffect to log the value of labelField when the modal is opened (debugging)
-  useEffect(() => {
-    console.log('EditModal labelField:', columns);
-  }, [columns]);
+  if (!data) {
+    return null; // to handle case when data is null
+  }
 
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setEditedData((prevData) => ({
-      ...prevData,
-      [name]: value
-    }));
+  const handleFieldChange = (field, value) => {
+    setEditedData((prevData) => ({ ...prevData, [field]: value }));
   };
 
-  const handleSave = () => {
-    onSaveChanges(editedData);
+  const handleSave = (event) => {
+    event.preventDefault();
+    onSave(editedData); // Call the onSave function (passed as a prop) with the edited data
+    onClose(); // Close the modal after saving changes
   };
 
   return (
@@ -54,7 +51,7 @@ const EditModal = ({ data, isOpen, onClose, onSaveChanges, columns }) => {
                     name={col.field}
                     label={col.header}
                     value={editedData[col.field]}
-                    onChange={handleInputChange}
+                    onChange={(e) => handleFieldChange(col.field, e.target.value)}
                     variant="outlined"
                     fullWidth
                   />
@@ -83,7 +80,7 @@ const EditModal = ({ data, isOpen, onClose, onSaveChanges, columns }) => {
             Save
           </Button>
           <Button variant="contained" onClick={onClose} style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
-            Close
+            Cancel
           </Button>
         </Typography>
       </Box>
@@ -94,9 +91,14 @@ const EditModal = ({ data, isOpen, onClose, onSaveChanges, columns }) => {
 EditModal.propTypes = {
   data: PropTypes.object.isRequired, // Single object representing the current row
   isOpen: PropTypes.bool.isRequired,
+  onSave: PropTypes.func.isRequired,
   onClose: PropTypes.func.isRequired,
-  onSaveChanges: PropTypes.func.isRequired,
-  columns: PropTypes.string.isRequired // prop for specifying the field in data that contains the labels
+  columns: PropTypes.arrayOf(
+    PropTypes.shape({
+      header: PropTypes.string.isRequired,
+      field: PropTypes.string.isRequired
+    })
+  ).isRequired
 };
 
 export default EditModal;
