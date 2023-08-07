@@ -27,8 +27,8 @@ import MainCard from 'ui-component/cards/MainCard';
 // import TableEditModal from '../../ui-component/tables/TableEditModal';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import config from '../../config';
-import { getJWTFromLS } from '../../utils/jwtUtils';
+import config from '../../../config';
+import { getJWTFromLS } from '../../../utils/jwtUtils';
 import PropTypes from 'prop-types';
 
 // ==============================|| COLLECTION POINTS MANAGEMENT ||============================== //

@@ -31,7 +31,7 @@ const MapComponent = () => {
     // Add click event listeners to the markers
     marker1.addListener('click', () => {
       const infoWindow = new window.google.maps.InfoWindow({
-        content: 'Mountain View, CA'
+        content: 'ISS'
       });
       infoWindow.open(map, marker1);
     });

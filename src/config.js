@@ -40,7 +40,11 @@ const config = {
   application: '/api/application',
 
   // transaction functions
-  transaction: '/api/transaction'
+  transaction: '/api/transaction',
+
+  // API Keys
+  mapAPI: 'YOUR_GOOGLE_MAPS_API_KEY',
+  bookAPI: 'YOUR_GOOGLE_BOOKS_API_KEY'
 };
 
 export default config;

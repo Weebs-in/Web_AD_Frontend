@@ -25,7 +25,7 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 const ManageStaff = Loadable(lazy(() => import('views/admin-pages/manage-staff')));
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/book-listings/manage-listings')));
 const ManageMember = Loadable(lazy(() => import('views/admin-pages/manage-member')));
-const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points')));
+const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points/collection-points')));
 const TransactionLog = Loadable(lazy(() => import('views/admin-pages/transaction-log/transaction-log')));
 
 // moderator page routing
