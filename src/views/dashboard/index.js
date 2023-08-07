@@ -16,17 +16,19 @@ import {
   Typography
 } from '@mui/material';
 
-// import MenuItem from from '@mui/material';
-// import TexfField from from '@mui/material';
+// import MenuItem from '@mui/material';
+// import TextField from '@mui/material';
 
 // project import
 import TransactionTable from './TransactionTable';
-import NewUserChart from './NewUserChart';
+import BooksTransactionChart from './BooksTransactionChart';
 import WeeklyBarChart from './WeeklyBarChart';
 import ReportAreaChart from './ReportAreaChart';
 import PickupPointColumnChart from './PickupPointColumnChart';
 import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
+import MonthlyLikedChart from "./MonthlyLikedChart";
+import AgeDemographicsChart from "./AgeDemographicsChart";
 
 // assets
 import { GiftOutlined, MessageOutlined } from '@ant-design/icons';
@@ -35,7 +37,6 @@ import avatar1 from 'assets/images/users/avatar-1.png';
 import avatar2 from 'assets/images/users/avatar-2.png';
 import avatar3 from 'assets/images/users/avatar-3.png';
 import avatar4 from 'assets/images/users/avatar-4.png';
-// import TransactionTable from "./TransactionTable";
 
 // avatar style
 const avatarSX = {
@@ -101,7 +102,7 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Number of new users registration</Typography>
+            <Typography variant="h5">Number of books transaction</Typography>
           </Grid>
           <Grid item>
             <Stack direction="row" alignItems="center" spacing={0}>
@@ -126,7 +127,7 @@ const DashboardDefault = () => {
         </Grid>
         <MainCard content={false} sx={{ mt: 1.5 }}>
           <Box sx={{ pt: 1.0, pr: 2 }}>
-            <NewUserChart slot={slot} />
+            <BooksTransactionChart slot={slot} />
           </Box>
         </MainCard>
       </Grid>
@@ -150,6 +151,44 @@ const DashboardDefault = () => {
       </Grid>
 
       {/* row 3 */}
+      <Grid item xs={12} md={7} lg={8}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography variant="h5">Top 10 most liked books</Typography>
+          </Grid>
+          <Grid item />
+        </Grid>
+        <MainCard sx={{ mt: 3.0 }} content={false}>
+          <Box sx={{ p: 3, pb: 0 }}>
+            <Stack spacing={2}>
+              <Typography variant="h6" color="textSecondary">
+                This Month Statistics
+              </Typography>
+            </Stack>
+          </Box>
+          <MonthlyLikedChart />
+        </MainCard>
+      </Grid>
+      <Grid item xs={12} md={5} lg={4}>
+        <Grid container alignItems="center" justifyContent="space-between">
+          <Grid item>
+            <Typography variant="h5">Demographic Breakdown by Age</Typography>
+          </Grid>
+          <Grid item />
+        </Grid>
+        <MainCard sx={{ mt: 3.0, height: '475px' }} content={false}>
+          <Box sx={{ p: 3, pb: 0 }}>
+            <Stack spacing={2}>
+              <Typography variant="h6" color="textSecondary">
+                {/*This Week Statistics*/}
+              </Typography>
+            </Stack>
+          </Box>
+          <AgeDemographicsChart />
+        </MainCard>
+      </Grid>
+
+      {/* row 4 */}
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
@@ -187,7 +226,7 @@ const DashboardDefault = () => {
         </MainCard>
       </Grid>
 
-      {/* row 4 */}
+      {/* row 5 */}
       <Grid item xs={12} md={7} lg={8}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
