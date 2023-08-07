@@ -16,6 +16,14 @@ const sysManagement = {
   type: 'group',
   children: [
     {
+      id: 'book-data',
+      title: 'Book Data',
+      type: 'item',
+      url: '/admin/book-data',
+      icon: icons.IconBook,
+      breadcrumbs: false
+    },
+    {
       id: 'manage-book-listings',
       title: 'Book Listings',
       type: 'item',

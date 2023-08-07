@@ -44,7 +44,7 @@ const config = {
 
   // API Keys
   mapAPI: 'YOUR_GOOGLE_MAPS_API_KEY',
-  bookAPI: 'YOUR_GOOGLE_BOOKS_API_KEY'
+  bookAPI: 'AIzaSyBOcP3aGRaZdMTkPTdD66yRlEozOhPBKow'
 };
 
 export default config;
