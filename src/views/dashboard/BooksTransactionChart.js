@@ -28,9 +28,9 @@ const areaChartOptions = {
   }
 };
 
-// ==============================|| INCOME AREA CHART ||============================== //
+// ==============================|| TRANSACTION AREA CHART ||============================== //
 
-const NewUserChart = ({ slot }) => {
+const BooksTransactionChart = ({ slot }) => {
   const theme = useTheme();
 
   const { primary, secondary } = theme.palette.text;
@@ -89,7 +89,7 @@ const NewUserChart = ({ slot }) => {
 
   const [series, setSeries] = useState([
     {
-      name: 'New users',
+      name: 'Number of transaction',
       data: [44, 36, 46, 55, 71, 93, 65]
     }
   ]);
@@ -97,7 +97,7 @@ const NewUserChart = ({ slot }) => {
   useEffect(() => {
     setSeries([
       {
-        name: 'New users',
+        name: 'Number of transaction',
         data: slot === 'month' ? [2642, 1852, 1729, 1794, 1952, 2539, 1872, 1748, 1967, 2154, 3164, 3402] : [44, 36, 46, 55, 71, 93, 65]
       }
     ]);
@@ -106,8 +106,8 @@ const NewUserChart = ({ slot }) => {
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
 };
 
-NewUserChart.propTypes = {
+BooksTransactionChart.propTypes = {
   slot: PropTypes.string
 };
 
-export default NewUserChart;
+export default BooksTransactionChart;
