@@ -24,7 +24,7 @@ import { randomId } from '@mui/x-data-grid-generator';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-// import TableEditModal from '../../ui-component/tables/TableEditModal';
+import GoogleMap from "../../../ui-component/maps/GoogleMap";
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../../config';
@@ -391,7 +391,7 @@ const CollectionPoints = () => {
   return (
     <MainCard title="Collection Points">
       <Typography variant="body2">
-        {/*<GoogleMap />*/}
+        <GoogleMap />
         <Divider />
         <Box
           sx={{
