@@ -16,8 +16,8 @@ import {
   Typography
 } from '@mui/material';
 
-// import MenuItem from from '@mui/material';
-// import TexfField from from '@mui/material';
+// import MenuItem from '@mui/material';
+// import TextField from '@mui/material';
 
 // project import
 import TransactionTable from './TransactionTable';
@@ -28,6 +28,7 @@ import PickupPointColumnChart from './PickupPointColumnChart';
 import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
 import MonthlyLikedChart from "./MonthlyLikedChart";
+import AgeDemographicsChart from "./AgeDemographicsChart";
 
 // assets
 import { GiftOutlined, MessageOutlined } from '@ant-design/icons';
@@ -171,33 +172,19 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={5} lg={4}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Number of new users registration</Typography>
+            <Typography variant="h5">Demographic Breakdown by Age</Typography>
           </Grid>
-          <Grid item>
-            <Stack direction="row" alignItems="center" spacing={0}>
-              <Button
-                  size="small"
-                  onClick={() => setSlot('month')}
-                  color={slot === 'month' ? 'primary' : 'secondary'}
-                  variant={slot === 'month' ? 'outlined' : 'text'}
-              >
-                Month
-              </Button>
-              <Button
-                  size="small"
-                  onClick={() => setSlot('week')}
-                  color={slot === 'week' ? 'primary' : 'secondary'}
-                  variant={slot === 'week' ? 'outlined' : 'text'}
-              >
-                Week
-              </Button>
-            </Stack>
-          </Grid>
+          <Grid item />
         </Grid>
-        <MainCard content={false} sx={{ mt: 1.5 }}>
-          <Box sx={{ pt: 1.0, pr: 2 }}>
-            <BooksTransactionChart slot={slot} />
+        <MainCard sx={{ mt: 3.0, height: '475px' }} content={false}>
+          <Box sx={{ p: 3, pb: 0 }}>
+            <Stack spacing={2}>
+              <Typography variant="h6" color="textSecondary">
+                {/*This Week Statistics*/}
+              </Typography>
+            </Stack>
           </Box>
+          <AgeDemographicsChart />
         </MainCard>
       </Grid>
 
