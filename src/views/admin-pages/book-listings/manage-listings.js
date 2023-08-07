@@ -1,5 +1,5 @@
 /// material-ui
-import { Typography } from '@mui/material';
+import { Dialog, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 // import AddIcon from '@mui/icons-material/Add';
@@ -24,7 +24,7 @@ import {
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-// import TableEditModal from '../../ui-component/tables/TableEditModal';
+import ListingEditModal from './ListingEditModal';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../../config';
@@ -52,6 +52,8 @@ function BookListingToolbar() {
 const ManageListings = () => {
   const apiRef = useGridApiRef();
   const [bookListings, setBookListings] = useState([]);
+  const [editModalOpen, setEditModalOpen] = useState(false);
+  const [selectedBook, setSelectedBook] = useState(null);
   const [rows, setRows] = useState([]);
   // const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
@@ -209,16 +211,25 @@ const ManageListings = () => {
   //   }
   // };
 
-  // change to open up modal for editing
+  // upon clicking Edit, open up modal and pass book data to modal
   const handleEditClick = useCallback(
-    async (event, id) => {
+    (event, id) => {
       event.preventDefault();
       console.log('handleEditClick function called for ID:', id);
 
-      // setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
+      // Find the selected book in the bookListings array
+      const selectedBookData = bookListings.find((book) => book.id === id);
+      setSelectedBook(selectedBookData);
+      setEditModalOpen(true);
     },
-    []
+    [bookListings]
   );
+
+  // Implement the function to close the modal
+  const handleCloseEditModal = () => {
+    setEditModalOpen(false);
+    setSelectedBook(null);
+  };
 
   // const handleSaveClick = useCallback(
   //   async (event, id) => {
@@ -350,7 +361,8 @@ const ManageListings = () => {
         valueOptions: [
           { value: 0, label: 'Available' },
           { value: 1, label: 'Reserved' }, // transaction in progress
-          { value: 2, label: 'Unavailable' } // completed donation transaction
+          { value: 2, label: 'Unavailable' }, // completed donation transaction
+          { value: 3, label: 'Removed' } // veto-ed by moderator
         ]
       },
       {
@@ -434,6 +446,10 @@ const ManageListings = () => {
           />
         </Box>
       </Typography>
+      {/* Render the edit modal */}
+      <Dialog open={editModalOpen} onClose={handleCloseEditModal}>
+        <ListingEditModal open={editModalOpen} onClose={handleCloseEditModal} bookData={selectedBook} />
+      </Dialog>
     </MainCard>
   );
 };

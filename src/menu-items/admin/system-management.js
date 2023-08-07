@@ -1,9 +1,11 @@
 // assets
-import { IconAdjustments } from '@tabler/icons';
+import { IconBook, IconBuildingStore, IconNotes } from '@tabler/icons';
 
 // constant
 const icons = {
-  IconAdjustments
+  IconBook,
+  IconBuildingStore,
+  IconNotes
 };
 
 // ==============================|| 'FOR REVIEW' MENU ITEMS ||============================== //
@@ -18,7 +20,7 @@ const sysManagement = {
       title: 'Book Listings',
       type: 'item',
       url: '/admin/manage-listings',
-      icon: icons.IconAdjustments,
+      icon: icons.IconBook,
       breadcrumbs: false
     },
     {
@@ -26,7 +28,15 @@ const sysManagement = {
       title: 'Collection Points',
       type: 'item',
       url: '/admin/collection-points',
-      icon: icons.IconAdjustments,
+      icon: icons.IconBuildingStore,
+      breadcrumbs: false
+    },
+    {
+      id: 'view-transaction-log',
+      title: 'Transaction Log',
+      type: 'item',
+      url: '/admin/transaction-log',
+      icon: icons.IconNotes,
       breadcrumbs: false
     }
   ]

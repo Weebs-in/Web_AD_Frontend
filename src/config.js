@@ -37,7 +37,10 @@ const config = {
   book: '/api/book',
 
   //application functions
-  application: '/api/application'
+  application: '/api/application',
+
+  // transaction functions
+  transaction: '/api/transaction'
 };
 
 export default config;
