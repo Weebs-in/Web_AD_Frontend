@@ -29,6 +29,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
 import MonthlyLikedChart from "./MonthlyLikedChart";
 import AgeDemographicsChart from "./AgeDemographicsChart";
+import TransactionAreaChart from "./TransactionAreaChart";
 
 // assets
 import { GiftOutlined, MessageOutlined } from '@ant-design/icons';
@@ -203,26 +204,19 @@ const DashboardDefault = () => {
       <Grid item xs={12} md={5} lg={4}>
         <Grid container alignItems="center" justifyContent="space-between">
           <Grid item>
-            <Typography variant="h5">Analytics Report</Typography>
+            <Typography variant="h5">Number of Transaction by Area</Typography>
           </Grid>
           <Grid item />
         </Grid>
-        <MainCard sx={{ mt: 2 }} content={false}>
-          <List sx={{ p: 0, '& .MuiListItemButton-root': { py: 2 } }}>
-            <ListItemButton divider>
-              <ListItemText primary="Company Finance Growth" />
-              <Typography variant="h5">+45.14%</Typography>
-            </ListItemButton>
-            <ListItemButton divider>
-              <ListItemText primary="Company Expenses Ratio" />
-              <Typography variant="h5">0.58%</Typography>
-            </ListItemButton>
-            <ListItemButton>
-              <ListItemText primary="Business Risk Cases" />
-              <Typography variant="h5">Low</Typography>
-            </ListItemButton>
-          </List>
-          <ReportAreaChart />
+        <MainCard sx={{ mt: 2.0, height: '475px' }} content={false}>
+          <Box sx={{ p: 3, pb: 0 }}>
+            <Stack spacing={2}>
+              <Typography variant="h6" color="textSecondary">
+                This Month Statistics
+              </Typography>
+            </Stack>
+          </Box>
+          <TransactionAreaChart />
         </MainCard>
       </Grid>
 
@@ -249,7 +243,7 @@ const DashboardDefault = () => {
           {/*</TextField>*/}
           {/*</Grid>*/}
         </Grid>
-        <MainCard sx={{ mt: 1.75 }}>
+        <MainCard sx={{ mt: 2.0 }}>
           <Stack spacing={1.5} sx={{ mb: 3 }}>
             <Typography variant="h6" color="secondary">
               {/*Net Profit*/}
