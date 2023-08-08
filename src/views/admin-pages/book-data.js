@@ -57,7 +57,8 @@ const BookData = () => {
   const handleSearch = () => {
     console.log('Search button clicked'); // Debugging line
     setLoading(true); // Set loading to true before making the API request
-    fetch(`${apiUrl}?q=${query}&key=${apiKey}`)
+    // send query string to API and set maximum to Google's limit of 40
+    fetch(`${apiUrl}?q=${query}&maxResults=40&key=${apiKey}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -145,9 +146,8 @@ const BookData = () => {
       field: 'volumeInfo.imageLinks.thumbnail',
       headerName: 'Cover',
       width: 80,
-      valueGetter: (params) => {
-        return params.row.volumeInfo.imageLinks.thumbnail.identifier || '';
-      }
+      valueGetter: (params) => // check if attribute exists, then checks if thumbnail exists, otherwise, return empty string
+        params.row.volumeInfo.imageLinks && params.row.volumeInfo.imageLinks.thumbnail ? params.row.volumeInfo.imageLinks.thumbnail : ''
     }
   ];
 
