@@ -56,22 +56,6 @@ const actionSX = {
   transform: 'none'
 };
 
-// sales report status
-// const status = [
-//   {
-//     value: 'today',
-//     label: 'Today'
-//   },
-//   {
-//     value: 'month',
-//     label: 'This Month'
-//   },
-//   {
-//     value: 'year',
-//     label: 'This Year'
-//   }
-// ];
-
 // ==============================|| DASHBOARD - DEFAULT ||============================== //
 
 const DashboardDefault = () => {
@@ -226,22 +210,6 @@ const DashboardDefault = () => {
           <Grid item>
             <Typography variant="h5">Pickup Point Information</Typography>
           </Grid>
-          {/*<Grid item>*/}
-          {/*<TextField*/}
-          {/*  id="standard-select-currency"*/}
-          {/*  size="small"*/}
-          {/*  select*/}
-          {/*  value={value}*/}
-          {/*  onChange={(e) => setValue(e.target.value)}*/}
-          {/*  sx={{ '& .MuiInputBase-input': { py: 0.5, fontSize: '0.875rem' } }}*/}
-          {/*>*/}
-          {/*{status.map((option) => (*/}
-          {/*  <MenuItem key={option.value} value={option.value}>*/}
-          {/*    {option.label}*/}
-          {/*  </MenuItem>*/}
-          {/*))}*/}
-          {/*</TextField>*/}
-          {/*</Grid>*/}
         </Grid>
         <MainCard sx={{ mt: 2.0 }}>
           <Stack spacing={1.5} sx={{ mb: 3 }}>
@@ -301,8 +269,6 @@ const DashboardDefault = () => {
                   sx={{
                     color: 'success.main',
                     bgcolor: 'success.lighter'
-                    // color: 'primary.main',
-                    // bgcolor: 'primary.lighter'
                   }}
                 >
                   <GiftOutlined />
