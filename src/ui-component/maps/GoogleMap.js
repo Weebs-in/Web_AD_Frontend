@@ -5,6 +5,7 @@ const MapComponent = ({ collectionPoints }) => {
   const [markersAndListenersReady, setMarkersAndListenersReady] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react/prop-types
     if (collectionPoints.length > 0) {
       console.log('collectionPoints changed, initializing map...');
       setMarkersAndListenersReady(true);
@@ -12,6 +13,7 @@ const MapComponent = ({ collectionPoints }) => {
         console.log('setMarkersAndListenersReady to true');
       }
     }
+    // eslint-disable-next-line
   }, [collectionPoints]);
 
   useEffect(() => {
@@ -20,6 +22,7 @@ const MapComponent = ({ collectionPoints }) => {
       initMap();
       setMarkersAndListenersReady(false);
     }
+    // eslint-disable-next-line
   }, [markersAndListenersReady]); // do not listen to eslint and put initMap here because it cannot be called before initialisation
 
   const initMap = async () => {
@@ -64,7 +67,7 @@ const MapComponent = ({ collectionPoints }) => {
     }
   };
 
-  return <div id="map" style={{ height: '500px', width: '100%' }}></div>;
+  return <div id="map" style={{ minHeight: '400px', height: 'auto', minWidth: '500px', maxWidth: '100%', width: '100%' }}></div>;
 };
 
 export default MapComponent;

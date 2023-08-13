@@ -328,13 +328,6 @@ const CollectionPoints = () => {
         ]
       },
       {
-        field: 'qrCode',
-        headerName: 'QR Code',
-        type: 'string',
-        width: 100,
-        editable: true
-      },
-      {
         field: 'actions',
         type: 'actions',
         headerName: 'Actions',
