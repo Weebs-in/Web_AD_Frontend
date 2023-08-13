@@ -304,7 +304,7 @@ const CollectionPoints = () => {
         field: 'name',
         headerName: 'Name',
         type: 'string',
-        width: 180,
+        width: 250,
         align: 'left',
         headerAlign: 'left',
         editable: true
@@ -313,7 +313,7 @@ const CollectionPoints = () => {
         field: 'address',
         headerName: 'Address',
         type: 'string',
-        width: 250,
+        width: 400,
         editable: true
       },
       {
