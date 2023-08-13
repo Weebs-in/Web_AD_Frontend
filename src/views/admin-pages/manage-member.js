@@ -53,7 +53,7 @@ function EditToolbar(props) {
       bio: '',
       isNew: true
     };
-    setRows((oldRows) => [...oldRows, newRow]);
+    setRows((oldRows) => [newRow, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' }

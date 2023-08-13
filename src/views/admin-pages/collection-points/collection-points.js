@@ -41,7 +41,7 @@ function EditToolbar(props) {
     event.preventDefault();
     const id = randomId();
     const newRow = { id, name: '', address: '', status: '', qrCode: '', isNew: true };
-    setRows((oldRows) => [...oldRows, newRow]);
+    setRows((oldRows) => [newRow, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' }
