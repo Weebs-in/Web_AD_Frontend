@@ -40,7 +40,7 @@ function EditToolbar(props) {
   const handleClick = (event) => {
     event.preventDefault();
     const id = randomId();
-    const newRow = { id, name: '', address: '', status: '', qrCode: '', isNew: true };
+    const newRow = { id, name: '', address: '', status: '', isNew: true };
     setRows((oldRows) => [newRow, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
@@ -64,7 +64,7 @@ const CollectionPoints = () => {
   const [collectionPoints, setCollectionPoints] = useState([]);
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['name', 'address', 'status', 'qrCode', 'actions'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['name', 'address', 'status', 'actions'], []);
 
   useEffect(() => {
     fetchCollectionPoints();

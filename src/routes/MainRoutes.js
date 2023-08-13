@@ -12,7 +12,7 @@ const Homepage = Loadable(lazy(() => import('views/pages/home')));
 const Dashboard = Loadable(lazy(() => import('views/dashboard')));
 
 // account settings
-const AccountSettings = Loadable(lazy(() => import('views/pages/account-settings')));
+const UpdateProfile = Loadable(lazy(() => import('views/pages/update-profile')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -48,8 +48,8 @@ const MainRoutes = {
       element: <Homepage />
     },
     {
-      path: 'account-settings',
-      element: <AccountSettings />
+      path: 'update-profile',
+      element: <UpdateProfile />
     },
     {
       path: 'dashboard',
