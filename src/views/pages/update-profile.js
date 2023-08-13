@@ -40,9 +40,9 @@ const UpdateProfile = () => {
   // will execute after component renders and retrieves userRole from storage
   useEffect(() => {
     console.log('1st use effect');
-    if (userRole === 'sys:admin') {
+    if (userRole === 'config.USER_ROLE_ADMIN') {
       setUserIdKey('adminId');
-    } else {
+    } else if (userRole === 'USER_ROLE_MODERATOR') {
       setUserIdKey('moderatorId');
     }
     setUserId(getUserIdFromLS(userIdKey));
@@ -144,7 +144,7 @@ const UpdateProfile = () => {
                 onChange={handleInputChange}
                 variant="outlined"
                 fullWidth
-                style={{ marginBottom: '16px' }} // Add spacing between TextField components
+                style={{ marginBottom: ELEMENT_PADDING }} // Add spacing between TextField components
               />
             ))}
             <Button

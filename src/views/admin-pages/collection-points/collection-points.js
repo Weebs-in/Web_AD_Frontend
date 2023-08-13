@@ -404,6 +404,7 @@ const CollectionPoints = () => {
           }}
         >
           <DataGrid
+              autoHeight {...data}
             rows={rows}
             editMode="row"
             columns={columns}

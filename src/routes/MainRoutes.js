@@ -13,6 +13,7 @@ const Dashboard = Loadable(lazy(() => import('views/dashboard')));
 
 // account settings
 const UpdateProfile = Loadable(lazy(() => import('views/pages/update-profile')));
+const ChangePassword = Loadable(lazy(() => import('views/pages/change-password')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -32,7 +33,7 @@ const BookData = Loadable(lazy(() => import('views/admin-pages/book-data')));
 // moderator page routing
 const CreditScores = Loadable(lazy(() => import('views/moderator-pages/credit-scores')));
 const ReviewBookListing = Loadable(lazy(() => import('views/moderator-pages/review-book-listing')));
-const ReviewBookRequest = Loadable(lazy(() => import('views/moderator-pages/review-book-request')));
+const ReviewApplication = Loadable(lazy(() => import('views/moderator-pages/review-book-request')));
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
@@ -50,6 +51,10 @@ const MainRoutes = {
     {
       path: 'update-profile',
       element: <UpdateProfile />
+    },
+    {
+      path: 'change-password',
+      element: <ChangePassword />
     },
     {
       path: 'dashboard',
@@ -186,7 +191,7 @@ const MainRoutes = {
       children: [
         {
           path: 'review-book-request',
-          element: <ReviewBookRequest />
+          element: <ReviewApplication />
         }
       ]
     }

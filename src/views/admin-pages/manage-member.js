@@ -472,6 +472,7 @@ const ManageMembers = () => {
           }}
         >
           <DataGrid
+              autoHeight {...data}
             rows={rows}
             editMode="row"
             columns={columns}
