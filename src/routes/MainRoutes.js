@@ -33,7 +33,7 @@ const BookData = Loadable(lazy(() => import('views/admin-pages/book-data')));
 // moderator page routing
 const CreditScores = Loadable(lazy(() => import('views/moderator-pages/credit-scores')));
 const ReviewBookListing = Loadable(lazy(() => import('views/moderator-pages/review-book-listing')));
-const ReviewApplication = Loadable(lazy(() => import('views/moderator-pages/review-book-request')));
+const ReviewApplication = Loadable(lazy(() => import('views/moderator-pages/review-book-application')));
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
@@ -187,10 +187,10 @@ const MainRoutes = {
       ]
     },
     {
-      path: 'admin',
+      path: 'moderator',
       children: [
         {
-          path: 'review-book-request',
+          path: 'review-book-application',
           element: <ReviewApplication />
         }
       ]

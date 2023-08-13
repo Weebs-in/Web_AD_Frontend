@@ -6,10 +6,10 @@ import MainCard from 'ui-component/cards/MainCard';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 
-const ReviewBookRequest = () => (
+const ReviewBookApplication = () => (
   <MainCard title="Pending Book Requests">
     <Typography variant="body2">To fill in content</Typography>
   </MainCard>
 );
 
-export default ReviewBookRequest;
+export default ReviewBookApplication;
