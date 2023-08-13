@@ -24,11 +24,11 @@ import { randomId } from '@mui/x-data-grid-generator';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-// import TableEditModal from '../../ui-component/tables/TableEditModal';
+import GoogleMap from '../../../ui-component/maps/GoogleMap';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import config from '../../config';
-import { getJWTFromLS } from '../../utils/jwtUtils';
+import config from '../../../config';
+import { getJWTFromLS } from '../../../utils/jwtUtils';
 import PropTypes from 'prop-types';
 
 // ==============================|| COLLECTION POINTS MANAGEMENT ||============================== //
@@ -41,7 +41,7 @@ function EditToolbar(props) {
     event.preventDefault();
     const id = randomId();
     const newRow = { id, name: '', address: '', status: '', qrCode: '', isNew: true };
-    setRows((oldRows) => [...oldRows, newRow]);
+    setRows((oldRows) => [newRow, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
       [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' }
@@ -304,7 +304,7 @@ const CollectionPoints = () => {
         field: 'name',
         headerName: 'Name',
         type: 'string',
-        width: 180,
+        width: 250,
         align: 'left',
         headerAlign: 'left',
         editable: true
@@ -313,7 +313,7 @@ const CollectionPoints = () => {
         field: 'address',
         headerName: 'Address',
         type: 'string',
-        width: 250,
+        width: 400,
         editable: true
       },
       {
@@ -326,13 +326,6 @@ const CollectionPoints = () => {
           { value: 1, label: 'Available' },
           { value: 0, label: 'Unavailable' }
         ]
-      },
-      {
-        field: 'qrCode',
-        headerName: 'QR Code',
-        type: 'string',
-        width: 100,
-        editable: true
       },
       {
         field: 'actions',
@@ -391,7 +384,12 @@ const CollectionPoints = () => {
   return (
     <MainCard title="Collection Points">
       <Typography variant="body2">
-        {/*<GoogleMap />*/}
+        <GoogleMap
+          collectionPoints={collectionPoints}
+          // onAddNewCollectionPoint={handleFormSubmit}
+          // onUpdateCollectionPoint={handleUpdateSubmit}
+          // onDeleteCollectionPoint={handleDeleteClick}
+        />
         <Divider />
         <Box
           sx={{

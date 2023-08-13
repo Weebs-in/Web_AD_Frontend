@@ -21,18 +21,16 @@ import {
   useGridApiRef
 } from '@mui/x-data-grid';
 
+import { randomId } from '@mui/x-data-grid-generator';
+
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-// import TableEditModal from '../../ui-component/tables/TableEditModal';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../config';
 import { getJWTFromLS } from '../../utils/jwtUtils';
 
-// IMPT -- currently we are using username as the id, once the database starts returning id,
-// remove all references to getRowId as this type of implementation is buggy.
-
-// ==============================|| COLLECTION POINTS MANAGEMENT ||============================== //
+// ==============================|| MEMBERS MANAGEMENT ||============================== //
 
 function EditToolbar(props) {
   // eslint-disable-next-line react/prop-types
@@ -40,11 +38,10 @@ function EditToolbar(props) {
 
   const handleClick = (event) => {
     event.preventDefault();
-    const id = '';
+    const id = randomId();
     const newRow = {
       id,
       username: '',
-      name: '',
       displayName: '',
       phoneNumber: '',
       email: '',
@@ -53,10 +50,10 @@ function EditToolbar(props) {
       bio: '',
       isNew: true
     };
-    setRows((oldRows) => [...oldRows, newRow]);
+    setRows((oldRows) => [newRow, ...oldRows]);
     setRowModesModel((oldModel) => ({
       ...oldModel,
-      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'name' }
+      [id]: { mode: GridRowModes.Edit, fieldToFocus: 'username' }
     }));
   };
 
@@ -77,7 +74,7 @@ const ManageMembers = () => {
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
-    () => ['username', 'name', 'displayName', 'phoneNumber', 'email', 'birthday', 'gender', 'bio', 'actions'],
+    () => ['username', 'displayName', 'phoneNumber', 'email', 'birthday', 'gender', 'bio', 'actions'],
     []
   );
 
@@ -86,7 +83,7 @@ const ManageMembers = () => {
   }, []);
 
   useEffect(() => {
-    // Map through the collection points to set rowModesModel
+    // Map through the members to set rowModesModel
     const updatedRowModesModel = {};
     members.forEach((cp) => {
       if (cp.isNew) {
@@ -131,18 +128,18 @@ const ManageMembers = () => {
     }
   };
 
-  const getRowId = useCallback((row) => {
-    return row.username; // Use the 'username' field as the row id
-  }, []);
-
-  // function for creating new collection point, called by handleSaveClick
+  // function for creating new members, called by handleSaveClick
   const handleFormSubmit = useCallback(
     async (formData) => {
       console.log('to POST - Form data before conversion to JSON:', formData);
       // Convert the form data to a JSON object
       const data = {};
       Object.entries(formData).forEach(([key, value]) => {
-        data[key] = typeof value === 'string' ? value.trim() : value;
+        if (key === 'birthday' && value instanceof Date) {
+          data[key] = value.toISOString(); // Convert Date to ISO 8601 format
+        } else {
+          data[key] = typeof value === 'string' ? value.trim() : value;
+        }
       });
 
       // Check if the username already exists
@@ -161,7 +158,7 @@ const ManageMembers = () => {
       // Make the POST request to the backend
       try {
         console.log('to POST - Submitting form data:', data); // Log the data before making the POST request
-        const response = await fetch(config.collectionPoint, {
+        const response = await fetch(config.member, {
           method: 'POST',
           headers: {
             Authorization: 'Bearer ' + getJWTFromLS(),
@@ -178,8 +175,8 @@ const ManageMembers = () => {
         const responseData = await response.json();
         console.log('New record added:', responseData);
 
-        // Fetch the updated collection points data
-        await fetchCollectionPoints();
+        // Fetch the updated members data
+        await fetchMembers();
       } catch (error) {
         console.error('Error adding new record:', error);
       }
@@ -187,7 +184,7 @@ const ManageMembers = () => {
     [members]
   );
 
-  // function for updating existing collection point, called by handleSaveClick
+  // function for updating existing member, called by handleSaveClick
   const handleUpdateSubmit = useCallback(
     async (id, formData) => {
       console.log('to PUT - Form data before conversion to JSON:', formData);
@@ -197,8 +194,10 @@ const ManageMembers = () => {
         data[key] = typeof value === 'string' ? value.trim() : value;
       });
 
+      // Exclude the current record's ID from the username check
+      const otherMembers = members.filter((member) => member.id !== id);
       // Check if the username already exists
-      const isUsernameExists = members.some((member) => member.username === data.username);
+      const isUsernameExists = otherMembers.some((member) => member.username === data.username);
 
       if (isUsernameExists) {
         console.error('Username already exists. Please choose a unique username.');
@@ -226,7 +225,7 @@ const ManageMembers = () => {
         const responseData = await response.json();
         console.log('Record updated:', responseData);
 
-        // Fetch the updated collection points data
+        // Fetch the updated members data
         await fetchMembers();
       } catch (error) {
         console.error('Error updating record:', error);
@@ -311,8 +310,8 @@ const ManageMembers = () => {
       console.log('Response Status:', response.status); // Log the status code
 
       if (response.ok) {
-        console.log('Collection point member');
-        await fetchCollectionPoints(); // Fetch the updated collection points data
+        console.log('Member deleted');
+        await fetchMembers(); // Fetch the updated members data
       } else {
         console.error('Failed to delete member');
       }
@@ -474,7 +473,6 @@ const ManageMembers = () => {
         >
           <DataGrid
             rows={rows}
-            getRowId={getRowId} // Use username as the id
             editMode="row"
             columns={columns}
             rowModesModel={rowModesModel}

@@ -65,6 +65,7 @@ const Login = () => {
         userIdKey = 'moderatorId';
         break;
     }
+
     localStorage.setItem('isLoggedIn', 'true');
     localStorage.setItem(userIdKey, userId); // primary key id
     localStorage.setItem('userRole', userRole); // admin is 0, moderator is 1

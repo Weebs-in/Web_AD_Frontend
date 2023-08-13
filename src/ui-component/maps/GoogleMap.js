@@ -1,50 +1,73 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
-const MapComponent = () => {
+// eslint-disable-next-line react/prop-types
+const MapComponent = ({ collectionPoints }) => {
+  const [markersAndListenersReady, setMarkersAndListenersReady] = useState(false);
+
   useEffect(() => {
-    // This function is called when the component is mounted
-    initMap();
-  }, []);
+    // eslint-disable-next-line react/prop-types
+    if (collectionPoints.length > 0) {
+      console.log('collectionPoints changed, initializing map...');
+      setMarkersAndListenersReady(true);
+      if (markersAndListenersReady) {
+        console.log('setMarkersAndListenersReady to true');
+      }
+    }
+    // eslint-disable-next-line
+  }, [collectionPoints]);
 
-  const initMap = () => {
+  useEffect(() => {
+    if (markersAndListenersReady) {
+      console.log('reinitialise map if markersAndListenersReady');
+      initMap();
+      setMarkersAndListenersReady(false);
+    }
+    // eslint-disable-next-line
+  }, [markersAndListenersReady]); // do not listen to eslint and put initMap here because it cannot be called before initialisation
+
+  const initMap = async () => {
     console.log('Maps JavaScript API loaded.');
 
-    // Create a new map instance
     const map = new window.google.maps.Map(document.getElementById('map'), {
       center: { lat: 1.3785214720052124, lng: 103.81470319776338 },
       zoom: 11
     });
 
-    // Create markers for your locations
-    const marker1 = new window.google.maps.Marker({
-      position: { lat: 1.2924497513679765, lng: 103.77653562182284 },
-      title: 'ISS',
-      map: map
-    });
+    // Create a Geocoder instance
+    console.log('Geocoder instance created');
+    const geocoder = new window.google.maps.Geocoder();
 
-    const marker2 = new window.google.maps.Marker({
-      position: { lat: 47.648994, lng: -122.3503845 },
-      title: 'Seattle, WA',
-      map: map
-    });
+    // Map collection points to markers
+    console.log('Mapping collection points to markers');
+    for (const point of collectionPoints) {
+      // Use Promise to ensure synchronous geocoding
+      await new Promise((resolve) => {
+        // Geocode the address to get latitude and longitude
+        geocoder.geocode({ address: point.address }, (results, status) => {
+          if (status === 'OK') {
+            const marker = new window.google.maps.Marker({
+              position: results[0].geometry.location,
+              title: point.name,
+              map: map
+            });
 
-    // Add click event listeners to the markers
-    marker1.addListener('click', () => {
-      const infoWindow = new window.google.maps.InfoWindow({
-        content: 'Mountain View, CA'
+            // Add click event listener to each marker
+            marker.addListener('click', () => {
+              const infoWindow = new window.google.maps.InfoWindow({
+                content: point.name
+              });
+              infoWindow.open(map, marker);
+            });
+          } else {
+            console.error('Geocode error:', status);
+          }
+          resolve(); // Resolve the Promise after geocoding
+        });
       });
-      infoWindow.open(map, marker1);
-    });
-
-    marker2.addListener('click', () => {
-      const infoWindow = new window.google.maps.InfoWindow({
-        content: 'Seattle, WA'
-      });
-      infoWindow.open(map, marker2);
-    });
+    }
   };
 
-  return <div id="map" style={{ height: '500px', width: '100%' }}></div>;
+  return <div id="map" style={{ minHeight: '400px', height: 'auto', minWidth: '500px', maxWidth: '100%', width: '100%' }}></div>;
 };
 
 export default MapComponent;
