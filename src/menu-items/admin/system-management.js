@@ -16,14 +16,6 @@ const sysManagement = {
   type: 'group',
   children: [
     {
-      id: 'book-data',
-      title: 'Book Data',
-      type: 'item',
-      url: '/admin/book-data',
-      icon: icons.IconBook,
-      breadcrumbs: false
-    },
-    {
       id: 'manage-book-listings',
       title: 'Book Listings',
       type: 'item',
@@ -40,10 +32,10 @@ const sysManagement = {
       breadcrumbs: false
     },
     {
-      id: 'view-transaction-log',
-      title: 'Transaction Log',
+      id: 'view-application-log',
+      title: 'Application Log',
       type: 'item',
-      url: '/admin/transaction-log',
+      url: '/admin/application-log',
       icon: icons.IconNotes,
       breadcrumbs: false
     }

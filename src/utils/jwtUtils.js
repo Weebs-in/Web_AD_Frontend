@@ -10,8 +10,8 @@ export function getUserNbrFromLS() {
   return localStorage.getItem('userNbr');
 }
 
-export function getUserIdFromLS(userIdKey) {
-  return localStorage.getItem(userIdKey);
+export function getUserIdFromLS() {
+  return localStorage.getItem('userId');
 }
 
 export function getUserRoleFromLS() {

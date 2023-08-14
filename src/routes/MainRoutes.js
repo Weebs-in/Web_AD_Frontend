@@ -27,7 +27,7 @@ const ManageStaff = Loadable(lazy(() => import('views/admin-pages/manage-staff')
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/book-listings/manage-listings')));
 const ManageMember = Loadable(lazy(() => import('views/admin-pages/manage-member')));
 const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points/collection-points')));
-const TransactionLog = Loadable(lazy(() => import('views/admin-pages/transaction-log/transaction-log')));
+const ApplicationLog = Loadable(lazy(() => import('views/admin-pages/transaction-log/transaction-log')));
 const BookData = Loadable(lazy(() => import('views/admin-pages/book-data')));
 
 // moderator page routing
@@ -154,8 +154,8 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
-          path: 'transaction-log',
-          element: <TransactionLog />
+          path: 'application-log',
+          element: <ApplicationLog />
         }
       ]
     },

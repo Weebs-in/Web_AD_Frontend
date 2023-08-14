@@ -12,7 +12,10 @@ import MuiAlert from '@mui/material/Alert';
 import AuthWrapper1 from './AuthWrapper1';
 import AuthCardWrapper from './AuthCardWrapper';
 
-// assets
+// for checks
+import {getUserIdFromLS} from "../../../utils/jwtUtils";
+import {getUserRoleFromLS} from "../../../utils/jwtUtils";
+import {getUserNbrFromLS} from "../../../utils/jwtUtils";
 
 // ================================|| AUTH3 - LOGIN ||================================ //
 
@@ -23,6 +26,9 @@ const Login = () => {
   // // form values
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  // values returned from payload at login
+  // const [userIdKey, setUserIdKey] = useState('');
+  // const [userId, setUserId] = useState('');
   // // toast
   // const [toast, addToast] = useState(0);
   // const toaster = useRef();
@@ -45,6 +51,11 @@ const Login = () => {
   const processJwt = async (jwt) => {
     const payloadObj = JSON.parse(atob(jwt.split('.')[1]));
     await setJWTToLS(jwt, payloadObj.sub, payloadObj.a[0], payloadObj.u);
+
+    // Now log the values after setting them
+    console.log('userNbr after setItem: ', getUserNbrFromLS());
+    console.log('userRole after setItem: ', getUserRoleFromLS());
+    console.log('userId after setItem: ', getUserIdFromLS());
   };
 
   /**
@@ -56,19 +67,9 @@ const Login = () => {
    */
   function setJWTToLS(jwt, userId, userRole, userNbr) {
     localStorage.setItem('jwt', jwt);
-    let userIdKey = '';
-    switch (userRole) {
-      case config.USER_ROLE_ADMIN:
-        userIdKey = 'adminId';
-        break;
-      case config.USER_ROLE_MODERATOR:
-        userIdKey = 'moderatorId';
-        break;
-    }
-
     localStorage.setItem('isLoggedIn', 'true');
-    localStorage.setItem(userIdKey, userId); // primary key id
-    localStorage.setItem('userRole', userRole); // admin is 0, moderator is 1
+    localStorage.setItem('userId', userId); // primary key id
+    localStorage.setItem('userRole', userRole); // sys:admin, sys:moderator
     localStorage.setItem('userNbr', userNbr); // username
   }
 

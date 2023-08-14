@@ -36,6 +36,8 @@ const config = {
   // ==============================|| STAFF FUNCTIONS ||============================== //
   // CRUD staff functions
   staff: '/api/staff',
+  // update personal password
+  password: '/api/staff/password',
 
   // ==============================|| MEMBER FUNCTIONS ||============================== //
 

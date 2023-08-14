@@ -6,7 +6,6 @@ import { Box, Button, TextField, Typography } from '@mui/material';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import config from '../../config';
-import { getUserRoleFromLS } from '../../utils/jwtUtils';
 import { getUserIdFromLS } from '../../utils/jwtUtils';
 import { getJWTFromLS } from '../../utils/jwtUtils';
 
@@ -32,27 +31,11 @@ const attributes = [
 const UpdateProfile = () => {
   // Initialize formData state with an empty object
   const [formData, setFormData] = useState({});
-  const userRole = getUserRoleFromLS();
-  const [userIdKey, setUserIdKey] = useState('');
-  const [userId, setUserId] = useState('');
+  const userId = getUserIdFromLS();
   // const [userData, setUserData] = useState([]);
 
-  // will execute after component renders and retrieves userRole from storage
   useEffect(() => {
-    console.log('1st use effect');
-    if (userRole === 'config.USER_ROLE_ADMIN') {
-      setUserIdKey('adminId');
-    } else if (userRole === 'USER_ROLE_MODERATOR') {
-      setUserIdKey('moderatorId');
-    }
-    setUserId(getUserIdFromLS(userIdKey));
-  }, [userRole]);
-
-  useEffect(() => {
-    if (userIdKey && userId) {
-      console.log('2nd use effect');
-      fetchUserData();
-    }
+    fetchUserData();
   }, [userId]);
 
   const fetchUserData = async () => {

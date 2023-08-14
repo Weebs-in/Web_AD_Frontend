@@ -58,6 +58,7 @@ const ProfileSection = () => {
   const anchorRef = useRef(null);
   const handleLogout = async () => {
     console.log('Logout');
+    navigate('/logout');
   };
 
   const handleClose = (event) => {
@@ -67,6 +68,7 @@ const ProfileSection = () => {
     setOpen(false);
   };
 
+  // handle clicks on dropdown buttons
   const handleListItemClick = (event, index, route = '') => {
     setSelectedIndex(index);
     handleClose(event);
