@@ -1,12 +1,11 @@
 import forReview from './for-review';
 import creditScores from './credit-scores';
+import modDashboard from './mod-dashboard';
 
 // ==============================|| MENU ITEMS ||============================== //
 
-// const userType = moderator;
-
 const menuItems = {
-  items: [forReview, creditScores]
+  items: [modDashboard, forReview, creditScores]
 };
 
 export default menuItems;

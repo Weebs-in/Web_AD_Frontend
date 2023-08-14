@@ -58,6 +58,7 @@ const ProfileSection = () => {
   const anchorRef = useRef(null);
   const handleLogout = async () => {
     console.log('Logout');
+    navigate('/logout');
   };
 
   const handleClose = (event) => {
@@ -67,6 +68,7 @@ const ProfileSection = () => {
     setOpen(false);
   };
 
+  // handle clicks on dropdown buttons
   const handleListItemClick = (event, index, route = '') => {
     setSelectedIndex(index);
     handleClose(event);
@@ -171,7 +173,6 @@ const ProfileSection = () => {
                   </Box>
                   <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                     <Box sx={{ p: 2 }}>
-                      {/*<UpgradePlanCard />*/}
                       {/*<Divider />*/}
                       <Card
                         sx={{
@@ -235,12 +236,22 @@ const ProfileSection = () => {
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 0}
-                          onClick={(event) => handleListItemClick(event, 0, 'account-settings')}
+                          onClick={(event) => handleListItemClick(event, 0, 'update-profile')}
                         >
                           <ListItemIcon>
                             <IconSettings stroke={1.5} size="1.3rem" />
                           </ListItemIcon>
                           <ListItemText primary={<Typography variant="body2">Update Profile</Typography>} />
+                        </ListItemButton>
+                        <ListItemButton
+                          sx={{ borderRadius: `${customization.borderRadius}px` }}
+                          selected={selectedIndex === 0}
+                          onClick={(event) => handleListItemClick(event, 0, 'change-password')}
+                        >
+                          <ListItemIcon>
+                            <IconSettings stroke={1.5} size="1.3rem" />
+                          </ListItemIcon>
+                          <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
                         </ListItemButton>
                         {/*<ListItemButton*/}
                         {/*  sx={{ borderRadius: `${customization.borderRadius}px` }}*/}

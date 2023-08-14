@@ -1,5 +1,5 @@
 // material-ui
-import { Typography } from '@mui/material';
+import {Divider, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -383,6 +383,8 @@ const ManageStaff = () => {
   return (
     <MainCard title="Staff Information">
       <Typography variant="body2">
+        <p>Please note: editing is disabled for fellow administrators and the moderator password/role fields.</p>
+        <Divider />
         <Box
           sx={{
             height: 500,
@@ -396,6 +398,8 @@ const ManageStaff = () => {
           }}
         >
           <DataGrid
+            autoHeight
+            {...rows}
             rows={rows}
             editMode="row"
             columns={columns}

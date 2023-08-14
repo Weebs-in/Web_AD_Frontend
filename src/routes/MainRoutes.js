@@ -12,7 +12,8 @@ const Homepage = Loadable(lazy(() => import('views/pages/home')));
 const Dashboard = Loadable(lazy(() => import('views/dashboard')));
 
 // account settings
-const AccountSettings = Loadable(lazy(() => import('views/pages/account-settings')));
+const UpdateProfile = Loadable(lazy(() => import('views/pages/update-profile')));
+const ChangePassword = Loadable(lazy(() => import('views/pages/change-password')));
 
 // utilities routing
 const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
@@ -24,15 +25,17 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 // admin page routing
 const ManageStaff = Loadable(lazy(() => import('views/admin-pages/manage-staff')));
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/book-listings/manage-listings')));
+const ListingActivity = Loadable(lazy(() => import('views/admin-pages/book-listings/listing-activity-log')));
 const ManageMember = Loadable(lazy(() => import('views/admin-pages/manage-member')));
 const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points/collection-points')));
-const TransactionLog = Loadable(lazy(() => import('views/admin-pages/transaction-log/transaction-log')));
+const ManageApplications = Loadable(lazy(() => import('views/admin-pages/book-applications/manage-applications')));
+const ApplicationActivity = Loadable(lazy(() => import('views/admin-pages/book-applications/application-activity-log')));
 const BookData = Loadable(lazy(() => import('views/admin-pages/book-data')));
 
 // moderator page routing
 const CreditScores = Loadable(lazy(() => import('views/moderator-pages/credit-scores')));
 const ReviewBookListing = Loadable(lazy(() => import('views/moderator-pages/review-book-listing')));
-const ReviewBookRequest = Loadable(lazy(() => import('views/moderator-pages/review-book-request')));
+const ReviewApplication = Loadable(lazy(() => import('views/moderator-pages/review-book-application')));
 
 // sample page routing
 const SamplePage = Loadable(lazy(() => import('views/sample-page')));
@@ -48,8 +51,12 @@ const MainRoutes = {
       element: <Homepage />
     },
     {
-      path: 'account-settings',
-      element: <AccountSettings />
+      path: 'update-profile',
+      element: <UpdateProfile />
+    },
+    {
+      path: 'change-password',
+      element: <ChangePassword />
     },
     {
       path: 'dashboard',
@@ -140,6 +147,15 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
+          path: 'listing-activity',
+          element: <ListingActivity />
+        }
+      ]
+    },
+    {
+      path: 'admin',
+      children: [
+        {
           path: 'collection-points',
           element: <CollectionPoints />
         }
@@ -149,13 +165,22 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
-          path: 'transaction-log',
-          element: <TransactionLog />
+          path: 'manage-applications',
+          element: <ManageApplications />
         }
       ]
     },
     {
       path: 'admin',
+      children: [
+        {
+          path: 'application-activity',
+          element: <ApplicationActivity />
+        }
+      ]
+    },
+    {
+      path: 'moderator',
       children: [
         {
           path: 'book-data',
@@ -182,11 +207,11 @@ const MainRoutes = {
       ]
     },
     {
-      path: 'admin',
+      path: 'moderator',
       children: [
         {
-          path: 'review-book-request',
-          element: <ReviewBookRequest />
+          path: 'review-book-application',
+          element: <ReviewApplication />
         }
       ]
     }

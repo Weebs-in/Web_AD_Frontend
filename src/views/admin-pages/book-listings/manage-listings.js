@@ -69,7 +69,8 @@ const ManageListings = () => {
       'language',
       'status',
       'likeCount',
-      'donor'
+      'donor',
+      'actions'
     ],
     []
   );
@@ -375,7 +376,7 @@ const ManageListings = () => {
         field: 'actions',
         type: 'actions',
         headerName: 'Actions',
-        width: 50,
+        width: 80,
         cellClassName: 'actions',
         getActions: ({ id }) => {
           console.log('getActions activated for ID:', id);

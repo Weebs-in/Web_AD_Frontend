@@ -10,7 +10,7 @@ const icons = {
 
 const forReview = {
   id: 'for-review',
-  title: 'For Review',
+  title: 'Review',
   type: 'group',
   children: [
     {
@@ -23,9 +23,9 @@ const forReview = {
     },
     {
       id: 'review-book-requests',
-      title: 'Book Requests',
+      title: 'Book Applications',
       type: 'item',
-      url: '/moderator/review-book-request',
+      url: '/moderator/review-book-application',
       icon: icons.IconUrgent,
       breadcrumbs: false
     }
