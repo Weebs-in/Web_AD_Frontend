@@ -8,6 +8,7 @@ import MainCard from 'ui-component/cards/MainCard';
 import config from '../../config';
 import { getUserIdFromLS } from '../../utils/jwtUtils';
 import { getJWTFromLS } from '../../utils/jwtUtils';
+import { useNavigate } from 'react-router';
 
 // ==============================|| UPDATE PROFILE for Administrators and Moderators ||============================== //
 
@@ -22,17 +23,13 @@ const attributes = [
   { header: 'Email', field: 'email' }
 ];
 
-// add handleSave function
-
-// add handleClose function
-
 // if time permits, add warning alert to handleClose function "Exit without saving?"
 
 const UpdateProfile = () => {
   // Initialize formData state with an empty object
   const [formData, setFormData] = useState({});
   const userId = getUserIdFromLS();
-  // const [userData, setUserData] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchUserData();
@@ -113,6 +110,16 @@ const UpdateProfile = () => {
     }
   }, []);
 
+  const handleClose = () => {
+    try {
+      navigate('/');
+    } catch (error) {
+      console.error('Navigation failed:', error);
+      // Use window.location.href as a backup option
+      window.location.href = '/';
+    }
+  };
+
   return (
     <MainCard title="Update Profile and Settings">
       <Typography variant="body2">
@@ -137,8 +144,8 @@ const UpdateProfile = () => {
             >
               Save
             </Button>
-            <Button variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
-              Close
+            <Button onClick={handleClose} variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+              Cancel
             </Button>
           </Box>
         </form>
