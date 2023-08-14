@@ -25,9 +25,11 @@ const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons
 // admin page routing
 const ManageStaff = Loadable(lazy(() => import('views/admin-pages/manage-staff')));
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/book-listings/manage-listings')));
+const ListingActivity = Loadable(lazy(() => import('views/admin-pages/book-listings/listing-activity-log')));
 const ManageMember = Loadable(lazy(() => import('views/admin-pages/manage-member')));
 const CollectionPoints = Loadable(lazy(() => import('views/admin-pages/collection-points/collection-points')));
-const ApplicationLog = Loadable(lazy(() => import('views/admin-pages/transaction-log/transaction-log')));
+const ManageApplications = Loadable(lazy(() => import('views/admin-pages/book-applications/manage-applications')));
+const ApplicationActivity = Loadable(lazy(() => import('views/admin-pages/book-applications/application-activity-log')));
 const BookData = Loadable(lazy(() => import('views/admin-pages/book-data')));
 
 // moderator page routing
@@ -145,6 +147,15 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
+          path: 'listing-activity',
+          element: <ListingActivity />
+        }
+      ]
+    },
+    {
+      path: 'admin',
+      children: [
+        {
           path: 'collection-points',
           element: <CollectionPoints />
         }
@@ -154,13 +165,22 @@ const MainRoutes = {
       path: 'admin',
       children: [
         {
-          path: 'application-log',
-          element: <ApplicationLog />
+          path: 'manage-applications',
+          element: <ManageApplications />
         }
       ]
     },
     {
       path: 'admin',
+      children: [
+        {
+          path: 'application-activity',
+          element: <ApplicationActivity />
+        }
+      ]
+    },
+    {
+      path: 'moderator',
       children: [
         {
           path: 'book-data',

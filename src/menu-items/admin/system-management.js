@@ -1,8 +1,9 @@
 // assets
-import { IconBook, IconBuildingStore, IconNotes } from '@tabler/icons';
+import { IconBasket, IconBook, IconBuildingStore, IconNotes } from '@tabler/icons';
 
 // constant
 const icons = {
+  IconBasket,
   IconBook,
   IconBuildingStore,
   IconNotes
@@ -16,12 +17,52 @@ const sysManagement = {
   type: 'group',
   children: [
     {
-      id: 'manage-book-listings',
+      id: 'book-listings',
       title: 'Book Listings',
-      type: 'item',
-      url: '/admin/manage-listings',
+      type: 'collapse',
       icon: icons.IconBook,
-      breadcrumbs: false
+      children: [
+        {
+          id: 'manage-book-listings',
+          title: 'Management',
+          type: 'item',
+          url: '/admin/manage-listings',
+          icon: icons.IconBook,
+          breadcrumbs: false
+        },
+        {
+          id: 'listing-activity-log',
+          title: 'Activity Log',
+          type: 'item',
+          url: '/admin/listing-activity',
+          icon: icons.IconBook,
+          breadcrumbs: false
+        },
+      ]
+    },
+    {
+      id: 'applications',
+      title: 'Applications',
+      type: 'collapse',
+      icon: icons.IconBasket,
+      children: [
+        {
+          id: 'manage-applications',
+          title: 'Management',
+          type: 'item',
+          url: '/admin/manage-listings',
+          icon: icons.IconBasket,
+          breadcrumbs: false
+        },
+        {
+          id: 'application-activity-log',
+          title: 'Activity Log',
+          type: 'item',
+          url: '/admin/application-activity',
+          icon: icons.IconBasket,
+          breadcrumbs: false
+        },
+      ]
     },
     {
       id: 'manage-pickup-points',
@@ -29,14 +70,6 @@ const sysManagement = {
       type: 'item',
       url: '/admin/collection-points',
       icon: icons.IconBuildingStore,
-      breadcrumbs: false
-    },
-    {
-      id: 'view-application-log',
-      title: 'Application Log',
-      type: 'item',
-      url: '/admin/application-log',
-      icon: icons.IconNotes,
       breadcrumbs: false
     }
   ]

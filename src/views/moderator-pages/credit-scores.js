@@ -1,5 +1,5 @@
 // material-ui
-import { Stack, Typography } from '@mui/material';
+import {Divider, Stack, Typography} from '@mui/material';
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 
@@ -145,6 +145,8 @@ const CreditScores = () => {
   return (
     <MainCard title="Credit Scores">
       <Typography variant="body2">
+        <p>Please note: Auto-approval of applications is granted for scores of 0.4 and above.</p>
+        <Divider />
         <Box
           sx={{
             height: 500,
