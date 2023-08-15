@@ -417,7 +417,7 @@ const CollectionPoints = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Collection Points">
+    <MainCard title="Collection Points" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <GoogleMap
           collectionPoints={collectionPoints}

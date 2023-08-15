@@ -309,7 +309,7 @@ const ManageApplications = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Applications for Books">
+    <MainCard title="Applications for Books" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <Box
           sx={{

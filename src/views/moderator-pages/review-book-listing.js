@@ -439,7 +439,7 @@ const ManageListings = () => {
   }, [handleDeleteClick, handleEditClick, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Book Listings">
+    <MainCard title="Book Listings" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         {/* eslint-disable-next-line react/no-unescaped-entities */}
         <p>Warning: you are only able to view listings with status "Pending" and "Deposited".</p>

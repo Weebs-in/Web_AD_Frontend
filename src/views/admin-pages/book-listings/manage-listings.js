@@ -440,7 +440,7 @@ const ManageListings = () => {
   }, [handleDeleteClick, handleEditClick, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Book Listings">
+    <MainCard title="Book Listings" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <Box
           sx={{

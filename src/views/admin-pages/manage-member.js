@@ -457,7 +457,7 @@ const ManageMembers = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Member Information">
+    <MainCard title="Member Information" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <Box
           sx={{

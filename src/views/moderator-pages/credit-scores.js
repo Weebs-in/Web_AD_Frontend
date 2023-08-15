@@ -143,7 +143,7 @@ const CreditScores = () => {
   }, [VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Credit Scores">
+    <MainCard title="Credit Scores" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <p>Please note: Auto-approval of applications is granted for scores of 0.4 and above.</p>
         <Divider />

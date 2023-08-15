@@ -382,7 +382,7 @@ const ManageStaff = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Staff Information">
+    <MainCard title="Staff Information" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <p>Please note: editing is disabled for fellow administrators and the moderator password/role fields.</p>
         <Divider />

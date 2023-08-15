@@ -152,7 +152,7 @@ const BookData = () => {
   ];
 
   return (
-    <MainCard title="Book Data">
+    <MainCard title="Book Data" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <TextField label="Search Books" value={query} onChange={handleInputChange} />
         <Button variant="contained" color="primary" onClick={handleSearch} disabled={loading}>
