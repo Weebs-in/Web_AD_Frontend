@@ -13,9 +13,9 @@ import AuthWrapper1 from './AuthWrapper1';
 import AuthCardWrapper from './AuthCardWrapper';
 
 // for checks
-import {getUserIdFromLS} from "../../../utils/jwtUtils";
-import {getUserRoleFromLS} from "../../../utils/jwtUtils";
-import {getUserNbrFromLS} from "../../../utils/jwtUtils";
+import { getUserIdFromLS } from '../../../utils/jwtUtils';
+import { getUserRoleFromLS } from '../../../utils/jwtUtils';
+import { getUserNbrFromLS } from '../../../utils/jwtUtils';
 
 // ================================|| AUTH3 - LOGIN ||================================ //
 

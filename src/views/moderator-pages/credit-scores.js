@@ -1,5 +1,5 @@
 // material-ui
-import {Divider, Stack, Typography} from '@mui/material';
+import { Divider, Stack, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 

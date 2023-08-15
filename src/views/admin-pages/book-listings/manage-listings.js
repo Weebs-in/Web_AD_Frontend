@@ -1,30 +1,30 @@
-/// material-ui
-import { Dialog, Typography } from '@mui/material';
+// material-ui
+import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 // import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
-// import SaveIcon from '@mui/icons-material/Save';
-// import CancelIcon from '@mui/icons-material/Close';
+import SaveIcon from '@mui/icons-material/Save';
+import CancelIcon from '@mui/icons-material/Close';
 
 // mui-datagrid
 import {
   // useGridApiContext,
-  // GridRowModes,
+  GridRowModes,
   DataGrid,
   GridToolbarContainer,
   GridActionsCellItem,
-  // GridRowEditStopReasons,
+  GridRowEditStopReasons,
   GridToolbarFilterButton,
   GridToolbarExport,
-  useGridApiRef
+  useGridApiRef,
 } from '@mui/x-data-grid';
 // import { randomId } from '@mui/x-data-grid-generator';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-import ListingEditModal from './ListingEditModal';
+// import ListingEditModal from './ListingEditModal';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../../config';
@@ -52,10 +52,10 @@ function BookListingToolbar() {
 const ManageListings = () => {
   const apiRef = useGridApiRef();
   const [bookListings, setBookListings] = useState([]);
-  const [editModalOpen, setEditModalOpen] = useState(false);
-  const [selectedBook, setSelectedBook] = useState(null);
+  // const [editModalOpen, setEditModalOpen] = useState(false);
+  // const [selectedBook, setSelectedBook] = useState(null);
   const [rows, setRows] = useState([]);
-  // const [rowModesModel, setRowModesModel] = React.useState({});
+  const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
     () => [
       'isbn',
@@ -112,153 +112,149 @@ const ManageListings = () => {
     }
   };
 
-  // // function for creating new book listing, called by handleSaveClick
-  // const handleFormSubmit = useCallback(async (formData) => {
-  //   console.log('to POST - Form data before conversion to JSON:', formData);
-  //   // Convert the form data to a JSON object
-  //   const data = {};
-  //   Object.entries(formData).forEach(([key, value]) => {
-  //     data[key] = typeof value === 'string' ? value.trim() : value;
-  //   });
-  //
-  //   // Remove the 'id' field from the data object as it is supposed to be created back-end
-  //   delete data['id'];
-  //   delete data['isNew'];
-  //
-  //   // Make the POST request to the backend
-  //   try {
-  //     console.log('to POST - Submitting form data:', data); // Log the data before making the POST request
-  //     const response = await fetch(config.book, {
-  //       method: 'POST',
-  //       headers: {
-  //         Authorization: 'Bearer ' + getJWTFromLS(),
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(data)
-  //     });
-  //
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //
-  //     // Process the response data if needed
-  //     const responseData = await response.json();
-  //     console.log('New record added:', responseData);
-  //
-  //     // Fetch the updated book listings data
-  //     await fetchBookListings();
-  //   } catch (error) {
-  //     console.error('Error adding new record:', error);
-  //   }
-  // }, []);
+  // function for creating new book listing, called by handleSaveClick
+  const handleFormSubmit = useCallback(async (formData) => {
+    console.log('to POST - Form data before conversion to JSON:', formData);
+    // Convert the form data to a JSON object
+    const data = {};
+    Object.entries(formData).forEach(([key, value]) => {
+      data[key] = typeof value === 'string' ? value.trim() : value;
+    });
 
-  // // function for updating existing book listing, called by handleSaveClick
-  // const handleUpdateSubmit = useCallback(async (id, formData) => {
-  //   console.log('to PUT - Form data before conversion to JSON:', formData);
-  //   // Convert the form data to a JSON object
-  //   const data = {};
-  //   Object.entries(formData).forEach(([key, value]) => {
-  //     data[key] = typeof value === 'string' ? value.trim() : value;
-  //   });
-  //
-  //   // Make the PUT request to the backend
-  //   try {
-  //     console.log('to PUT - Submitting form data:', data); // Log the data before making the PUT request
-  //     const response = await fetch(config.book + '/' + id, {
-  //       method: 'PUT',
-  //       headers: {
-  //         Authorization: 'Bearer ' + getJWTFromLS(),
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(data)
-  //     });
-  //
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //
-  //     // Process the response data if needed
-  //     const responseData = await response.json();
-  //     console.log('Record updated:', responseData);
-  //
-  //     // Fetch the updated book listing data
-  //     await fetchBookListings();
-  //   } catch (error) {
-  //     console.error('Error updating record:', error);
-  //   }
-  // }, []);
+    // Remove the 'id' field from the data object as it is supposed to be created back-end
+    delete data['id'];
+    delete data['isNew'];
 
-  // const processRowUpdate = useCallback((newRow) => {
-  //   // Check if the row is an existing row (by checking the presence of 'id' property)
-  //   const isExistingRow = Object.prototype.hasOwnProperty.call(newRow, 'id');
-  //
-  //   if (isExistingRow) {
-  //     // For existing rows, return the row as is (no updates needed)
-  //     console.log('processRowUpdate for existing row:', JSON.stringify(newRow));
-  //     setRows((rows) => rows.map((row) => (row.id === newRow.id ? newRow : row)));
-  //     return newRow;
-  //   } else {
-  //     // For new rows, add the 'isNew' field and set it to false
-  //     const updatedRow = { ...newRow, isNew: false };
-  //     console.log('processRowUpdate for new row:', JSON.stringify(updatedRow));
-  //     setRows((rows) => [...rows, updatedRow]);
-  //     return updatedRow;
-  //   }
-  // }, []);
+    // Make the POST request to the backend
+    try {
+      console.log('to POST - Submitting form data:', data); // Log the data before making the POST request
+      const response = await fetch(config.book, {
+        method: 'POST',
+        headers: {
+          Authorization: 'Bearer ' + getJWTFromLS(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
 
-  // const handleRowEditStop = (params, event) => {
-  //   if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-  //     event.defaultMuiPrevented = true;
-  //   }
-  // };
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
 
-  // upon clicking Edit, open up modal and pass book data to modal
+      // Process the response data if needed
+      const responseData = await response.json();
+      console.log('New record added:', responseData);
+
+      // Fetch the updated book listings data
+      await fetchBookListings();
+    } catch (error) {
+      console.error('Error adding new record:', error);
+    }
+  }, []);
+
+  // function for updating existing book listing, called by handleSaveClick
+  const handleUpdateSubmit = useCallback(async (id, formData) => {
+    console.log('to PUT - Form data before conversion to JSON:', formData);
+    // Convert the form data to a JSON object
+    const data = {};
+    Object.entries(formData).forEach(([key, value]) => {
+      data[key] = typeof value === 'string' ? value.trim() : value;
+    });
+
+    // Make the PUT request to the backend
+    try {
+      console.log('to PUT - Submitting form data:', data); // Log the data before making the PUT request
+      const response = await fetch(config.book + '/' + id, {
+        method: 'PUT',
+        headers: {
+          Authorization: 'Bearer ' + getJWTFromLS(),
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      // Process the response data if needed
+      const responseData = await response.json();
+      console.log('Record updated:', responseData);
+
+      // Fetch the updated book listing data
+      await fetchBookListings();
+    } catch (error) {
+      console.error('Error updating record:', error);
+    }
+  }, []);
+
+  const processRowUpdate = useCallback((newRow) => {
+    // Check if the row is an existing row (by checking the presence of 'id' property)
+    const isExistingRow = Object.prototype.hasOwnProperty.call(newRow, 'id');
+
+    if (isExistingRow) {
+      // For existing rows, return the row as is (no updates needed)
+      console.log('processRowUpdate for existing row:', JSON.stringify(newRow));
+      setRows((rows) => rows.map((row) => (row.id === newRow.id ? newRow : row)));
+      return newRow;
+    } else {
+      // For new rows, add the 'isNew' field and set it to false
+      const updatedRow = { ...newRow, isNew: false };
+      console.log('processRowUpdate for new row:', JSON.stringify(updatedRow));
+      setRows((rows) => [...rows, updatedRow]);
+      return updatedRow;
+    }
+  }, []);
+
+  const handleRowEditStop = (params, event) => {
+    if (params.reason === GridRowEditStopReasons.rowFocusOut) {
+      event.defaultMuiPrevented = true;
+    }
+  };
+
   const handleEditClick = useCallback(
-    (event, id) => {
+    async (event, id) => {
       event.preventDefault();
       console.log('handleEditClick function called for ID:', id);
 
-      // Find the selected book in the bookListings array
-      const selectedBookData = bookListings.find((book) => book.id === id);
-      setSelectedBook(selectedBookData);
-      setEditModalOpen(true);
+      setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
     },
-    [bookListings]
+    [rowModesModel]
   );
 
-  // Implement the function to close the modal
-  const handleCloseEditModal = () => {
-    setEditModalOpen(false);
-    setSelectedBook(null);
-  };
+  // // Implement the function to close the modal
+  // const handleCloseEditModal = () => {
+  //   setEditModalOpen(false);
+  //   setSelectedBook(null);
+  // };
 
-  // const handleSaveClick = useCallback(
-  //   async (event, id) => {
-  //     event.preventDefault();
-  //     console.log('handleSaveClick function called for ID:', id);
-  //
-  //     // Get the updated row data using getRowWithUpdatedValues
-  //     const newRow = apiRef.current.getRowWithUpdatedValues(id);
-  //     console.log('Updated row data from getRowWithUpdatedValues:', JSON.stringify(newRow));
-  //
-  //     // Process the row update and get the updated row data
-  //     const updatedRow = processRowUpdate(newRow);
-  //     console.log('processRowUpdate invoked in handleSaveClick: ' + JSON.stringify(updatedRow));
-  //
-  //     // // Update the row mode to view after saving
-  //     // setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  //
-  //     // Check if it's a new row (isNew property exists) or an existing row (isNew property is null or does not exist)
-  //     if (Object.prototype.hasOwnProperty.call(updatedRow, 'isNew')) {
-  //       // Call the handleFormSubmit function with the form data (excluding 'isNew')
-  //       await handleFormSubmit(updatedRow);
-  //     } else {
-  //       // Call the handleUpdateSubmit function with the form data (excluding 'isNew')
-  //       await handleUpdateSubmit(id, updatedRow);
-  //     }
-  //   },
-  //   [apiRef, processRowUpdate, handleFormSubmit, handleUpdateSubmit, rowModesModel]
-  // );
+  const handleSaveClick = useCallback(
+    async (event, id) => {
+      event.preventDefault();
+      console.log('handleSaveClick function called for ID:', id);
+
+      // Get the updated row data using getRowWithUpdatedValues
+      const newRow = apiRef.current.getRowWithUpdatedValues(id);
+      console.log('Updated row data from getRowWithUpdatedValues:', JSON.stringify(newRow));
+
+      // Process the row update and get the updated row data
+      const updatedRow = processRowUpdate(newRow);
+      console.log('processRowUpdate invoked in handleSaveClick: ' + JSON.stringify(updatedRow));
+
+      // Update the row mode to view after saving
+      setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
+
+      // Check if it's a new row (isNew property exists) or an existing row (isNew property is null or does not exist)
+      if (Object.prototype.hasOwnProperty.call(updatedRow, 'isNew')) {
+        // Call the handleFormSubmit function with the form data (excluding 'isNew')
+        await handleFormSubmit(updatedRow);
+      } else {
+        // Call the handleUpdateSubmit function with the form data (excluding 'isNew')
+        await handleUpdateSubmit(id, updatedRow);
+      }
+    },
+    [apiRef, processRowUpdate, handleFormSubmit, handleUpdateSubmit, rowModesModel]
+  );
 
   const handleDeleteClick = useCallback(async (event, id) => {
     console.log('handleDeleteClick function called for ID:', id);
@@ -284,24 +280,24 @@ const ManageListings = () => {
     }
   }, []);
 
-  // const handleCancelClick = useCallback(
-  //   (id) => () => {
-  //     setRowModesModel({
-  //       ...rowModesModel,
-  //       [id]: { mode: GridRowModes.View, ignoreModifications: true }
-  //     });
-  //
-  //     const editedRow = rows.find((row) => row.id === id);
-  //     if (editedRow.isNew) {
-  //       setRows(rows.filter((row) => row.id !== id));
-  //     }
-  //   },
-  //   [rows, rowModesModel]
-  // );
-  //
-  // const handleRowModesModelChange = (newRowModesModel) => {
-  //   setRowModesModel(newRowModesModel);
-  // };
+  const handleCancelClick = useCallback(
+    (id) => () => {
+      setRowModesModel({
+        ...rowModesModel,
+        [id]: { mode: GridRowModes.View, ignoreModifications: true }
+      });
+
+      const editedRow = rows.find((row) => row.id === id);
+      if (editedRow.isNew) {
+        setRows(rows.filter((row) => row.id !== id));
+      }
+    },
+    [rows, rowModesModel]
+  );
+
+  const handleRowModesModelChange = (newRowModesModel) => {
+    setRowModesModel(newRowModesModel);
+  };
 
   const columns = useMemo(() => {
     return [
@@ -319,12 +315,34 @@ const ManageListings = () => {
         field: 'title',
         headerName: 'Title',
         type: 'string',
+        editable: true,
         width: 250
       },
       {
         field: 'author',
         headerName: 'Author',
         type: 'string',
+        editable: true,
+        width: 100
+      },
+      {
+        field: 'bookCondition',
+        headerName: 'Book Condition',
+        width: 120,
+        type: 'singleSelect',
+        editable: true,
+        valueOptions: [
+          { value: 0, label: 'Brand New' },
+          { value: 1, label: 'Like New' },
+          { value: 2, label: 'Lightly Used' },
+          { value: 3, label: 'Well Used' }
+        ]
+      },
+      {
+        field: 'description',
+        headerName: 'Description',
+        type: 'string',
+        editable: true,
         width: 100
       },
       {
@@ -332,6 +350,7 @@ const ManageListings = () => {
         headerName: 'Language',
         width: 80,
         type: 'singleSelect',
+        editable: true,
         valueOptions: [
           { value: 0, label: 'English' },
           { value: 1, label: 'Chinese' },
@@ -343,27 +362,19 @@ const ManageListings = () => {
         ]
       },
       {
-        field: 'bookCondition',
-        headerName: 'Book Condition',
-        width: 120,
-        type: 'singleSelect',
-        valueOptions: [
-          { value: 0, label: 'Brand New' },
-          { value: 1, label: 'Like New' },
-          { value: 2, label: 'Lightly Used' },
-          { value: 3, label: 'Well Used' }
-        ]
-      },
-      {
         field: 'status',
         headerName: 'Status',
         width: 100,
         type: 'singleSelect',
+        editable: true,
         valueOptions: [
-          { value: 0, label: 'Available' },
-          { value: 1, label: 'Reserved' }, // transaction in progress
-          { value: 2, label: 'Unavailable' }, // completed donation transaction
-          { value: 3, label: 'Removed' } // veto-ed by moderator
+          { value: 0, label: 'Pending' }, // listing created, but book not deposited
+          { value: 1, label: 'Deposited' }, // deposited at collection point
+          { value: 2, label: 'Available' }, // book listing approved after collection
+          { value: 3, label: 'Reserved' }, // application for book approved
+          { value: 4, label: 'Unavailable' }, // book successfully donated to recipient
+          { value: 5, label: 'Rejected' }, // book listing rejected after collection
+          { value: 6, label: 'Disabled' } // want to simulate delete but retain record
         ]
       },
       {
@@ -376,10 +387,34 @@ const ManageListings = () => {
         field: 'actions',
         type: 'actions',
         headerName: 'Actions',
-        width: 80,
+        width: 100,
         cellClassName: 'actions',
         getActions: ({ id }) => {
           console.log('getActions activated for ID:', id);
+          const isInEditMode = rowModesModel[id]?.mode === GridRowModes.Edit;
+
+          if (isInEditMode) {
+            return [
+              <GridActionsCellItem
+                icon={<SaveIcon />}
+                key={`save_${id}`}
+                label="Save"
+                sx={{
+                  color: 'primary.main'
+                }}
+                onClick={(event) => handleSaveClick(event, id)}
+              />,
+              <GridActionsCellItem
+                icon={<CancelIcon />}
+                key={`cancel_${id}`}
+                label="Cancel"
+                className="textPrimary"
+                onClick={handleCancelClick(id)}
+                color="inherit"
+              />
+            ];
+          }
+
           return [
             <GridActionsCellItem
               icon={<EditIcon />}
@@ -421,10 +456,11 @@ const ManageListings = () => {
             rows={rows}
             editMode="row"
             columns={columns}
-            // rowModesModel={rowModesModel}
-            // onRowModesModelChange={handleRowModesModelChange}
-            // onRowEditStop={handleRowEditStop}
-            // processRowUpdate={processRowUpdate}
+            // sx={{ overflowX: 'scroll' }}
+            rowModesModel={rowModesModel}
+            onRowModesModelChange={handleRowModesModelChange}
+            onRowEditStop={handleRowEditStop}
+            processRowUpdate={processRowUpdate}
             apiRef={apiRef}
             slots={{
               toolbar: BookListingToolbar
@@ -448,9 +484,9 @@ const ManageListings = () => {
         </Box>
       </Typography>
       {/* Render the edit modal */}
-      <Dialog open={editModalOpen} onClose={handleCloseEditModal}>
-        <ListingEditModal open={editModalOpen} onClose={handleCloseEditModal} bookData={selectedBook} />
-      </Dialog>
+      {/*<Dialog open={editModalOpen} onClose={handleCloseEditModal}>*/}
+      {/*  <ListingEditModal open={editModalOpen} onClose={handleCloseEditModal} bookData={selectedBook} />*/}
+      {/*</Dialog>*/}
     </MainCard>
   );
 };

@@ -1,5 +1,5 @@
-import React, { useCallback, useState } from 'react';
-import {useNavigate} from "react-router";
+import React, { useCallback, useRef, useState } from 'react';
+import { useNavigate } from 'react-router';
 
 // material-ui
 import { Box, Button, TextField, Typography } from '@mui/material';
@@ -15,46 +15,35 @@ import { getJWTFromLS } from '../../utils/jwtUtils';
 // to consistently edit all padding values
 const ELEMENT_PADDING = '16px';
 
-const attributes = [
-  { header: 'Password', field: 'password' },
-  { header: 'Confirm Password', field: null }
-];
-
 // if time permits, add warning alert to handleClose function "Exit without saving?"
 
 const ChangePassword = () => {
-  // Initialize formData state with an empty object
-  const [formData, setFormData] = useState({});
+  const [password, setPassword] = useState('');
+  // eslint-disable-next-line no-unused-vars
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const formRef = useRef(null);
   const userId = getUserIdFromLS();
   const navigate = useNavigate();
 
-  // Handle input change and update formData state
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: value
-    }));
-  };
-
   const handleSave = useCallback(async (event) => {
     event.preventDefault();
-
+    const formData = new FormData(formRef.current);
+    const formDataObject = Object.fromEntries(formData.entries());
+    console.log(getJWTFromLS());
     // Validation: Check if passwords match
-    if (formData.password !== formData.confirmPassword) {
+    const passwordTrim = formDataObject['password'].trim();
+    const confirmPasswordTrim = formDataObject['confirmPassword'].trim();
+    if (passwordTrim !== confirmPasswordTrim) {
       console.error('Passwords do not match');
       return; // Prevent form submission
     }
-
-    console.log('to PUT - Form data before conversion to JSON:', formData);
+    console.log('password transferred to handleSave: ', password);
+    const userIdInt = parseInt(userId, 10);
     // Construct the JSON payload
     const data = {
-      id: userId, // Assuming the user ID is available from getUserIdFromLS()
-      password: formData.password
+      id: userIdInt,
+      password: passwordTrim
     };
-    Object.entries(formData).forEach(([key, value]) => {
-      data[key] = typeof value === 'string' ? value.trim() : value;
-    });
 
     // Make the PUT request to the backend
     try {
@@ -93,26 +82,27 @@ const ChangePassword = () => {
   return (
     <MainCard title="Change Password">
       <Typography variant="body2">
-        <form onSubmit={handleSave}>
+        <form ref={formRef}>
           <Box style={{ maxWidth: 300, margin: '0 auto' }}>
-            {attributes.map((attribute) => (
-              <TextField
-                key={attribute.field}
-                name={attribute.field}
-                label={attribute.header}
-                type="password"
-                onChange={handleInputChange}
-                variant="outlined"
-                fullWidth
-                style={{ marginBottom: ELEMENT_PADDING }} // Add spacing between TextField components
-              />
-            ))}
-            <Button
-              type="submit"
-              variant="contained"
-              style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}
-              // onClick={(event) => handleSave(event, formData)}
-            >
+            <TextField
+              name="password"
+              label="Password"
+              type="password"
+              onChange={(event) => setPassword(event.target.value)}
+              variant="outlined"
+              fullWidth
+              style={{ marginBottom: ELEMENT_PADDING }} // Add spacing between TextField components
+            />
+            <TextField
+              name="confirmPassword"
+              label="Confirm Password"
+              type="password"
+              onChange={(event) => setConfirmPassword(event.target.value)}
+              variant="outlined"
+              fullWidth
+              style={{ marginBottom: ELEMENT_PADDING }} // Add spacing between TextField components
+            />
+            <Button variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }} onClick={handleSave}>
               Save
             </Button>
             <Button onClick={handleClose} variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>

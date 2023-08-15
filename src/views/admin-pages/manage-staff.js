@@ -1,5 +1,5 @@
 // material-ui
-import {Divider, Typography} from '@mui/material';
+import { Divider, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import AddIcon from '@mui/icons-material/Add';
@@ -103,6 +103,7 @@ const ManageStaff = () => {
   // function for creating new staff point, called by handleSaveClick
   const handleFormSubmit = useCallback(async (formData) => {
     console.log('to POST - Form data before conversion to JSON:', formData);
+    console.log('JWT: ', getJWTFromLS());
     // Convert the form data to a JSON object
     const data = {};
     Object.entries(formData).forEach(([key, value]) => {

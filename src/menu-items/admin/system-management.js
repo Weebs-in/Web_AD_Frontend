@@ -37,7 +37,7 @@ const sysManagement = {
           url: '/admin/listing-activity',
           icon: icons.IconBook,
           breadcrumbs: false
-        },
+        }
       ]
     },
     {
@@ -50,7 +50,7 @@ const sysManagement = {
           id: 'manage-applications',
           title: 'Management',
           type: 'item',
-          url: '/admin/manage-listings',
+          url: '/admin/manage-applications',
           icon: icons.IconBasket,
           breadcrumbs: false
         },
@@ -61,7 +61,7 @@ const sysManagement = {
           url: '/admin/application-activity',
           icon: icons.IconBasket,
           breadcrumbs: false
-        },
+        }
       ]
     },
     {

@@ -22,7 +22,7 @@ const Logout = () => {
             localStorage.removeItem('userRole');
             localStorage.removeItem('userNbr');
             resolve();
-          }),
+          })
         ]).then(() => {
           // Refresh the page to clear any cached data
           window.location.reload();

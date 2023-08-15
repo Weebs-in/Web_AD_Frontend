@@ -120,6 +120,7 @@ const CollectionPoints = () => {
   // function for creating new collection point, called by handleSaveClick
   const handleFormSubmit = useCallback(async (formData) => {
     console.log('to POST - Form data before conversion to JSON:', formData);
+    console.log('JWT: ', getJWTFromLS());
     // Convert the form data to a JSON object
     const data = {};
     Object.entries(formData).forEach(([key, value]) => {
@@ -350,7 +351,7 @@ const CollectionPoints = () => {
         valueOptions: [
           { value: 1, label: 'Available' },
           { value: 0, label: 'Unavailable' }
-        ],
+        ]
         // valueGetter: (params) => {
         //   const statusValue = params.value; // Get the value of the 'status' field
         //   return (
