@@ -57,12 +57,22 @@ const config = {
   booksDonated: '/api/book/donor',
   // GET with {id} to retrieve list of book listings (successfully received) by member id
   booksReceived: '/api/book/recipient',
+  // GET request using search string
+  bookSearch: '/api/book/search',
+  // GET request from book recommender
+  bookRecommend: '/api/book/recommend',
+  // GET request for randomly generated book listings
+  bookRandom: '/api/book/random',
+  // CRUD of book status update logs
+  bookTimestamp: '/api/bookTimestamp',
 
   // ==============================|| APPLICATION FUNCTIONS ||============================== //
   // CRUD application functions
   application: '/api/application',
   // GET with {id} to retrieve list of applications by member id
   applicationMember: '/api/application/member',
+  // CRUD of application status update logs
+  applicationTimestamp: '/api/applicationTimestamp',
 
   // CRUD transaction functions
   transaction: '/api/transaction',

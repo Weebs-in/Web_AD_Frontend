@@ -57,6 +57,7 @@ const ManageListings = () => {
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
     () => [
+        'id',
       'isbn',
       'title',
       'author',
@@ -302,7 +303,8 @@ const ManageListings = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: 'id', headerName: 'ID', width: 0 },
+      { field: 'id', headerName: 'ID', width: 80, align: 'left',
+        headerAlign: 'left'},
       {
         field: 'donor',
         headerName: 'Donor',
@@ -471,10 +473,10 @@ const ManageListings = () => {
             // slotProps={{
             //   toolbar: { setRows, setRowModesModel }
             // }}
-            columnVisibilityModel={{
-              // Hide column id, the other columns will remain visible
-              id: false
-            }}
+            // columnVisibilityModel={{
+            //   // Hide column id, the other columns will remain visible
+            //   id: false
+            // }}
             initialState={{
               pagination: {
                 paginationModel: {

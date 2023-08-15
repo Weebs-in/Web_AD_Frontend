@@ -44,7 +44,7 @@ const ManageApplications = () => {
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['createTime', 'book', 'donor', 'recipient', 'status', 'actions'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['id', 'createTime', 'book', 'donor', 'recipient', 'status', 'actions'], []);
 
   useEffect(() => {
     fetchApplications();
@@ -201,7 +201,8 @@ const ManageApplications = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: 'id', headerName: 'ID', width: 0 },
+      { field: 'id', headerName: 'ID', width: 80, align: 'left',
+        headerAlign: 'left'},
       {
         field: 'createTime',
         headerName: 'Date',
@@ -334,10 +335,10 @@ const ManageApplications = () => {
             slots={{
               toolbar: ApplicationToolbar
             }}
-            columnVisibilityModel={{
-              // Hide column id, the other columns will remain visible
-              id: false
-            }}
+            // columnVisibilityModel={{
+            //   // Hide column id, the other columns will remain visible
+            //   id: false
+            // }}
             initialState={{
               pagination: {
                 paginationModel: {
