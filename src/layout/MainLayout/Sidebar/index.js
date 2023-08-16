@@ -13,12 +13,14 @@ import MenuList from './MenuList';
 import LogoSection from '../LogoSection';
 // import MenuCard from './MenuCard';
 import { drawerWidth } from 'store/constant';
+import { getUserRoleFromLS } from '../../../utils/jwtUtils';
 
 // ==============================|| SIDEBAR DRAWER ||============================== //
 
 const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
   const theme = useTheme();
   const matchUpMd = useMediaQuery(theme.breakpoints.up('md'));
+  const role = getUserRoleFromLS();
 
   const drawer = (
     <>
@@ -36,7 +38,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
             paddingRight: '16px'
           }}
         >
-          <MenuList userType="admin" />
+          <MenuList userType={role} />
           {/*<MenuCard />*/}
         </PerfectScrollbar>
       </BrowserView>

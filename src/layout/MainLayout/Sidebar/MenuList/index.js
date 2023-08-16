@@ -6,6 +6,7 @@ import NavGroup from './NavGroup';
 import menuItem from 'menu-items';
 import menuItemAdmin from 'menu-items/admin';
 import menuItemMod from 'menu-items/moderator';
+import config from '../../../../config';
 
 // ==============================|| SIDEBAR MENU LIST ||============================== //
 
@@ -15,17 +16,17 @@ const MenuList = ({ userType }) => {
   // Replace this with the actual prop passed from the parent component
   // For example: const userType = 'admin';
   // For testing with different userTypes, simply change the value here
-  const hardcodedUserType = 'moderator';
+  // const hardcodedUserType = 'moderator';
 
   // Select the appropriate menu-items array based on the user type
   let selectedMenuItems;
   console.log(selectedMenuItems);
 
-  switch (userType || hardcodedUserType) {
-    case 'admin':
+  switch (userType) {
+    case config.USER_ROLE_ADMIN:
       selectedMenuItems = menuItemAdmin;
       break;
-    case 'moderator':
+    case config.USER_ROLE_MODERATOR:
       selectedMenuItems = menuItemMod;
       break;
     default:

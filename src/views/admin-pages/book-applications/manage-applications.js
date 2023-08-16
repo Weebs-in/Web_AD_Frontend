@@ -251,7 +251,8 @@ const ManageApplications = () => {
           { value: 1, label: 'Approved' },
           { value: 2, label: 'Rejected' },
           { value: 3, label: 'Ready for Collection' },
-          { value: 3, label: 'Completed' }
+          { value: 4, label: 'Completed' },
+          { value: 5, label: 'Disabled' }
         ]
       },
       {
