@@ -44,7 +44,7 @@ const ManageApplications = () => {
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['id','createTime', 'book', 'donor', 'recipient', 'status', 'actions'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['id', 'createTime', 'book', 'donor', 'recipient', 'status', 'actions'], []);
 
   useEffect(() => {
     fetchApplications();
@@ -201,8 +201,7 @@ const ManageApplications = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: 'id', headerName: 'ID', width: 80, align: 'left',
-        headerAlign: 'left'},
+      { field: 'id', headerName: 'ID', width: 80, align: 'left', headerAlign: 'left' },
       {
         field: 'createTime',
         headerName: 'Date',
@@ -310,7 +309,7 @@ const ManageApplications = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Applications for Books" style={{overflow: 'auto'}}>
+    <MainCard title="Applications for Books" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <Box
           sx={{
@@ -325,6 +324,8 @@ const ManageApplications = () => {
           }}
         >
           <DataGrid
+            autoHeight
+            {...rows}
             rows={rows}
             editMode="row"
             columns={columns}

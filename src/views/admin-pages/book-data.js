@@ -91,7 +91,7 @@ const BookData = () => {
     {
       field: 'volumeInfo.authors',
       headerName: 'Author(s)',
-      width: 100,
+      width: 200,
       align: 'left',
       headerAlign: 'left',
       valueGetter: (params) =>
@@ -104,7 +104,7 @@ const BookData = () => {
     {
       field: 'volumeInfo.categories',
       headerName: 'Genre/Subject',
-      width: 100,
+      width: 180,
       align: 'left',
       headerAlign: 'left',
       valueGetter: (params) =>
@@ -137,7 +137,7 @@ const BookData = () => {
     {
       field: 'volumeInfo.industryIdentifiers[0].identifier',
       headerName: 'ISBN',
-      width: 80,
+      width: 180,
       valueGetter: (params) => {
         return params.row.volumeInfo.industryIdentifiers[0].identifier || '';
       }
@@ -145,14 +145,14 @@ const BookData = () => {
     {
       field: 'volumeInfo.imageLinks.thumbnail',
       headerName: 'Cover',
-      width: 80,
+      width: 120,
       valueGetter: (params) => // check if attribute exists, then checks if thumbnail exists, otherwise, return empty string
         params.row.volumeInfo.imageLinks && params.row.volumeInfo.imageLinks.thumbnail ? params.row.volumeInfo.imageLinks.thumbnail : ''
     }
   ];
 
   return (
-    <MainCard title="Book Data" style={{overflow: 'auto'}}>
+    <MainCard title="Google Book Search" style={{overflow: 'auto'}}>
       <Typography variant="body2">
         <TextField label="Search Books" value={query} onChange={handleInputChange} />
         <Button variant="contained" color="primary" onClick={handleSearch} disabled={loading}>

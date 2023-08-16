@@ -1,5 +1,5 @@
 // material-ui
-import {Divider, Typography} from '@mui/material';
+import { Divider, Grid, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 // import Button from '@mui/material/Button';
 // import AddIcon from '@mui/icons-material/Add';
@@ -24,6 +24,7 @@ import {
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
+import BookData from '../admin-pages/book-data';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../config';
@@ -57,7 +58,7 @@ const ManageListings = () => {
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
     () => [
-        'id',
+      'id',
       'isbn',
       'title',
       'author',
@@ -303,8 +304,7 @@ const ManageListings = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: 'id', headerName: 'ID', width: 80, align: 'left',
-        headerAlign: 'left'},
+      { field: 'id', headerName: 'ID', width: 80, align: 'left', headerAlign: 'left' },
       {
         field: 'donor',
         headerName: 'Donor',
@@ -439,56 +439,61 @@ const ManageListings = () => {
   }, [handleDeleteClick, handleEditClick, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Book Listings" style={{overflow: 'auto'}}>
-      <Typography variant="body2">
-        {/* eslint-disable-next-line react/no-unescaped-entities */}
-        <p>Warning: you are only able to view listings with status "Pending" and "Deposited".</p>
-        <p>If you need to reverse any changes made from these two statuses, please approach an administrator.</p>
-        <Divider />
-        <Box
-          sx={{
-            height: 500,
-            width: '100%',
-            '& .actions': {
-              color: 'text.secondary'
-            },
-            '& .textPrimary': {
-              color: 'text.primary'
-            }
-          }}
-        >
-          <DataGrid
-            rows={rows}
-            editMode="row"
-            columns={columns}
-            // sx={{ overflowX: 'scroll' }}
-            rowModesModel={rowModesModel}
-            onRowModesModelChange={handleRowModesModelChange}
-            onRowEditStop={handleRowEditStop}
-            processRowUpdate={processRowUpdate}
-            apiRef={apiRef}
-            slots={{
-              toolbar: BookListingToolbar
-            }}
-            // slotProps={{
-            //   toolbar: { setRows, setRowModesModel }
-            // }}
-            // columnVisibilityModel={{
-            //   // Hide column id, the other columns will remain visible
-            //   id: false
-            // }}
-            initialState={{
-              pagination: {
-                paginationModel: {
-                  pageSize: 5
-                }
+    <Grid container>
+      <MainCard title="Book Listings" style={{ overflow: 'auto' }}>
+        <Typography variant="body2">
+          {/* eslint-disable-next-line react/no-unescaped-entities */}
+          <p>Warning: you are only able to view listings with status "Pending" and "Deposited".</p>
+          <p>If you need to reverse any changes made from these two statuses, please approach an administrator.</p>
+          <Divider />
+          <Box
+            sx={{
+              height: 500,
+              width: '100%',
+              '& .actions': {
+                color: 'text.secondary'
+              },
+              '& .textPrimary': {
+                color: 'text.primary'
               }
             }}
-            pageSizeOptions={[5, 10, 25]}
-          />
-        </Box>
-      </Typography>
-    </MainCard>
+          >
+            <DataGrid
+              autoHeight
+              {...rows}
+              rows={rows}
+              editMode="row"
+              columns={columns}
+              // sx={{ overflowX: 'scroll' }}
+              rowModesModel={rowModesModel}
+              onRowModesModelChange={handleRowModesModelChange}
+              onRowEditStop={handleRowEditStop}
+              processRowUpdate={processRowUpdate}
+              apiRef={apiRef}
+              slots={{
+                toolbar: BookListingToolbar
+              }}
+              // slotProps={{
+              //   toolbar: { setRows, setRowModesModel }
+              // }}
+              // columnVisibilityModel={{
+              //   // Hide column id, the other columns will remain visible
+              //   id: false
+              // }}
+              initialState={{
+                pagination: {
+                  paginationModel: {
+                    pageSize: 5
+                  }
+                }
+              }}
+              pageSizeOptions={[5, 10, 25]}
+            />
+          </Box>
+        </Typography>
+      </MainCard>
+      <BookData />
+    </Grid>
   );
 };
 
