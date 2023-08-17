@@ -52,8 +52,6 @@ function BookListingToolbar() {
 const ManageListings = () => {
   const apiRef = useGridApiRef();
   const [bookListings, setBookListings] = useState([]);
-  // const [editModalOpen, setEditModalOpen] = useState(false);
-  // const [selectedBook, setSelectedBook] = useState(null);
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
@@ -436,7 +434,7 @@ const ManageListings = () => {
         }
       }
     ].filter((column) => VISIBLE_FIELDS.includes(column.field));
-  }, [handleDeleteClick, handleEditClick, VISIBLE_FIELDS]);
+  }, [handleSaveClick, handleCancelClick, handleDeleteClick, rowModesModel, handleEditClick, VISIBLE_FIELDS]);
 
   return (
     <Grid container>
