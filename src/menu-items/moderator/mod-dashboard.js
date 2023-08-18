@@ -7,15 +7,15 @@ const icons = { IconDashboard };
 // ==============================|| DASHBOARD MENU ITEMS ||============================== //
 
 const ModDashboard = {
-  id: 'mod-dashboard',
-  title: 'Dashboard',
+  id: 'collection-view',
+  title: 'Overview',
   type: 'group',
   children: [
     {
       id: 'default',
-      title: 'Dashboard',
+      title: 'Collection',
       type: 'item',
-      url: '/dashboard/default',
+      url: '/moderator/collection-view',
       icon: icons.IconDashboard,
       breadcrumbs: false
     }
