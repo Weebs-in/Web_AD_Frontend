@@ -233,7 +233,7 @@ const ManageApplications = () => {
       {
         field: 'status',
         headerName: 'Status',
-        width: 120,
+        width: 150,
         type: 'singleSelect',
         editable: true,
         valueOptions: [
