@@ -209,14 +209,14 @@ const ListingActivity = () => {
         align: 'left',
         headerAlign: 'left',
         renderCell: (params) => (
+          <div>
             <div>
-              <div>
-                <b>ID:</b> {params.row.book.id}
-              </div>
-              <div>
-                <b>Title:</b> {params.row.book.title}
-              </div>
+              <b>ID:</b> {params.row.book.id}
             </div>
+            <div>
+              <b>Title:</b> {params.row.book.title}
+            </div>
+          </div>
         )
       },
       {
@@ -319,7 +319,7 @@ const ListingActivity = () => {
   }, [VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Applications for Books" style={{ overflow: 'auto' }}>
+    <MainCard title="Applications for Books - Activity Log" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <Box
           sx={{

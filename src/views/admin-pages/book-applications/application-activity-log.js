@@ -204,15 +204,18 @@ const ApplicationActivity = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: 'id', headerName: 'ID', width: 0 },
+      // { field: 'id', headerName: 'uniqueid', width: 0 },
       {
         field: 'application',
-        headerName: 'Recipient',
+        headerName: 'ID',
         type: 'string',
         width: 120,
         align: 'left',
         headerAlign: 'left',
-        valueGetter: (params) => params.row.application.id
+        valueGetter: (params) => {
+          const appId = params.row.application;
+          return appId ? appId.id : '';
+        }
       },
       {
         field: 'book',
@@ -220,25 +223,21 @@ const ApplicationActivity = () => {
         width: 200,
         align: 'left',
         headerAlign: 'left',
-        renderCell: (params) => (
-          <div>
+        renderCell: (params) => {
+          console.log('params.row:', params.row);
+          console.log('params.row.book:', params.row.application.book);
+
+          return (
             <div>
-              <b>ID:</b> {params.row.book.id}
+              <div>
+                <b>ID:</b> {params.row.application.book.id}
+              </div>
+              <div>
+                <b>Title:</b> {params.row.application.book.title}
+              </div>
             </div>
-            <div>
-              <b>Title:</b> {params.row.book.title}
-            </div>
-          </div>
-        )
-      },
-      {
-        field: 'donor',
-        headerName: 'Recipient',
-        type: 'string',
-        width: 150,
-        align: 'left',
-        headerAlign: 'left',
-        valueGetter: (params) => params.row.application.book.donor.username
+          );
+        }
       },
       {
         field: 'recipient',
@@ -361,7 +360,7 @@ const ApplicationActivity = () => {
   }, [VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Applications for Books" style={{ overflow: 'auto' }}>
+    <MainCard title="Applications for Books - Activity Log" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <Box
           sx={{
