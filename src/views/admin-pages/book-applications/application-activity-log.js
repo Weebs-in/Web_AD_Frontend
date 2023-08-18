@@ -44,7 +44,10 @@ const ApplicationActivity = () => {
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
   // const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['application', 'book', 'donor', 'recipient', 'statusPrev', 'statusNow', 'roleUsername', 'roleType', 'actionTime'], []);
+  const VISIBLE_FIELDS = React.useMemo(
+    () => ['application', 'book', 'donor', 'recipient', 'statusPrev', 'statusNow', 'roleUsername', 'roleType', 'actionTime'],
+    []
+  );
 
   useEffect(() => {
     fetchApplications();
@@ -219,8 +222,12 @@ const ApplicationActivity = () => {
         headerAlign: 'left',
         renderCell: (params) => (
           <div>
-            <div>{params.row.application.book.id}</div>
-            <div>{params.row.application.book.title}</div>
+            <div>
+              <b>ID:</b> {params.row.book.id}
+            </div>
+            <div>
+              <b>Title:</b> {params.row.book.title}
+            </div>
           </div>
         )
       },
@@ -263,7 +270,7 @@ const ApplicationActivity = () => {
         type: 'string',
         width: 120,
         align: 'left',
-        headerAlign: 'left',
+        headerAlign: 'left'
       },
       {
         field: 'roleType',
@@ -275,7 +282,8 @@ const ApplicationActivity = () => {
         valueOptions: [
           { value: 0, label: 'Admin' },
           { value: 1, label: 'Moderator' },
-          { value: 2, label: 'Member' } ]
+          { value: 2, label: 'Member' }
+        ]
       },
       {
         field: 'statusNow',

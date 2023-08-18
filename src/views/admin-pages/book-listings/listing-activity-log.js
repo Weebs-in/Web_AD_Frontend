@@ -209,10 +209,14 @@ const ListingActivity = () => {
         align: 'left',
         headerAlign: 'left',
         renderCell: (params) => (
-          <div>
-            <div>{params.row.book.id}</div>
-            <div>{params.row.book.title}</div>
-          </div>
+            <div>
+              <div>
+                <b>ID:</b> {params.row.book.id}
+              </div>
+              <div>
+                <b>Title:</b> {params.row.book.title}
+              </div>
+            </div>
         )
       },
       {
