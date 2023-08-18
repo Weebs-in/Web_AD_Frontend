@@ -146,13 +146,15 @@ const BookData = () => {
       field: 'volumeInfo.imageLinks.thumbnail',
       headerName: 'Cover',
       width: 120,
-      valueGetter: (params) => // check if attribute exists, then checks if thumbnail exists, otherwise, return empty string
+      valueGetter: (
+        params // check if attribute exists, then checks if thumbnail exists, otherwise, return empty string
+      ) =>
         params.row.volumeInfo.imageLinks && params.row.volumeInfo.imageLinks.thumbnail ? params.row.volumeInfo.imageLinks.thumbnail : ''
     }
   ];
 
   return (
-    <MainCard title="Google Book Search" style={{overflow: 'auto'}}>
+    <MainCard title="Google Book Search" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <TextField label="Search Books" value={query} onChange={handleInputChange} />
         <Button variant="contained" color="primary" onClick={handleSearch} disabled={loading}>

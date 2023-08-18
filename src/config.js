@@ -14,7 +14,6 @@ const config = {
   USER_ROLE_MODERATOR: 'sys:moderator',
 
   // urls
-  basicURL: 'http://localhost:3000', // this field is probably not going to be used
   logoutUrl: '/logout', // might not use
 
   // toasts
@@ -50,6 +49,8 @@ const config = {
   // ==============================|| COLLECTION POINT FUNCTIONS ||============================== //
   // CRUD collection point functions
   collectionPoint: '/api/collectionPoint',
+  // GET number of books with status 0 and number of books with status 1 at a collection point
+  collectionCount: '/api/collectionPoint/count',
 
   // CRUD book listing functions
   book: '/api/book',
@@ -65,6 +66,8 @@ const config = {
   bookRandom: '/api/book/random',
   // CRUD of book status update logs
   bookTimestamp: '/api/bookTimestamp',
+  // PUT - moderator to reject book listing by book id
+  bookReject: '/api/book/reject',
 
   // ==============================|| APPLICATION FUNCTIONS ||============================== //
   // CRUD application functions
@@ -73,6 +76,12 @@ const config = {
   applicationMember: '/api/application/member',
   // CRUD of application status update logs
   applicationTimestamp: '/api/applicationTimestamp',
+  // PUT with {id} for moderator to reject application
+  applicationReject: '/api/application/reject',
+  // PUT with {id} for moderator to approve application
+  applicationApprove: '/api/application/approve',
+  // PUT with {id} for moderator to mark application as ready for collection
+  applicationReady: '/api/application/ready',
 
   // CRUD transaction functions
   transaction: '/api/transaction',

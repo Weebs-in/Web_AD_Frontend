@@ -63,15 +63,77 @@ function EditToolbar(props) {
 const CollectionPoints = () => {
   const apiRef = useGridApiRef();
   const [collectionPoints, setCollectionPoints] = useState([]);
+  const [collectionPointsCount, setCollectionPointsCount] = useState([]);
+  // const [combinedData, setCombinedData] = useState({});
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['name', 'address', 'status', 'actions'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['name', 'address', 'status', 'actions', 'pendingCount', 'depositedCount'], []);
+
+  // useEffect(() => {
+  //   // Fetch collection points and count data
+  //   const fetchData = async () => {
+  //     try {
+  //       const collectionPointsResponse = fetchCollectionPoints();
+  //       const collectionPointsCountResponse = fetchCollectionPointsCount();
+  //
+  //       // Wait for both fetches to complete
+  //       await Promise.all([collectionPointsResponse, collectionPointsCountResponse]);
+  //
+  //       // Combine collection points and counts data based on id
+  //       const combined = {};
+  //       collectionPoints.forEach((cp) => {
+  //         const countData = collectionPointsCount.find((count) => count.id === cp.id);
+  //         combined[cp.id] = { ...cp, ...countData };
+  //       });
+  //       console.log('combined: ', combined);
+  //       // Update combined data state
+  //       setCombinedData(combined);
+  //
+  //       // Map through the collection points to set rowModesModel
+  //       const updatedRowModesModel = {};
+  //       collectionPoints.forEach((cp) => {
+  //         if (cp.isNew) {
+  //           updatedRowModesModel[cp.id] = { mode: GridRowModes.Edit };
+  //         } else {
+  //           updatedRowModesModel[cp.id] = { mode: GridRowModes.View };
+  //         }
+  //       });
+  //       setRowModesModel(updatedRowModesModel);
+  //
+  //       // Set the rows to be displayed in the DataGrid
+  //       setRows(Object.values(combinedData));
+  //     } catch (error) {
+  //       console.error('Error fetching collection point and count data:', error);
+  //     }
+  //   };
+  //
+  //   fetchData();
+  // }, []);
 
   useEffect(() => {
-    fetchCollectionPoints();
+    const fetchData = async () => {
+      try {
+        await fetchCollectionPoints();
+        await fetchCollectionPointsCount();
+      } catch (error) {
+        console.error('Error fetching collection point data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   useEffect(() => {
+    // Combine collection points and counts data based on id
+    const combined = {};
+    collectionPoints.forEach((cp) => {
+      const countData = collectionPointsCount.find((count) => count.id === cp.id);
+      combined[cp.id] = { ...cp, ...countData };
+    });
+
+    // Update combined data state
+    // setCombinedData(combined);
+
     // Map through the collection points to set rowModesModel
     const updatedRowModesModel = {};
     collectionPoints.forEach((cp) => {
@@ -81,12 +143,12 @@ const CollectionPoints = () => {
         updatedRowModesModel[cp.id] = { mode: GridRowModes.View };
       }
     });
-
     setRowModesModel(updatedRowModesModel);
-
     // Set the rows to be displayed in the DataGrid
-    setRows(collectionPoints);
-  }, [collectionPoints]);
+    setRows(Object.values(combined));
+    // check rows in grid
+    console.log('combined rows: ', rows);
+  }, [collectionPoints, collectionPointsCount]);
 
   const fetchCollectionPoints = async () => {
     try {
@@ -114,6 +176,36 @@ const CollectionPoints = () => {
       }
     } catch (error) {
       console.error('Error fetching collection point data:', error);
+    }
+  };
+
+  /// fetch counts of Pending and Deposited books
+  const fetchCollectionPointsCount = async () => {
+    try {
+      const response = await fetch(config.collectionCount, {
+        headers: {
+          Authorization: 'Bearer ' + getJWTFromLS(),
+          'Content-Type': 'application/json'
+        },
+        method: 'GET'
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        console.log('Retrieved collection point count data successfully');
+        console.log(data);
+        setCollectionPointsCount(data);
+      } else {
+        const errorData = await response.text();
+        throw new Error(`Invalid JSON response for collectionPointCount: ${errorData}`);
+      }
+    } catch (error) {
+      console.error('Error fetching collection point count data:', error);
     }
   };
 
@@ -153,6 +245,7 @@ const CollectionPoints = () => {
 
       // Fetch the updated collection points data
       await fetchCollectionPoints();
+      await fetchCollectionPointsCount();
     } catch (error) {
       console.error('Error adding new record:', error);
     }
@@ -166,6 +259,10 @@ const CollectionPoints = () => {
     Object.entries(formData).forEach(([key, value]) => {
       data[key] = typeof value === 'string' ? value.trim() : value;
     });
+
+    // Remove the counts fields from the data object
+    delete data['pendingCount'];
+    delete data['depositCount'];
 
     // Make the PUT request to the backend
     try {
@@ -189,6 +286,7 @@ const CollectionPoints = () => {
 
       // Fetch the updated collection points data
       await fetchCollectionPoints();
+      await fetchCollectionPointsCount();
     } catch (error) {
       console.error('Error updating record:', error);
     }
@@ -272,6 +370,7 @@ const CollectionPoints = () => {
       if (response.ok) {
         console.log('Collection point deleted');
         await fetchCollectionPoints(); // Fetch the updated collection points data
+        await fetchCollectionPointsCount();
       } else {
         console.error('Failed to delete collection point');
       }
@@ -412,12 +511,26 @@ const CollectionPoints = () => {
             />
           ];
         }
+      },
+      {
+        field: 'pendingCount',
+        headerName: 'Books\nPending',
+        width: 80,
+        align: 'center',
+        type: 'number'
+      },
+      {
+        field: 'depositedCount',
+        headerName: 'Books\nDeposited',
+        width: 80,
+        align: 'center',
+        type: 'number'
       }
     ].filter((column) => VISIBLE_FIELDS.includes(column.field));
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Collection Points" style={{overflow: 'auto'}}>
+    <MainCard title="Collection Points" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <GoogleMap
           collectionPoints={collectionPoints}

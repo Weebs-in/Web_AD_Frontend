@@ -23,7 +23,6 @@ import MainCard from 'ui-component/cards/MainCard';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../../config';
 import { getJWTFromLS } from '../../../utils/jwtUtils';
-import { format } from 'date-fns';
 import SaveIcon from '@mui/icons-material/Save';
 import CancelIcon from '@mui/icons-material/Close';
 import EditIcon from '@mui/icons-material/Edit';
@@ -203,12 +202,6 @@ const ManageApplications = () => {
     return [
       { field: 'id', headerName: 'ID', width: 80, align: 'left', headerAlign: 'left' },
       {
-        field: 'createTime',
-        headerName: 'Date',
-        width: 100,
-        valueFormatter: (params) => format(new Date(params.value), 'yyyy-MM-dd HH:mm:ss')
-      },
-      {
         field: 'book',
         headerName: 'Book',
         width: 200,
@@ -216,19 +209,14 @@ const ManageApplications = () => {
         headerAlign: 'left',
         renderCell: (params) => (
           <div>
-            <div>{params.row.book.id}</div>
-            <div>{params.row.book.title}</div>
+            <div>
+              <b>ID:</b> {params.row.book.id}
+            </div>
+            <div>
+              <b>Title:</b> {params.row.book.title}
+            </div>
           </div>
         )
-      },
-      {
-        field: 'donor',
-        headerName: 'Donor',
-        type: 'string',
-        width: 120,
-        align: 'left',
-        headerAlign: 'left',
-        valueGetter: (params) => params.row.donor.username
       },
       {
         field: 'recipient',
@@ -237,7 +225,10 @@ const ManageApplications = () => {
         width: 120,
         align: 'left',
         headerAlign: 'left',
-        valueGetter: (params) => params.row.recipient.username
+        valueGetter: (params) => {
+          const recipient = params.row.recipient;
+          return recipient ? recipient.username : 'No Recipient';
+        }
       },
       {
         field: 'status',

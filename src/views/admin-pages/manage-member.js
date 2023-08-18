@@ -44,10 +44,13 @@ function EditToolbar(props) {
       username: '',
       displayName: '',
       phoneNumber: '',
+      password: '123',
       email: '',
       birthday: '',
       gender: '',
       bio: '',
+      donationCount: 0,
+      receiveCount: 0,
       isNew: true
     };
     setRows((oldRows) => [newRow, ...oldRows]);
@@ -136,7 +139,7 @@ const ManageMembers = () => {
       const data = {};
       Object.entries(formData).forEach(([key, value]) => {
         if (key === 'birthday' && value instanceof Date) {
-          data[key] = value.toISOString(); // Convert Date to ISO 8601 format
+          data[key] = value.toISOString().split('T')[0];
         } else {
           data[key] = typeof value === 'string' ? value.trim() : value;
         }
@@ -191,7 +194,11 @@ const ManageMembers = () => {
       // Convert the form data to a JSON object
       const data = {};
       Object.entries(formData).forEach(([key, value]) => {
-        data[key] = typeof value === 'string' ? value.trim() : value;
+        if (key === 'birthday' && value instanceof Date) {
+          data[key] = value.toISOString().split('T')[0];
+        } else {
+          data[key] = typeof value === 'string' ? value.trim() : value;
+        }
       });
 
       // Exclude the current record's ID from the username check
@@ -457,7 +464,7 @@ const ManageMembers = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Member Information" style={{overflow: 'auto'}}>
+    <MainCard title="Member Information" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <Box
           sx={{

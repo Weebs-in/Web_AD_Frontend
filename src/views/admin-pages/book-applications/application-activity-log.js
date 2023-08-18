@@ -11,7 +11,7 @@ import {
   GridToolbarContainer,
   // GridActionsCellItem,
   GridToolbarFilterButton,
-  GridToolbarExport,
+  GridToolbarExport
   // useGridApiRef,
   // GridRowModes,
   // GridRowEditStopReasons
@@ -44,7 +44,7 @@ const ApplicationActivity = () => {
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
   // const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['application', 'book', 'donor', 'recipient', 'statusPrev', 'statusNow', 'actionTime'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['application', 'book', 'donor', 'recipient', 'statusPrev', 'statusNow', 'roleUsername', 'roleType', 'actionTime'], []);
 
   useEffect(() => {
     fetchApplications();
@@ -219,8 +219,8 @@ const ApplicationActivity = () => {
         headerAlign: 'left',
         renderCell: (params) => (
           <div>
-            <div>{params.row.book.id}</div>
-            <div>{params.row.book.title}</div>
+            <div>{params.row.application.book.id}</div>
+            <div>{params.row.application.book.title}</div>
           </div>
         )
       },
@@ -258,6 +258,26 @@ const ApplicationActivity = () => {
         ]
       },
       {
+        field: 'roleUsername',
+        headerName: 'Action By',
+        type: 'string',
+        width: 120,
+        align: 'left',
+        headerAlign: 'left',
+      },
+      {
+        field: 'roleType',
+        headerName: 'Role',
+        width: 80,
+        align: 'left',
+        headerAlign: 'left',
+        type: 'singleSelect',
+        valueOptions: [
+          { value: 0, label: 'Admin' },
+          { value: 1, label: 'Moderator' },
+          { value: 2, label: 'Member' } ]
+      },
+      {
         field: 'statusNow',
         headerName: 'Current \n Status',
         width: 120,
@@ -277,7 +297,7 @@ const ApplicationActivity = () => {
         headerName: 'Timestamp',
         width: 200,
         valueFormatter: (params) => format(new Date(params.value), 'yyyy-MM-dd HH:mm:ss')
-      },
+      }
       // {
       //   field: 'actions',
       //   type: 'actions',
@@ -348,8 +368,8 @@ const ApplicationActivity = () => {
           }}
         >
           <DataGrid
-              autoHeight
-              {...rows}
+            autoHeight
+            {...rows}
             rows={rows}
             // editMode="row"
             columns={columns}
