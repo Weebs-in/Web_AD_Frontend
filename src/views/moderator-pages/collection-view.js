@@ -101,6 +101,7 @@ const CollectionView = () => {
     setRows(Object.values(combined));
     // check rows in grid
     console.log('combined rows: ', rows);
+    // eslint-disable-next-line
   }, [collectionPoints, collectionPointsCount]);
 
   const fetchCollectionPoints = async () => {
@@ -114,6 +115,7 @@ const CollectionView = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -125,6 +127,7 @@ const CollectionView = () => {
         setCollectionPoints(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response: ${errorData}`);
       }
     } catch (error) {
@@ -144,6 +147,7 @@ const CollectionView = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -155,6 +159,7 @@ const CollectionView = () => {
         setCollectionPointsCount(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response for collectionPointCount: ${errorData}`);
       }
     } catch (error) {

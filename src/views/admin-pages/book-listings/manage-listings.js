@@ -18,7 +18,7 @@ import {
   GridRowEditStopReasons,
   GridToolbarFilterButton,
   GridToolbarExport,
-  useGridApiRef,
+  useGridApiRef
 } from '@mui/x-data-grid';
 // import { randomId } from '@mui/x-data-grid-generator';
 
@@ -58,7 +58,7 @@ const ManageListings = () => {
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
     () => [
-        'id',
+      'id',
       'isbn',
       'title',
       'author',
@@ -95,6 +95,7 @@ const ManageListings = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -106,6 +107,7 @@ const ManageListings = () => {
         setBookListings(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response: ${errorData}`);
       }
     } catch (error) {
@@ -139,6 +141,7 @@ const ManageListings = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -175,6 +178,7 @@ const ManageListings = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -302,8 +306,7 @@ const ManageListings = () => {
 
   const columns = useMemo(() => {
     return [
-      { field: 'id', headerName: 'ID', width: 80, align: 'left',
-        headerAlign: 'left'},
+      { field: 'id', headerName: 'ID', width: 80, align: 'left', headerAlign: 'left' },
       {
         field: 'donor',
         headerName: 'Donor',
@@ -437,10 +440,10 @@ const ManageListings = () => {
         }
       }
     ].filter((column) => VISIBLE_FIELDS.includes(column.field));
-  }, [handleDeleteClick, handleEditClick, VISIBLE_FIELDS]);
+  }, [handleCancelClick, handleSaveClick, handleDeleteClick, handleEditClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Book Listings" style={{overflow: 'auto'}}>
+    <MainCard title="Book Listings" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <Box
           sx={{

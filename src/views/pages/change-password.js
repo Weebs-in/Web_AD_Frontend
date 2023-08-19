@@ -19,7 +19,6 @@ const ELEMENT_PADDING = '16px';
 
 const ChangePassword = () => {
   const [password, setPassword] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [confirmPassword, setConfirmPassword] = useState('');
   const formRef = useRef(null);
   const userId = getUserIdFromLS();
@@ -38,6 +37,7 @@ const ChangePassword = () => {
       return; // Prevent form submission
     }
     console.log('password transferred to handleSave: ', password);
+    console.log('confirmPassword value: ', confirmPassword);
     const userIdInt = parseInt(userId, 10);
     // Construct the JSON payload
     const data = {
@@ -58,6 +58,7 @@ const ChangePassword = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -67,6 +68,7 @@ const ChangePassword = () => {
     } catch (error) {
       console.error('Error updating record:', error);
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleClose = () => {

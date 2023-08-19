@@ -84,6 +84,7 @@ const ManageStaff = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -93,6 +94,7 @@ const ManageStaff = () => {
         setStaff(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response: ${errorData}`);
       }
     } catch (error) {
@@ -127,6 +129,7 @@ const ManageStaff = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -163,6 +166,7 @@ const ManageStaff = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -382,7 +386,7 @@ const ManageStaff = () => {
   }, [handleCancelClick, handleDeleteClick, handleEditClick, handleSaveClick, rowModesModel, VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Staff Information" style={{overflow: 'auto'}}>
+    <MainCard title="Staff Information" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <p>Please note: editing is disabled for fellow administrators and the moderator password/role fields.</p>
         <Divider />

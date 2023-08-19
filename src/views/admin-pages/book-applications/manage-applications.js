@@ -64,6 +64,7 @@ const ManageApplications = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -75,6 +76,7 @@ const ManageApplications = () => {
         setApplications(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response: ${errorData}`);
       }
     } catch (error) {
@@ -104,6 +106,7 @@ const ManageApplications = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -191,7 +194,7 @@ const ManageApplications = () => {
         [id]: { mode: GridRowModes.View, ignoreModifications: true }
       });
     },
-    [rows, rowModesModel]
+    [rowModesModel]
   );
 
   const handleRowModesModelChange = (newRowModesModel) => {

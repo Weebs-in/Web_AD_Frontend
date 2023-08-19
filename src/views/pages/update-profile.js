@@ -32,7 +32,9 @@ const UpdateProfile = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     fetchUserData();
+    // eslint-disable-next-line
   }, [userId]);
 
   const fetchUserData = async () => {
@@ -47,6 +49,7 @@ const UpdateProfile = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -58,6 +61,7 @@ const UpdateProfile = () => {
         setFormData(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response: ${errorData}`);
       }
     } catch (error) {
@@ -96,6 +100,7 @@ const UpdateProfile = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -108,6 +113,7 @@ const UpdateProfile = () => {
     } catch (error) {
       console.error('Error updating record:', error);
     }
+    // eslint-disable-next-line
   }, []);
 
   const handleClose = () => {

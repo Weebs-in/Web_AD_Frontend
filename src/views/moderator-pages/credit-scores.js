@@ -25,6 +25,7 @@ function CreditToolbar() {
   );
 }
 
+// eslint-disable-next-line react/prop-types
 const StatusColour = ({ ratio }) => {
   let colour;
   let title;
@@ -72,6 +73,7 @@ const CreditScores = () => {
       });
 
       if (!response.ok) {
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error('Network response was not ok');
       }
 
@@ -83,6 +85,7 @@ const CreditScores = () => {
         setCreditInfo(data);
       } else {
         const errorData = await response.text();
+        // noinspection ExceptionCaughtLocallyJS
         throw new Error(`Invalid JSON response: ${errorData}`);
       }
     } catch (error) {
@@ -143,7 +146,7 @@ const CreditScores = () => {
   }, [VISIBLE_FIELDS]);
 
   return (
-    <MainCard title="Credit Scores" style={{overflow: 'auto'}}>
+    <MainCard title="Credit Scores" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <p>Please note: Auto-approval of applications is granted for scores of 0.4 and above.</p>
         <Divider />

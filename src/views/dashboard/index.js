@@ -27,9 +27,9 @@ import WeeklyBarChart from './WeeklyBarChart';
 import PickupPointColumnChart from './PickupPointColumnChart';
 import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
-import MonthlyLikedChart from "./MonthlyLikedChart";
-import AgeDemographicsChart from "./AgeDemographicsChart";
-import TransactionAreaChart from "./TransactionAreaChart";
+import MonthlyLikedChart from './MonthlyLikedChart';
+import AgeDemographicsChart from './AgeDemographicsChart';
+import TransactionAreaChart from './TransactionAreaChart';
 
 // assets
 import { GiftOutlined, MessageOutlined } from '@ant-design/icons';
