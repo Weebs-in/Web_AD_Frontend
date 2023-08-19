@@ -23,7 +23,7 @@ import {
 import TransactionTable from './TransactionTable';
 import BooksTransactionChart from './BooksTransactionChart';
 import WeeklyBarChart from './WeeklyBarChart';
-import ReportAreaChart from './ReportAreaChart';
+// import ReportAreaChart from './ReportAreaChart';
 import PickupPointColumnChart from './PickupPointColumnChart';
 import MainCard from 'ui-component/cards/MainCard';
 import AnalyticEcommerce from 'ui-component/cards/statistics/AnalyticEcommerce';
