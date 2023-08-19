@@ -42,7 +42,6 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -80,7 +79,8 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "immutable": "^4.3.0",
     "prettier": "^2.8.7",
-    "sass": "^1.53.0"
+    "sass": "^1.53.0",
+    "react-scripts": "^5.0.1"
   },
   "proxy": "https://adt8api.azurewebsites.net"
 }
