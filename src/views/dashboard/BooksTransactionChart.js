@@ -1,13 +1,9 @@
-import PropTypes from 'prop-types';
-import { useState, useEffect } from 'react';
-
-// material-ui
+import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
-
-// third-party
 import ReactApexChart from 'react-apexcharts';
+import config from '../../config';
+import { getJWTFromLS } from '../../utils/jwtUtils';
 
-// chart options
 const areaChartOptions = {
   chart: {
     height: 450,
@@ -28,48 +24,35 @@ const areaChartOptions = {
   }
 };
 
-// ==============================|| TRANSACTION AREA CHART ||============================== //
-
-const BooksTransactionChart = ({ slot }) => {
+const BooksTransactionChart = () => {
   const theme = useTheme();
-
   const { primary, secondary } = theme.palette.text;
   const line = theme.palette.divider;
 
   const [options, setOptions] = useState(areaChartOptions);
+  const [series, setSeries] = useState([
+    {
+      name: 'Number of successful transaction',
+      data: []
+    }
+  ]);
 
   useEffect(() => {
     setOptions((prevState) => ({
       ...prevState,
-      colors: [theme.palette.primary.main, theme.palette.primary[700]],
+      colors: [theme.palette.primary.main],
       xaxis: {
-        categories:
-          slot === 'month'
-            ? ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-            : ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        categories: [], // We will populate this dynamically based on the API data
         labels: {
           style: {
-            colors: [
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary,
-              secondary
-            ]
+            colors: [secondary]
           }
         },
         axisBorder: {
           show: true,
           color: line
         },
-        tickAmount: slot === 'month' ? 11 : 7
+        tickAmount: 6 // Default value (will be updated dynamically)
       },
       yaxis: {
         labels: {
@@ -85,29 +68,59 @@ const BooksTransactionChart = ({ slot }) => {
         theme: 'light'
       }
     }));
-  }, [primary, secondary, line, theme, slot]);
-
-  const [series, setSeries] = useState([
-    {
-      name: 'Number of transaction',
-      data: [44, 36, 46, 55, 71, 93, 65]
-    }
-  ]);
+  }, [primary, secondary, line, theme]);
 
   useEffect(() => {
-    setSeries([
-      {
-        name: 'Number of transaction',
-        data: slot === 'month' ? [2642, 1852, 1729, 1794, 1952, 2539, 1872, 1748, 1967, 2154, 3164, 3402] : [44, 36, 46, 55, 71, 93, 65]
+    const fetchData = async () => {
+      try {
+        const response = await fetch(config.booksStatusByMonth, {
+          headers: {
+            Authorization: 'Bearer ' + getJWTFromLS(),
+            'Content-Type': 'application/json'
+          },
+          method: 'GET'
+        });
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const contentType = response.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) {
+          const data = await response.json();
+
+          // Extract month labels and completed counts from the data
+          const monthLabels = data.map((item) => item.yearMonth);
+          const completedCounts = data.map((item) => item.completedCount);
+
+          setSeries([
+            {
+              name: 'Number of successful transaction',
+              data: completedCounts
+            }
+          ]);
+
+          setOptions((prevState) => ({
+            ...prevState,
+            xaxis: {
+              ...prevState.xaxis,
+              categories: monthLabels
+            },
+            tickAmount: monthLabels.length // Update tickAmount based on the number of months
+          }));
+        } else {
+          const errorData = await response.text();
+          throw new Error(`Invalid JSON response: ${errorData}`);
+        }
+      } catch (error) {
+        console.error('Error fetching transaction data:', error);
       }
-    ]);
-  }, [slot]);
+    };
+
+    fetchData();
+  }, []);
 
   return <ReactApexChart options={options} series={series} type="area" height={450} />;
-};
-
-BooksTransactionChart.propTypes = {
-  slot: PropTypes.string
 };
 
 export default BooksTransactionChart;
