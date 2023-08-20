@@ -1,18 +1,13 @@
 /// material-ui
 import { Button, Divider, TextField, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 
 // mui-datagrid
 import {
-  // useGridApiContext,
   DataGrid,
   GridToolbarContainer,
-  // GridActionsCellItem,
   GridToolbarFilterButton,
   GridToolbarExport
-  // useGridApiRef
 } from '@mui/x-data-grid';
 
 // project imports
@@ -20,8 +15,6 @@ import MainCard from 'ui-component/cards/MainCard';
 
 import React, { useEffect, useState } from 'react';
 import config from '../../config';
-// import { getJWTFromLS } from '../../utils/jwtUtils';
-// import { format } from 'date-fns';
 
 // ==============================|| BOOK LISTINGS MANAGEMENT ||============================== //
 

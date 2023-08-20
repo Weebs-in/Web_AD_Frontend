@@ -33,16 +33,8 @@ import { getJWTFromLS } from '../../utils/jwtUtils';
 // ==============================|| BOOK LISTINGS MANAGEMENT ||============================== //
 
 function BookListingToolbar() {
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  // // open Modal if I want to implement a create
-  // };
-
   return (
     <GridToolbarContainer>
-      {/*<Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>*/}
-      {/*  Add record*/}
-      {/*</Button>*/}
       <GridToolbarExport />
       <GridToolbarFilterButton />
     </GridToolbarContainer>
@@ -471,13 +463,6 @@ const ManageListings = () => {
               slots={{
                 toolbar: BookListingToolbar
               }}
-              // slotProps={{
-              //   toolbar: { setRows, setRowModesModel }
-              // }}
-              // columnVisibilityModel={{
-              //   // Hide column id, the other columns will remain visible
-              //   id: false
-              // }}
               initialState={{
                 pagination: {
                   paginationModel: {

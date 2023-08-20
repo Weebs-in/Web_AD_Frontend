@@ -1,21 +1,9 @@
 // material-ui
 import { Button, Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 
 // mui-datagrid
-import {
-  // useGridApiContext,
-  DataGrid,
-  GridToolbarContainer,
-  // GridActionsCellItem,
-  GridToolbarFilterButton,
-  GridToolbarExport,
-  useGridApiRef
-  // GridRowModes,
-  // GridRowEditStopReasons
-} from '@mui/x-data-grid';
+import { DataGrid, GridToolbarContainer, GridToolbarFilterButton, GridToolbarExport, useGridApiRef } from '@mui/x-data-grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -23,9 +11,6 @@ import MainCard from 'ui-component/cards/MainCard';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../config';
 import { getJWTFromLS } from '../../utils/jwtUtils';
-// import SaveIcon from '@mui/icons-material/Save';
-// import CancelIcon from '@mui/icons-material/Close';
-// import EditIcon from '@mui/icons-material/Edit';
 
 // ==============================|| BOOK APPLICATIONS MANAGEMENT ||============================== //
 
@@ -48,10 +33,6 @@ const ReviewApplications = () => {
   useEffect(() => {
     fetchApplications();
   }, []);
-
-  // useEffect(() => {
-  //   setRows(applications);
-  // }, [applications]);
 
   useEffect(() => {
     // Filter applications with status values 0,1
@@ -89,122 +70,6 @@ const ReviewApplications = () => {
       console.error('Error fetching application data:', error);
     }
   };
-
-  // // function for updating existing application, called by handleSaveClick
-  // const handleUpdateSubmit = useCallback(async (id, formData) => {
-  //   console.log('to PUT - Form data before conversion to JSON:', formData);
-  //   // Convert the form data to a JSON object
-  //   const data = {};
-  //   Object.entries(formData).forEach(([key, value]) => {
-  //     data[key] = typeof value === 'string' ? value.trim() : value;
-  //   });
-  //
-  //   // Make the PUT request to the backend
-  //   try {
-  //     console.log('to PUT - Submitting form data:', data); // Log the data before making the PUT request
-  //     const response = await fetch(config.application + '/' + id, {
-  //       method: 'PUT',
-  //       headers: {
-  //         Authorization: 'Bearer ' + getJWTFromLS(),
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(data)
-  //     });
-  //
-  //     if (!response.ok) {
-  //       throw new Error('Network response was not ok');
-  //     }
-  //
-  //     // Process the response data if needed
-  //     const responseData = await response.json();
-  //     console.log('Record updated:', responseData);
-  //
-  //     // Fetch the updated application data
-  //     await fetchApplications();
-  //   } catch (error) {
-  //     console.error('Error updating record:', error);
-  //   }
-  // }, []);
-
-  // const processRowUpdate = useCallback((newRow) => {
-  //   console.log('processRowUpdate for existing row:', JSON.stringify(newRow));
-  //   setRows((rows) => rows.map((row) => (row.id === newRow.id ? newRow : row)));
-  //   return newRow;
-  // }, []);
-  //
-  // const handleRowEditStop = (params, event) => {
-  //   if (params.reason === GridRowEditStopReasons.rowFocusOut) {
-  //     event.defaultMuiPrevented = true;
-  //   }
-  // };
-  //
-  // const handleEditClick = useCallback(
-  //   async (event, id) => {
-  //     event.preventDefault();
-  //     console.log('handleEditClick function called for ID:', id);
-  //
-  //     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.Edit } });
-  //   },
-  //   [rowModesModel]
-  // );
-  //
-  // const handleSaveClick = useCallback(
-  //   async (event, id) => {
-  //     event.preventDefault();
-  //     console.log('handleSaveClick function called for ID:', id);
-  //
-  //     // Get the updated row data using getRowWithUpdatedValues
-  //     const newRow = apiRef.current.getRowWithUpdatedValues(id);
-  //     console.log('Updated row data from getRowWithUpdatedValues:', JSON.stringify(newRow));
-  //
-  //     // Process the row update and get the updated row data
-  //     const updatedRow = processRowUpdate(newRow);
-  //     console.log('processRowUpdate invoked in handleSaveClick: ' + JSON.stringify(updatedRow));
-  //
-  //     // Update the row mode to view after saving
-  //     setRowModesModel({ ...rowModesModel, [id]: { mode: GridRowModes.View } });
-  //     await handleUpdateSubmit(id, updatedRow);
-  //   },
-  //   [apiRef, processRowUpdate, handleUpdateSubmit, rowModesModel]
-  // );
-  //
-  // const handleDeleteClick = useCallback(async (event, id) => {
-  //   console.log('handleDeleteClick function called for ID:', id);
-  //   try {
-  //     const response = await fetch(config.application + '/' + id, {
-  //       headers: {
-  //         Authorization: 'Bearer ' + getJWTFromLS(),
-  //         'Content-Type': 'application/json'
-  //       },
-  //       method: 'DELETE'
-  //     });
-  //
-  //     console.log('Response Status:', response.status); // Log the status code
-  //
-  //     if (response.ok) {
-  //       console.log('Application deleted');
-  //       await fetchApplications(); // Fetch the updated book listing data
-  //     } else {
-  //       console.error('Failed to delete application');
-  //     }
-  //   } catch (error) {
-  //     console.error('Error while deleting application', error);
-  //   }
-  // }, []);
-  //
-  // const handleCancelClick = useCallback(
-  //   (id) => () => {
-  //     setRowModesModel({
-  //       ...rowModesModel,
-  //       [id]: { mode: GridRowModes.View, ignoreModifications: true }
-  //     });
-  //   },
-  //   [rowModesModel]
-  // );
-  //
-  // const handleRowModesModelChange = (newRowModesModel) => {
-  //   setRowModesModel(newRowModesModel);
-  // };
 
   // function for updating existing application status, called by handleActionClick
   const handleActionClick = useCallback(async (event, id, statusChange) => {

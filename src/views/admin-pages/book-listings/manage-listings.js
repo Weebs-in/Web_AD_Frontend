@@ -1,8 +1,6 @@
 // material-ui
 import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
-// import Button from '@mui/material/Button';
-// import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import SaveIcon from '@mui/icons-material/Save';
@@ -20,11 +18,9 @@ import {
   GridToolbarExport,
   useGridApiRef
 } from '@mui/x-data-grid';
-// import { randomId } from '@mui/x-data-grid-generator';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
-// import ListingEditModal from './ListingEditModal';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../../config';
@@ -33,16 +29,8 @@ import { getJWTFromLS } from '../../../utils/jwtUtils';
 // ==============================|| BOOK LISTINGS MANAGEMENT ||============================== //
 
 function BookListingToolbar() {
-  // const handleClick = (event) => {
-  //   event.preventDefault();
-  // // open Modal if I want to implement a create
-  // };
-
   return (
     <GridToolbarContainer>
-      {/*<Button color="primary" startIcon={<AddIcon />} onClick={handleClick}>*/}
-      {/*  Add record*/}
-      {/*</Button>*/}
       <GridToolbarExport />
       <GridToolbarFilterButton />
     </GridToolbarContainer>
@@ -52,8 +40,6 @@ function BookListingToolbar() {
 const ManageListings = () => {
   const apiRef = useGridApiRef();
   const [bookListings, setBookListings] = useState([]);
-  // const [editModalOpen, setEditModalOpen] = useState(false);
-  // const [selectedBook, setSelectedBook] = useState(null);
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(

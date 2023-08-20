@@ -167,30 +167,6 @@ const CollectionView = () => {
     }
   };
 
-  // status dot colour
-  // const StatusColour = ({ ratio }) => {
-  //   let colour;
-  //   let title;
-  //   const status = ratio < 0.4 ? 0 : 1;
-  //
-  //   switch (status) {
-  //     case 0:
-  //       colour = 'error';
-  //       title = 'Review Required';
-  //       break;
-  //     default:
-  //       colour = 'success';
-  //       title = 'Auto-approval';
-  //   }
-  //
-  //   return (
-  //     <Stack direction="row" spacing={1} alignItems="center">
-  //       <Dot color={colour} />
-  //       <Typography>{title}</Typography>
-  //     </Stack>
-  //   );
-  // };
-
   const columns = useMemo(() => {
     return [
       { field: 'id', headerName: 'ID', width: 0 },
@@ -220,15 +196,6 @@ const CollectionView = () => {
           { value: 1, label: 'Available' },
           { value: 0, label: 'Unavailable' }
         ]
-        // valueGetter: (params) => {
-        //   const statusValue = params.value; // Get the value of the 'status' field
-        //   return (
-        //     <Stack direction="row" spacing={1} alignItems="center">
-        //       <StatusColour status={statusValue} />
-        //       <span>{statusValue === 1 ? 'Available' : 'Unavailable'}</span>
-        //     </Stack>
-        //   );
-        // }
       },
       {
         field: 'pendingCount',

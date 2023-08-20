@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import config from '../../../config';
-// import { Link } from 'react-router-dom';
 
 // material-ui
 import { useTheme } from '@mui/material/styles';
@@ -26,12 +25,6 @@ const Login = () => {
   // // form values
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  // values returned from payload at login
-  // const [userIdKey, setUserIdKey] = useState('');
-  // const [userId, setUserId] = useState('');
-  // // toast
-  // const [toast, addToast] = useState(0);
-  // const toaster = useRef();
   const [open, setOpen] = useState(false);
 
   // Feature detection for 'fetch' API

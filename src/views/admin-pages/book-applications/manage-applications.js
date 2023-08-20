@@ -331,10 +331,6 @@ const ManageApplications = () => {
             slots={{
               toolbar: ApplicationToolbar
             }}
-            // columnVisibilityModel={{
-            //   // Hide column id, the other columns will remain visible
-            //   id: false
-            // }}
             initialState={{
               pagination: {
                 paginationModel: {
