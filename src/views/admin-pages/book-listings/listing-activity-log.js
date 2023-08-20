@@ -3,12 +3,7 @@ import { Typography } from '@mui/material';
 import Box from '@mui/material/Box';
 
 // mui-datagrid
-import {
-  DataGrid,
-  GridToolbarContainer,
-  GridToolbarFilterButton,
-  GridToolbarExport
-} from '@mui/x-data-grid';
+import { DataGrid, GridToolbarContainer, GridToolbarFilterButton, GridToolbarExport } from '@mui/x-data-grid';
 
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
@@ -32,7 +27,7 @@ function ApplicationToolbar() {
 const ListingActivity = () => {
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
-  const VISIBLE_FIELDS = React.useMemo(() => ['book', 'donor', 'statusPrev', 'statusNow', 'actionTime'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['book', 'donor', 'statusPrev', 'statusNow', 'roleUsername', 'roleType', 'actionTime'], []);
 
   useEffect(() => {
     fetchApplications();
@@ -128,6 +123,27 @@ const ListingActivity = () => {
           { value: 4, label: 'Completed' },
           { value: 5, label: 'Cancelled' },
           { value: 6, label: 'Disabled' }
+        ]
+      },
+      {
+        field: 'roleUsername',
+        headerName: 'Action By',
+        type: 'string',
+        width: 120,
+        align: 'left',
+        headerAlign: 'left'
+      },
+      {
+        field: 'roleType',
+        headerName: 'Role',
+        width: 80,
+        align: 'left',
+        headerAlign: 'left',
+        type: 'singleSelect',
+        valueOptions: [
+          { value: 0, label: 'Admin' },
+          { value: 1, label: 'Moderator' },
+          { value: 2, label: 'Member' }
         ]
       },
       {
