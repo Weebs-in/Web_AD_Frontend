@@ -104,10 +104,20 @@ const ChangePassword = () => {
               fullWidth
               style={{ marginBottom: ELEMENT_PADDING }} // Add spacing between TextField components
             />
-            <Button variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }} onClick={handleSave}>
+            <Button
+              variant="contained"
+              color="secondary"
+              style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}
+              onClick={handleSave}
+            >
               Save
             </Button>
-            <Button onClick={handleClose} variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+            <Button
+              onClick={handleClose}
+              color="secondary"
+              variant="contained"
+              style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}
+            >
               Cancel
             </Button>
           </Box>

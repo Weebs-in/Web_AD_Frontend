@@ -45,6 +45,7 @@ const MapComponent = ({ collectionPoints }) => {
         // Geocode the address to get latitude and longitude
         geocoder.geocode({ address: point.address }, (results, status) => {
           if (status === 'OK') {
+            console.log('geocode status ok');
             const marker = new window.google.maps.Marker({
               position: results[0].geometry.location,
               title: point.name,

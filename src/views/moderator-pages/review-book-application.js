@@ -54,8 +54,9 @@ const ReviewApplications = () => {
   // }, [applications]);
 
   useEffect(() => {
-    // Filter applications with status values 0, 1, 2
-    const filteredApplications = applications.filter((application) => [0, 1, 2].includes(application.status));
+    // Filter applications with status values 0,1
+    // add more status codes to the array if you want to display
+    const filteredApplications = applications.filter((application) => [0, 1].includes(application.status));
 
     setRows(filteredApplications);
   }, [applications]);

@@ -205,7 +205,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         sx={{ margin: '10px 0' }}
                       />
-                      <Button fullWidth variant="contained" color="primary" onClick={handleLogin} sx={{ margin: '10px 0' }}>
+                      <Button fullWidth variant="contained" color="secondary" onClick={handleLogin} sx={{ margin: '10px 0' }}>
                         Sign In
                       </Button>
                     </form>

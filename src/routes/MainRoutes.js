@@ -15,13 +15,6 @@ const Dashboard = Loadable(lazy(() => import('views/dashboard')));
 const UpdateProfile = Loadable(lazy(() => import('views/pages/update-profile')));
 const ChangePassword = Loadable(lazy(() => import('views/pages/change-password')));
 
-// utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
-const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialIcons')));
-const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
-
 // admin page routing
 const ManageStaff = Loadable(lazy(() => import('views/admin-pages/manage-staff')));
 const ManageListings = Loadable(lazy(() => import('views/admin-pages/book-listings/manage-listings')));
@@ -37,9 +30,6 @@ const CreditScores = Loadable(lazy(() => import('views/moderator-pages/credit-sc
 const ReviewBookListing = Loadable(lazy(() => import('views/moderator-pages/review-book-listing')));
 const ReviewApplication = Loadable(lazy(() => import('views/moderator-pages/review-book-application')));
 const CollectionView = Loadable(lazy(() => import('views/moderator-pages/collection-view')));
-
-// sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -67,55 +57,6 @@ const MainRoutes = {
           element: <Dashboard />
         }
       ]
-    },
-    {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-typography',
-          element: <UtilsTypography />
-        }
-      ]
-    },
-    {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-color',
-          element: <UtilsColor />
-        }
-      ]
-    },
-    {
-      path: 'utils',
-      children: [
-        {
-          path: 'util-shadow',
-          element: <UtilsShadow />
-        }
-      ]
-    },
-    {
-      path: 'icons',
-      children: [
-        {
-          path: 'tabler-icons',
-          element: <UtilsTablerIcons />
-        }
-      ]
-    },
-    {
-      path: 'icons',
-      children: [
-        {
-          path: 'material-icons',
-          element: <UtilsMaterialIcons />
-        }
-      ]
-    },
-    {
-      path: 'sample-page',
-      element: <SamplePage />
     },
     {
       path: 'admin',

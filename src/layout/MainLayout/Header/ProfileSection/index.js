@@ -8,12 +8,12 @@ import { useTheme } from '@mui/material/styles';
 import {
   Avatar,
   Box,
-  Card,
-  CardContent,
+  // Card,
+  // CardContent,
   Chip,
   ClickAwayListener,
   Divider,
-  Grid,
+  // Grid,
   List,
   ListItemButton,
   ListItemIcon,
@@ -21,7 +21,7 @@ import {
   Paper,
   Popper,
   Stack,
-  Switch,
+  // Switch,
   Typography
 } from '@mui/material';
 
@@ -32,6 +32,7 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import MainCard from 'ui-component/cards/MainCard';
 import Transitions from 'ui-component/extended/Transitions';
 import FaceIcon from '@mui/icons-material/Face';
+import colors from 'assets/scss/_themes-vars.module.scss';
 import { getUserNbrFromLS } from '../../../../utils/jwtUtils';
 import { getUserRoleFromLS } from '../../../../utils/jwtUtils';
 
@@ -48,8 +49,8 @@ const ProfileSection = () => {
   const userRole = getUserRoleFromLS() === 'sys:admin' ? 'Administrator' : 'Moderator';
   const userName = getUserNbrFromLS();
 
-  const [sdm, setSdm] = useState(true);
-  const [notification, setNotification] = useState(false);
+  // const [sdm, setSdm] = useState(true);
+  // const [notification, setNotification] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   /**
@@ -98,14 +99,14 @@ const ProfileSection = () => {
           alignItems: 'center',
           borderRadius: '27px',
           transition: 'all .2s ease-in-out',
-          borderColor: theme.palette.primary.light,
-          backgroundColor: theme.palette.primary.light,
+          borderColor: theme.palette.secondary.light,
+          backgroundColor: theme.palette.secondary.light,
           '&[aria-controls="menu-list-grow"], &:hover': {
-            borderColor: theme.palette.primary.main,
-            background: `${theme.palette.primary.main}!important`,
-            color: theme.palette.primary.light,
+            borderColor: theme.palette.secondary.main,
+            background: `${theme.palette.secondary.main}!important`,
+            color: theme.palette.secondary.light,
             '& svg': {
-              stroke: theme.palette.primary.light
+              stroke: theme.palette.secondary.light
             }
           },
           '& .MuiChip-label': {
@@ -114,27 +115,27 @@ const ProfileSection = () => {
         }}
         icon={
           <Avatar
-            // src={User1}
             sx={{
               ...theme.typography.mediumAvatar,
               margin: '8px 0 8px 8px !important',
-              cursor: 'pointer'
+              cursor: 'pointer',
+              bgcolor: colors.secondary200
             }}
             ref={anchorRef}
             aria-controls={open ? 'menu-list-grow' : undefined}
             aria-haspopup="true"
-            color="inherit"
+            color="secondary"
           >
             <FaceIcon />
           </Avatar>
         }
-        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.primary.main} />}
+        label={<IconSettings stroke={1.5} size="1.5rem" color={theme.palette.secondary.main} />}
         variant="outlined"
         ref={anchorRef}
         aria-controls={open ? 'menu-list-grow' : undefined}
         aria-haspopup="true"
         onClick={handleToggle}
-        color="primary"
+        color="secondary"
       />
       <Popper
         placement="bottom-end"
@@ -174,49 +175,49 @@ const ProfileSection = () => {
                   <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                     <Box sx={{ p: 2 }}>
                       {/*<Divider />*/}
-                      <Card
-                        sx={{
-                          bgcolor: theme.palette.primary.light,
-                          my: 2
-                        }}
-                      >
-                        <CardContent>
-                          <Grid container spacing={3} direction="column">
-                            <Grid item>
-                              <Grid item container alignItems="center" justifyContent="space-between">
-                                <Grid item>
-                                  <Typography variant="subtitle1">Dark Mode</Typography>
-                                </Grid>
-                                <Grid item>
-                                  <Switch
-                                    color="primary"
-                                    checked={sdm}
-                                    onChange={(e) => setSdm(e.target.checked)}
-                                    name="sdm"
-                                    size="small"
-                                  />
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                            <Grid item>
-                              <Grid item container alignItems="center" justifyContent="space-between">
-                                <Grid item>
-                                  <Typography variant="subtitle1">Allow Notifications</Typography>
-                                </Grid>
-                                <Grid item>
-                                  <Switch
-                                    checked={notification}
-                                    onChange={(e) => setNotification(e.target.checked)}
-                                    name="sdm"
-                                    size="small"
-                                  />
-                                </Grid>
-                              </Grid>
-                            </Grid>
-                          </Grid>
-                        </CardContent>
-                      </Card>
-                      <Divider />
+                      {/*<Card*/}
+                      {/*  sx={{*/}
+                      {/*    bgcolor: theme.palette.primary.light,*/}
+                      {/*    my: 2*/}
+                      {/*  }}*/}
+                      {/*>*/}
+                      {/*  <CardContent>*/}
+                      {/*    <Grid container spacing={3} direction="column">*/}
+                      {/*      <Grid item>*/}
+                      {/*        <Grid item container alignItems="center" justifyContent="space-between">*/}
+                      {/*          <Grid item>*/}
+                      {/*            <Typography variant="subtitle1">Dark Mode</Typography>*/}
+                      {/*          </Grid>*/}
+                      {/*          <Grid item>*/}
+                      {/*            <Switch*/}
+                      {/*              color="primary"*/}
+                      {/*              checked={sdm}*/}
+                      {/*              onChange={(e) => setSdm(e.target.checked)}*/}
+                      {/*              name="sdm"*/}
+                      {/*              size="small"*/}
+                      {/*            />*/}
+                      {/*          </Grid>*/}
+                      {/*        </Grid>*/}
+                      {/*      </Grid>*/}
+                      {/*      <Grid item>*/}
+                      {/*        <Grid item container alignItems="center" justifyContent="space-between">*/}
+                      {/*          <Grid item>*/}
+                      {/*            <Typography variant="subtitle1">Allow Notifications</Typography>*/}
+                      {/*          </Grid>*/}
+                      {/*          <Grid item>*/}
+                      {/*            <Switch*/}
+                      {/*              checked={notification}*/}
+                      {/*              onChange={(e) => setNotification(e.target.checked)}*/}
+                      {/*              name="sdm"*/}
+                      {/*              size="small"*/}
+                      {/*            />*/}
+                      {/*          </Grid>*/}
+                      {/*        </Grid>*/}
+                      {/*      </Grid>*/}
+                      {/*    </Grid>*/}
+                      {/*  </CardContent>*/}
+                      {/*</Card>*/}
+                      {/*<Divider />*/}
                       <List
                         component="nav"
                         sx={{

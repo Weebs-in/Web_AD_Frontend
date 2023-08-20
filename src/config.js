@@ -83,12 +83,17 @@ const config = {
   // PUT with {id} for moderator to mark application as ready for collection
   applicationReady: '/api/application/ready',
 
-  // CRUD transaction functions
-  transaction: '/api/transaction',
+  // ==============================|| DASHBOARD FUNCTIONS ||============================== //
+  // GET to retrieve the books status for the month
+  booksStatusByMonth: '/api/book/statusByMonth',
+  // GET to retrieve member age group data
+  ageGroup: '/api/member/ageGroup',
+  // GET to retrieve books deposited at specific Collection Point
+  groupCount: '/api/collectionPoint/groupCount',
 
   // API Keys
-  mapAPI: 'YOUR_GOOGLE_MAPS_API_KEY',
-  bookAPI: 'YOUR_GOOGLE_BOOKS_API_KEY'
+  mapAPI: 'AIzaSyDSpewPKb5AMUQsZ732e3Co8HQkUUsuGv0',
+  bookAPI: 'AIzaSyBOcP3aGRaZdMTkPTdD66yRlEozOhPBKow'
 };
 
 export default config;

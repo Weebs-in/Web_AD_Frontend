@@ -157,7 +157,7 @@ const BookData = () => {
     <MainCard title="Google Book Search" style={{ overflow: 'auto' }}>
       <Typography variant="body2">
         <TextField label="Search Books" value={query} onChange={handleInputChange} />
-        <Button variant="contained" color="primary" onClick={handleSearch} disabled={loading}>
+        <Button variant="contained" color="secondary" onClick={handleSearch} disabled={loading} style={{ margin: '8px' }}>
           Search
         </Button>
         <Divider />

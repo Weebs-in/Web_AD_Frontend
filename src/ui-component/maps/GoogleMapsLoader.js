@@ -14,7 +14,7 @@ const loadScript = (url) => {
 
 // Load Google Maps API script
 export const loadGoogleMapsAPI = () => {
-  const apiKey = 'AIzaSyAmgYOzS_meczaIqTyn00IJu5a4I3PP2Z8'; // Replace with your API key
+  const apiKey = 'AIzaSyDSpewPKb5AMUQsZ732e3Co8HQkUUsuGv0'; // Replace with your API key
   const url = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
   return loadScript(url);
 };

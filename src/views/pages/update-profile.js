@@ -145,12 +145,18 @@ const UpdateProfile = () => {
             ))}
             <Button
               variant="contained"
+              color="secondary"
               style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}
               onClick={(event) => handleSave(event, formData)}
             >
               Save
             </Button>
-            <Button onClick={handleClose} variant="contained" style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}>
+            <Button
+              onClick={handleClose}
+              variant="contained"
+              color="secondary"
+              style={{ marginRight: ELEMENT_PADDING, marginTop: ELEMENT_PADDING }}
+            >
               Cancel
             </Button>
           </Box>
