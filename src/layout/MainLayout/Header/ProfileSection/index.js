@@ -49,8 +49,6 @@ const ProfileSection = () => {
   const userRole = getUserRoleFromLS() === 'sys:admin' ? 'Administrator' : 'Moderator';
   const userName = getUserNbrFromLS();
 
-  // const [sdm, setSdm] = useState(true);
-  // const [notification, setNotification] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const [open, setOpen] = useState(false);
   /**
@@ -174,50 +172,6 @@ const ProfileSection = () => {
                   </Box>
                   <PerfectScrollbar style={{ height: '100%', maxHeight: 'calc(100vh - 250px)', overflowX: 'hidden' }}>
                     <Box sx={{ p: 2 }}>
-                      {/*<Divider />*/}
-                      {/*<Card*/}
-                      {/*  sx={{*/}
-                      {/*    bgcolor: theme.palette.primary.light,*/}
-                      {/*    my: 2*/}
-                      {/*  }}*/}
-                      {/*>*/}
-                      {/*  <CardContent>*/}
-                      {/*    <Grid container spacing={3} direction="column">*/}
-                      {/*      <Grid item>*/}
-                      {/*        <Grid item container alignItems="center" justifyContent="space-between">*/}
-                      {/*          <Grid item>*/}
-                      {/*            <Typography variant="subtitle1">Dark Mode</Typography>*/}
-                      {/*          </Grid>*/}
-                      {/*          <Grid item>*/}
-                      {/*            <Switch*/}
-                      {/*              color="primary"*/}
-                      {/*              checked={sdm}*/}
-                      {/*              onChange={(e) => setSdm(e.target.checked)}*/}
-                      {/*              name="sdm"*/}
-                      {/*              size="small"*/}
-                      {/*            />*/}
-                      {/*          </Grid>*/}
-                      {/*        </Grid>*/}
-                      {/*      </Grid>*/}
-                      {/*      <Grid item>*/}
-                      {/*        <Grid item container alignItems="center" justifyContent="space-between">*/}
-                      {/*          <Grid item>*/}
-                      {/*            <Typography variant="subtitle1">Allow Notifications</Typography>*/}
-                      {/*          </Grid>*/}
-                      {/*          <Grid item>*/}
-                      {/*            <Switch*/}
-                      {/*              checked={notification}*/}
-                      {/*              onChange={(e) => setNotification(e.target.checked)}*/}
-                      {/*              name="sdm"*/}
-                      {/*              size="small"*/}
-                      {/*            />*/}
-                      {/*          </Grid>*/}
-                      {/*        </Grid>*/}
-                      {/*      </Grid>*/}
-                      {/*    </Grid>*/}
-                      {/*  </CardContent>*/}
-                      {/*</Card>*/}
-                      {/*<Divider />*/}
                       <List
                         component="nav"
                         sx={{
@@ -254,34 +208,6 @@ const ProfileSection = () => {
                           </ListItemIcon>
                           <ListItemText primary={<Typography variant="body2">Change Password</Typography>} />
                         </ListItemButton>
-                        {/*<ListItemButton*/}
-                        {/*  sx={{ borderRadius: `${customization.borderRadius}px` }}*/}
-                        {/*  selected={selectedIndex === 1}*/}
-                        {/*  onClick={(event) => handleListItemClick(event, 1, '#')}*/}
-                        {/*>*/}
-                        {/*<ListItemIcon>*/}
-                        {/*  <IconUser stroke={1.5} size="1.3rem" />*/}
-                        {/*</ListItemIcon>*/}
-                        {/*<ListItemText*/}
-                        {/*  primary={*/}
-                        {/*    <Grid container spacing={1} justifyContent="space-between">*/}
-                        {/*      <Grid item>*/}
-                        {/*        <Typography variant="body2">Social Profile</Typography>*/}
-                        {/*      </Grid>*/}
-                        {/*      <Grid item>*/}
-                        {/*        <Chip*/}
-                        {/*          label="02"*/}
-                        {/*          size="small"*/}
-                        {/*          sx={{*/}
-                        {/*            bgcolor: theme.palette.warning.dark,*/}
-                        {/*            color: theme.palette.background.default*/}
-                        {/*          }}*/}
-                        {/*        />*/}
-                        {/*      </Grid>*/}
-                        {/*    </Grid>*/}
-                        {/*  }*/}
-                        {/*/>*/}
-                        {/*</ListItemButton>*/}
                         <ListItemButton
                           sx={{ borderRadius: `${customization.borderRadius}px` }}
                           selected={selectedIndex === 4}

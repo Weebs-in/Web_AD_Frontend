@@ -158,13 +158,7 @@ const ListingActivity = () => {
             autoHeight
             {...rows}
             rows={rows}
-            // editMode="row"
             columns={columns}
-            // rowModesModel={rowModesModel}
-            // onRowModesModelChange={handleRowModesModelChange}
-            // onRowEditStop={handleRowEditStop}
-            // processRowUpdate={processRowUpdate}
-            // apiRef={apiRef}
             slots={{
               toolbar: ApplicationToolbar
             }}

@@ -456,13 +456,6 @@ const ManageListings = () => {
             slots={{
               toolbar: BookListingToolbar
             }}
-            // slotProps={{
-            //   toolbar: { setRows, setRowModesModel }
-            // }}
-            // columnVisibilityModel={{
-            //   // Hide column id, the other columns will remain visible
-            //   id: false
-            // }}
             initialState={{
               pagination: {
                 paginationModel: {
@@ -474,10 +467,6 @@ const ManageListings = () => {
           />
         </Box>
       </Typography>
-      {/* Render the edit modal */}
-      {/*<Dialog open={editModalOpen} onClose={handleCloseEditModal}>*/}
-      {/*  <ListingEditModal open={editModalOpen} onClose={handleCloseEditModal} bookData={selectedBook} />*/}
-      {/*</Dialog>*/}
     </MainCard>
   );
 };

@@ -10,7 +10,6 @@ import CancelIcon from '@mui/icons-material/Close';
 
 // mui-datagrid
 import {
-  // useGridApiContext,
   GridRowModes,
   DataGrid,
   GridToolbarContainer,
@@ -30,7 +29,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import config from '../../../config';
 import { getJWTFromLS } from '../../../utils/jwtUtils';
 import PropTypes from 'prop-types';
-// import Dot from '../../../ui-component/extended/Dot';
 
 // ==============================|| COLLECTION POINTS MANAGEMENT ||============================== //
 
@@ -64,51 +62,9 @@ const CollectionPoints = () => {
   const apiRef = useGridApiRef();
   const [collectionPoints, setCollectionPoints] = useState([]);
   const [collectionPointsCount, setCollectionPointsCount] = useState([]);
-  // const [combinedData, setCombinedData] = useState({});
   const [rows, setRows] = useState([]);
   const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(() => ['name', 'address', 'status', 'actions', 'pendingCount', 'depositedCount'], []);
-
-  // useEffect(() => {
-  //   // Fetch collection points and count data
-  //   const fetchData = async () => {
-  //     try {
-  //       const collectionPointsResponse = fetchCollectionPoints();
-  //       const collectionPointsCountResponse = fetchCollectionPointsCount();
-  //
-  //       // Wait for both fetches to complete
-  //       await Promise.all([collectionPointsResponse, collectionPointsCountResponse]);
-  //
-  //       // Combine collection points and counts data based on id
-  //       const combined = {};
-  //       collectionPoints.forEach((cp) => {
-  //         const countData = collectionPointsCount.find((count) => count.id === cp.id);
-  //         combined[cp.id] = { ...cp, ...countData };
-  //       });
-  //       console.log('combined: ', combined);
-  //       // Update combined data state
-  //       setCombinedData(combined);
-  //
-  //       // Map through the collection points to set rowModesModel
-  //       const updatedRowModesModel = {};
-  //       collectionPoints.forEach((cp) => {
-  //         if (cp.isNew) {
-  //           updatedRowModesModel[cp.id] = { mode: GridRowModes.Edit };
-  //         } else {
-  //           updatedRowModesModel[cp.id] = { mode: GridRowModes.View };
-  //         }
-  //       });
-  //       setRowModesModel(updatedRowModesModel);
-  //
-  //       // Set the rows to be displayed in the DataGrid
-  //       setRows(Object.values(combinedData));
-  //     } catch (error) {
-  //       console.error('Error fetching collection point and count data:', error);
-  //     }
-  //   };
-  //
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -405,30 +361,6 @@ const CollectionPoints = () => {
     setRowModesModel(newRowModesModel);
   };
 
-  // // status dot colour
-  // const StatusColour = ({ ratio }) => {
-  //   let colour;
-  //   let title;
-  //   const status = ratio < 0.4 ? 0 : 1;
-  //
-  //   switch (status) {
-  //     case 0:
-  //       colour = 'error';
-  //       title = 'Review Required';
-  //       break;
-  //     default:
-  //       colour = 'success';
-  //       title = 'Auto-approval';
-  //   }
-  //
-  //   return (
-  //     <Stack direction="row" spacing={1} alignItems="center">
-  //       <Dot color={colour} />
-  //       <Typography>{title}</Typography>
-  //     </Stack>
-  //   );
-  // };
-
   const columns = useMemo(() => {
     return [
       { field: 'id', headerName: 'ID', width: 0 },
@@ -458,15 +390,6 @@ const CollectionPoints = () => {
           { value: 1, label: 'Available' },
           { value: 0, label: 'Unavailable' }
         ]
-        // valueGetter: (params) => {
-        //   const statusValue = params.value; // Get the value of the 'status' field
-        //   return (
-        //     <Stack direction="row" spacing={1} alignItems="center">
-        //       <StatusColour status={statusValue} />
-        //       <span>{statusValue === 1 ? 'Available' : 'Unavailable'}</span>
-        //     </Stack>
-        //   );
-        // }
       },
       {
         field: 'actions',
@@ -522,14 +445,14 @@ const CollectionPoints = () => {
       {
         field: 'pendingCount',
         headerName: 'Books\nPending',
-        width: 80,
+        width: 120,
         align: 'center',
         type: 'number'
       },
       {
         field: 'depositedCount',
         headerName: 'Books\nDeposited',
-        width: 80,
+        width: 120,
         align: 'center',
         type: 'number'
       }

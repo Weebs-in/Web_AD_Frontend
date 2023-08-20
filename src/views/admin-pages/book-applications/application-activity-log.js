@@ -4,15 +4,10 @@ import Box from '@mui/material/Box';
 
 // mui-datagrid
 import {
-  // useGridApiContext,
   DataGrid,
   GridToolbarContainer,
-  // GridActionsCellItem,
   GridToolbarFilterButton,
   GridToolbarExport
-  // useGridApiRef,
-  // GridRowModes,
-  // GridRowEditStopReasons
 } from '@mui/x-data-grid';
 
 // project imports
@@ -35,10 +30,8 @@ function ApplicationToolbar() {
 }
 
 const ApplicationActivity = () => {
-  // const apiRef = useGridApiRef();
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
-  // const [rowModesModel, setRowModesModel] = React.useState({});
   const VISIBLE_FIELDS = React.useMemo(
     () => ['application', 'book', 'donor', 'recipient', 'statusPrev', 'statusNow', 'roleUsername', 'roleType', 'actionTime'],
     []
@@ -206,13 +199,7 @@ const ApplicationActivity = () => {
             autoHeight
             {...rows}
             rows={rows}
-            // editMode="row"
             columns={columns}
-            // rowModesModel={rowModesModel}
-            // onRowModesModelChange={handleRowModesModelChange}
-            // onRowEditStop={handleRowEditStop}
-            // processRowUpdate={processRowUpdate}
-            // apiRef={apiRef}
             slots={{
               toolbar: ApplicationToolbar
             }}
