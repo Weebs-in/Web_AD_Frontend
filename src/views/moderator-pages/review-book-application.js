@@ -28,7 +28,7 @@ const ReviewApplications = () => {
   const [applications, setApplications] = useState([]);
   const [rows, setRows] = useState([]);
   // const [rowModesModel, setRowModesModel] = React.useState({});
-  const VISIBLE_FIELDS = React.useMemo(() => ['id', 'book', 'donor', 'recipient', 'status', 'actions'], []);
+  const VISIBLE_FIELDS = React.useMemo(() => ['id', 'book', 'donor', 'recipient', 'bookStatus', 'status', 'actions'], []);
 
   useEffect(() => {
     fetchApplications();
@@ -147,6 +147,25 @@ const ReviewApplications = () => {
         }
       },
       {
+        field: 'bookStatus',
+        headerName: 'Book Status',
+        width: 120,
+        type: 'singleSelect',
+        valueGetter: (params) => {
+          const bk = params.row.book;
+          return bk ? bk.status : '';
+        },
+        valueOptions: [
+          { value: 0, label: 'Pending' }, // listing created, but book not deposited
+          { value: 1, label: 'Deposited' }, // deposited at collection point
+          { value: 2, label: 'Available' }, // book listing approved after collection
+          { value: 3, label: 'Reserved' }, // application for book approved
+          { value: 4, label: 'Unavailable' }, // book successfully donated to recipient
+          { value: 5, label: 'Rejected' }, // book listing rejected after collection
+          { value: 6, label: 'Disabled' } // want to simulate delete but retain record
+        ]
+      },
+      {
         field: 'status',
         headerName: 'Status',
         width: 120,
@@ -218,10 +237,6 @@ const ReviewApplications = () => {
             rows={rows}
             editMode="row"
             columns={columns}
-            // rowModesModel={rowModesModel}
-            // onRowModesModelChange={handleRowModesModelChange}
-            // onRowEditStop={handleRowEditStop}
-            // processRowUpdate={processRowUpdate}
             apiRef={apiRef}
             slots={{
               toolbar: ApplicationToolbar
