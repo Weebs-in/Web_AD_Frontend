@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 import config from '../../config';
 import { getJWTFromLS } from '../../utils/jwtUtils';
 
 const BooksStatusByMonthChart = () => {
-  const theme = useTheme();
-  const { primary, secondary } = theme.palette.text;
-  const line = theme.palette.divider;
+  // const theme = useTheme();
+  // const { primary, secondary } = theme.palette.text;
+  // const line = theme.palette.divider;
 
   const [series, setSeries] = useState([]);
   const [categories, setCategories] = useState([]);

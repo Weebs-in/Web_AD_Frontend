@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 import config from '../../config';
 import { getJWTFromLS } from '../../utils/jwtUtils';
 
 const AgeDemographicsChart = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
   // const { info } = theme.palette;
 
   const [series, setSeries] = useState([]);
   const ageGroups = ['< 18', '19-25', '26-35', '36-45', '46-55', '56-65', '> 66'];
 
-  const [options, setOptions] = useState({
+  const options = {
     chart: {
       type: 'pie',
       height: 415,
@@ -36,7 +36,7 @@ const AgeDemographicsChart = () => {
       }
     },
     labels: ageGroups
-  });
+  };
 
   useEffect(() => {
     // Fetch data from the API
@@ -74,9 +74,9 @@ const AgeDemographicsChart = () => {
   }, []);
 
   return (
-      <div id="chart">
-        <ReactApexChart options={options} series={series} type="pie" height={415} />
-      </div>
+    <div id="chart">
+      <ReactApexChart options={options} series={series} type="pie" height={415} />
+    </div>
   );
 };
 

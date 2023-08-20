@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { useTheme } from '@mui/material/styles';
+// import { useTheme } from '@mui/material/styles';
 import ReactApexChart from 'react-apexcharts';
 import config from '../../config';
 import { getJWTFromLS } from '../../utils/jwtUtils';
 
 const BooksDepositByCP = () => {
-  const theme = useTheme();
+  // const theme = useTheme();
   // const { info } = theme.palette;
 
   const [series, setSeries] = useState([]);

@@ -183,6 +183,13 @@ export default function TransactionTable() {
   const [selected] = useState([]);
   const [transactionData, setTransactionData] = useState([]); // State to store fetched transaction data
 
+  const conditionLabels = {
+    0: 'Brand New',
+    1: 'Like New',
+    2: 'Lightly Used',
+    3: 'Well Used'
+  };
+
   useEffect(() => {
     fetchTransactionTable(); // Fetch data when the component mounts
   }, []);
@@ -272,7 +279,7 @@ export default function TransactionTable() {
                     {/*<TableCell align="center">*/}
                     {/*  <BookConditionStatus status={row.book.bookCondition} />*/}
                     {/*</TableCell>*/}
-                    <TableCell align="center">{row.book.bookCondition}</TableCell>
+                    <TableCell align="center">{conditionLabels[row.book.bookCondition]}</TableCell>
                   </TableRow>
                 );
               })}
