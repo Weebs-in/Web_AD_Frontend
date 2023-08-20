@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 
 // material-ui
@@ -7,26 +7,11 @@ import { Box, Link, Stack, Table, TableBody, TableCell, TableContainer, TableHea
 
 // third-party - use NumericFormat or PatternFormat in place of NumberFormat
 // import { PatternFormat } from 'react-number-format';
+import config from '../../config';
+import { getJWTFromLS } from '../../utils/jwtUtils';
 
 // project import
 import Dot from 'ui-component/extended/Dot';
-
-function createData(bookId, bookTitle, donarId, status, bookCondition) {
-  return { bookId, bookTitle, donarId, status, bookCondition };
-}
-
-const rows = [
-  createData(439023483, 'The Hunger Games', 1, 1, 8),
-  createData(439554934, "Harry Potter and the Philosopher's Stone", 2, 1, 9),
-  createData(316015849, 'Twilight', 3, 1, 9),
-  createData(61120081, 'To Kill a Mockingbird', 4, 0, 6),
-  createData(743273567, 'The Great Gatsby', 5, 1, 9),
-  createData(525478817, 'The Fault in Our Stars', 6, 0, 7),
-  createData(618260307, 'The Hobbit or There and Back Again', 7, 1, 7),
-  createData(316769177, 'The Catcher in the Rye', 8, 1, 8),
-  createData(1416524797, 'Angels & Demons ', 9, 2, 5),
-  createData(679783261, 'Pride and Prejudice', 10, 1, 9)
-];
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -70,10 +55,10 @@ const headCells = [
     label: 'Book Title'
   },
   {
-    id: 'donarId',
+    id: 'donorUsername',
     align: 'center',
     disablePadding: false,
-    label: 'Donar Id'
+    label: 'Donor Username'
   },
   {
     id: 'status',
@@ -135,10 +120,48 @@ const OrderStatus = ({ status }) => {
       color = 'error';
       title = 'Rejected';
       break;
+    case 3:
+      color = 'warning';
+      title = 'Ready for Collection';
+      break;
+    case 4:
+      color = 'success';
+      title = 'Completed';
+      break;
+    case 5:
+      color = 'warning';
+      title = 'Disabled';
+      break;
     default:
       color = 'primary';
       title = 'None';
   }
+
+  // const BookConditionStatus = ({ status }) => {
+  //   let color;
+  //   let title;
+  //
+  //   switch (status) {
+  //     case 0:
+  //       color = 'warning';
+  //       title = 'Brand New';
+  //       break;
+  //     case 1:
+  //       color = 'success';
+  //       title = 'Like New';
+  //       break;
+  //     case 2:
+  //       color = 'error';
+  //       title = 'Lightly Used';
+  //       break;
+  //     case 3:
+  //       color = 'warning';
+  //       title = 'Well Used';
+  //       break;
+  //     default:
+  //       color = 'primary';
+  //       title = 'None';
+  //   }
 
   return (
     <Stack direction="row" spacing={1} alignItems="center">
@@ -158,8 +181,42 @@ export default function TransactionTable() {
   const [order] = useState('asc');
   const [orderBy] = useState([]);
   const [selected] = useState([]);
+  const [transactionData, setTransactionData] = useState([]); // State to store fetched transaction data
 
-  const isSelected = (bookId) => selected.indexOf(bookId) !== -1;
+  useEffect(() => {
+    fetchTransactionTable(); // Fetch data when the component mounts
+  }, []);
+
+  const isSelected = (transactionId) => selected.indexOf(transactionId) !== -1;
+
+  const fetchTransactionTable = async () => {
+    try {
+      const response = await fetch(config.application, {
+        headers: {
+          Authorization: 'Bearer ' + getJWTFromLS(),
+          'Content-Type': 'application/json'
+        },
+        method: 'GET'
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (contentType && contentType.includes('application/json')) {
+        const data = await response.json();
+        console.log('Retrieved transaction data successfully');
+        console.log(data);
+        setTransactionData(data); // Set fetched data in the state
+      } else {
+        const errorData = await response.text();
+        throw new Error(`Invalid JSON response: ${errorData}`);
+      }
+    } catch (error) {
+      console.error('Error fetching transaction data:', error);
+    }
+  };
 
   return (
     <Box>
@@ -186,37 +243,39 @@ export default function TransactionTable() {
         >
           <OrderTableHead order={order} orderBy={orderBy} />
           <TableBody>
-            {stableSort(rows, getComparator(order, orderBy)).map((row, index) => {
-              const isItemSelected = isSelected(row.bookId);
-              const labelId = `enhanced-table-checkbox-${index}`;
+            {stableSort(transactionData, getComparator(order, orderBy))
+              .slice(0, 10) // Only take the first 10 items
+              .map((row, index) => {
+                const isItemSelected = isSelected(row.id);
+                const labelId = `enhanced-table-checkbox-${index}`;
 
-              return (
-                <TableRow
-                  hover
-                  role="checkbox"
-                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                  aria-checked={isItemSelected}
-                  tabIndex={-1}
-                  key={row.bookId}
-                  selected={isItemSelected}
-                >
-                  <TableCell component="th" id={labelId} scope="row" align="left">
-                    <Link color="secondary" component={RouterLink} to="">
-                      {row.bookId}
-                    </Link>
-                  </TableCell>
-                  <TableCell align="left">{row.bookTitle}</TableCell>
-                  <TableCell align="center">{row.donarId}</TableCell>
-                  <TableCell align="left">
-                    <OrderStatus status={row.status} />
-                  </TableCell>
-                  <TableCell align="center">
-                    {row.bookCondition}
-                    {/*<PatternFormat value={row.bookCondition} displayType="text" thousandSeparator prefix="$" format="### ###" />*/}
-                  </TableCell>
-                </TableRow>
-              );
-            })}
+                return (
+                  <TableRow
+                    hover
+                    role="checkbox"
+                    sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                    aria-checked={isItemSelected}
+                    tabIndex={-1}
+                    key={row.id}
+                    selected={isItemSelected}
+                  >
+                    <TableCell component="th" id={labelId} scope="row" align="left">
+                      <Link color="secondary" component={RouterLink} to="">
+                        {row.id}
+                      </Link>
+                    </TableCell>
+                    <TableCell align="left">{row.book.title}</TableCell>
+                    <TableCell align="center">{row.book.donor.username}</TableCell>
+                    <TableCell align="left">
+                      <OrderStatus status={row.status} />
+                    </TableCell>
+                    {/*<TableCell align="center">*/}
+                    {/*  <BookConditionStatus status={row.book.bookCondition} />*/}
+                    {/*</TableCell>*/}
+                    <TableCell align="center">{row.book.bookCondition}</TableCell>
+                  </TableRow>
+                );
+              })}
           </TableBody>
         </Table>
       </TableContainer>
